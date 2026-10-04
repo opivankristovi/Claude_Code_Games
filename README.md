@@ -72,13 +72,16 @@ Fly through bonus pickups on the track to collect power-ups:
 
 ## How to play
 
-**Online:** to serve the games straight from this repo, enable GitHub Pages (Settings → Pages → deploy from the `main` branch). Each game is then available at `/<folder>/`.
+**Online** (GitHub Pages):
+
+- X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
+- Sandstorm Circuit: <https://opivankristovi.github.io/Claude_Code_Games/PodRace/>
 
 **Locally:**
 
 ```bash
-git clone https://github.com/opivankristovi/claude_code_games.git
-cd claude_code_games
+git clone https://github.com/opivankristovi/Claude_Code_Games.git
+cd Claude_Code_Games
 python3 -m http.server 8000
 ```
 

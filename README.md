@@ -4,13 +4,13 @@ A collection of browser games, mostly retro-inspired arcade games, built with Cl
 
 Each game is one self-contained `index.html`: no build step, no bundler, no asset files. Every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
 
-| Game | Folder | Genre |
+| Game | Folder (own README) | Genre |
 | --- | --- | --- |
-| **X-Fighter**: Assault on the Iron Fortress | [`X-Fighter/`](X-Fighter/index.html) | 3D space combat shooter |
-| **Sandstorm Circuit** | [`PodRace/`](PodRace/index.html) | Combat podracing |
-| **Daido Dog Sim** | [`DaidoSim/`](DaidoSim/index.html) | Dog life sim / exploration |
-| **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/index.html) | Brick breaker |
-| **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/index.html) | Maze chase (Pac-Man style) |
+| **X-Fighter**: Assault on the Iron Fortress | [`X-Fighter/`](X-Fighter/README.md) | 3D space combat shooter |
+| **Sandstorm Circuit** | [`PodRace/`](PodRace/README.md) | Combat podracing |
+| **Daido Dog Sim** | [`DaidoSim/`](DaidoSim/README.md) | Dog life sim / exploration |
+| **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/README.md) | Brick breaker |
+| **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
 
 ---
 
@@ -181,18 +181,23 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 ```
 .
 ├── Arkanoid/
-│   └── index.html   # Neon Arkanoid
+│   ├── index.html   # Neon Arkanoid
+│   └── README.md
 ├── DaidoSim/
-│   └── index.html   # Daido Dog Sim
+│   ├── index.html   # Daido Dog Sim
+│   └── README.md
 ├── PodRace/
-│   └── index.html   # Sandstorm Circuit
+│   ├── index.html   # Sandstorm Circuit
+│   └── README.md
 ├── Shakur-Boy/
-│   └── index.html   # Shakur Boy: Shroom Run 3D
+│   ├── index.html   # Shakur Boy: Shroom Run 3D
+│   └── README.md
 ├── X-Fighter/
-│   └── index.html   # X-Fighter
+│   ├── index.html   # X-Fighter
+│   └── README.md
 └── README.md
 ```
 
 ## Adding a game
 
-Create a new folder containing a single `index.html`, then add a row to the table at the top and a section describing the game and its controls.
+Create a new folder containing a single `index.html` and a `README.md` (description, live link, how to run, controls), then add a row to the table at the top of this file and a section describing the game and its controls.

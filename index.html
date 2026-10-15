@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tuxemon 3D</title>
+<meta name="description" content="A 3D browser remake of Tuxemon, the open source monster-catching RPG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="view"></canvas>
+
+  <!-- world HUD -->
+  <div id="hud" hidden>
+    <div class="hud-area"><span id="hud-area-name">Candy Town</span><span id="hud-clock"></span></div>
+    <div id="hud-party" class="hud-party"></div>
+    <div class="hud-keys"><kbd>WASD</kbd> move <kbd>Shift</kbd> run <kbd>E</kbd> talk <kbd>Esc</kbd> menu</div>
+  </div>
+
+  <!-- area name banner -->
+  <div id="banner" class="banner" hidden></div>
+
+  <!-- battle HUD -->
+  <div id="battle" hidden>
+    <div class="plate plate-enemy" id="plate-enemy"></div>
+    <div class="plate plate-player" id="plate-player"></div>
+    <div class="battle-bottom">
+      <div class="battle-log" id="battle-log"></div>
+      <div class="battle-menu" id="battle-menu"></div>
+    </div>
+  </div>
+
+  <!-- dialog -->
+  <div id="dialog" class="dialog" hidden>
+    <div class="dialog-name" id="dialog-name"></div>
+    <div class="dialog-text" id="dialog-text"></div>
+    <div class="dialog-next">&#9660;</div>
+  </div>
+
+  <!-- choices / generic panels -->
+  <div id="choices" class="choices" hidden></div>
+  <div id="panel" class="panel" hidden></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="fade" class="fade"></div>
+
+  <!-- title -->
+  <div id="title" class="title" hidden>
+    <div class="logo">
+      <div class="logo-main">TUXEMON</div>
+      <div class="logo-sub">3D &middot; Open Source Monster RPG</div>
+    </div>
+    <div class="title-menu" id="title-menu"></div>
+    <div class="title-foot">A browser remake built on the Tuxemon project's monster data &middot; GPL-3.0</div>
+  </div>
+
+  <div id="loading" class="loading"><div class="spinner"></div><div>Loading the world&hellip;</div></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/util.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/input.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/creatures.js"></script>
+<script src="js/characters.js"></script>
+<script src="js/world.js"></script>
+<script src="js/monsters.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/game.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+window.THREE = THREE;
+TX.addons = { EffectComposer, RenderPass, UnrealBloomPass, ShaderPass, OutputPass };
+TX.game.boot().catch((e) => {
+  console.error(e);
+  document.getElementById('loading').innerHTML = '<div>Could not start: ' + e.message + '</div>';
+});
+</script>
+</body>
+</html>

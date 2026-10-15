@@ -4,7 +4,9 @@ A 3D browser remake of [Tuxemon](https://github.com/Tuxemon/Tuxemon), the open s
 
 ## Play
 
-Double-click **`Play Tuxemon 3D.cmd`**. It starts a small local web server and opens the game in your browser. Close the server window to stop it.
+**Play online: https://opivankristovi.github.io/Tuxemon-3D/**
+
+To run it locally, double-click **`Play Tuxemon 3D.cmd`**. It starts a small local web server and opens the game in your browser. Close the server window to stop it.
 
 Or from a terminal:
 

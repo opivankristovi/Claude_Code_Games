@@ -75,7 +75,7 @@ Fly through bonus pickups on the track to collect power-ups:
 
 ## Daido Dog Sim
 
-Spend a day in the meadow as a dog. Choose between two dogs, **Daido** and **Fluffy**, then play one of five levels or wander freely in **Free roam**. Each level is a short checklist of dog jobs: drinking from the stream, collecting bones, marking trees, fetching a ball or slipper for your human, and digging up or burying things. Each level begins with a poop on a marked spot and ends with the bowl of food your dog has earned.
+Spend a day in the meadow as a dog. Choose between two dogs, **Daido** and **Fluffy**, then play one of five levels or wander freely in **Free roam**. Each level is a short checklist of dog jobs: drinking from the stream, collecting bones, marking trees, fetching a ball or slipper for your human, and digging up or burying things. Each level begins with a poop on a marked spot and ends with the bowl of food your dog has earned. The interface is in Dutch by default, with a switch to English.
 
 1. **First Morning**: a gentle start around the garden.
 2. **Marking the Rounds**: patrol the path and leave your mark.

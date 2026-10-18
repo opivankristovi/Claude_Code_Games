@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -33,10 +33,14 @@
   #chars button:hover{background:var(--btn-bg-hover)}
   #chars button.on{border-color:var(--hud-accent);box-shadow:0 0 0 1px var(--hud-accent) inset}
   #chars button:focus-visible,#actions button:focus-visible{outline:2px solid var(--hud-accent);outline-offset:2px}
+  #langswitch{display:flex;border:1px solid var(--btn-border);border-radius:10px;overflow:hidden;background:var(--btn-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  #chars #langswitch button{border:0;border-radius:0;background:transparent;padding:7px 9px;font-size:12px;font-weight:650;letter-spacing:.06em;color:var(--hud-dim);backdrop-filter:none;-webkit-backdrop-filter:none}
+  #chars #langswitch button.on{background:var(--hud-accent);color:#0c1a1d;box-shadow:none}
+  #chars #langswitch button:not(.on):hover{background:var(--btn-bg-hover);color:var(--hud-fg)}
   #chars .sw{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(255,255,255,.3)}
   #chars .sw0{background:radial-gradient(circle at 50% 78%,#e9e5dc 0 22%,#141312 24%)}
   #chars .sw1{background:linear-gradient(180deg,#34302c 0 40%,#a98b66 55%,#d6c8ae 80%)}
-  @media (max-width:640px){ #hud{max-width:calc(100vw - 200px)} #chars{top:12px;right:12px} #chars button{padding:6px 8px 6px 6px;font-size:12px} }
+  @media (max-width:640px){ #chars{top:10px;right:10px;left:10px;justify-content:flex-end;flex-wrap:wrap} #chars button{padding:6px 8px 6px 6px;font-size:12px} #hud{top:56px;max-width:calc(100vw - 32px)} #tasks{top:116px!important} }
   #tasks{position:fixed;left:16px;top:96px;width:min(300px,calc(100vw - 32px));background:var(--hud-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px;padding:10px 12px;font-size:13px;pointer-events:none;user-select:none}
   #tasks .thead{display:flex;justify-content:space-between;gap:8px;font-weight:600;margin-bottom:6px}
   #tasks .timer{font-variant-numeric:tabular-nums;color:var(--hud-dim);font-weight:500}
@@ -88,26 +92,27 @@
 </script>
 </head>
 <body>
-<div id="loading">Building the meadow…</div>
+<div id="loading" data-i18n="ui.loading">De weide wordt opgebouwd…</div>
 <div id="hud">
-  <div class="name"><b id="dogname">Daido</b><span id="status">Standing</span></div>
-  <div class="help">WASD / arrows move · Shift run · R jog · C switch dog · M menu · drag to look · wheel zoom</div>
+  <div class="name"><b id="dogname">Daido</b><span id="status">Staat</span></div>
+  <div class="help" data-i18n="ui.help">WASD / pijltjes bewegen · Shift rennen · R draven · C wissel hond · M menu · slepen om rond te kijken · scrollwiel zoomen</div>
 </div>
-<div id="chars" role="group" aria-label="Choose your dog">
-  <button id="menubtn" aria-label="Open the menu">Menu</button>
+<div id="chars" role="group" data-i18n-aria="ui.chooseDog" aria-label="Kies je hond">
+  <div id="langswitch" role="group" data-i18n-aria="ui.lang" aria-label="Taal"><button data-lang="nl" class="on" aria-pressed="true" lang="nl">NL</button><button data-lang="en" aria-pressed="false" lang="en">EN</button></div>
+  <button id="menubtn" data-i18n="ui.menu" data-i18n-aria="ui.openMenu" aria-label="Open het menu">Menu</button>
   <button data-d="0" class="on" aria-pressed="true"><i class="sw sw0"></i>Daido</button>
   <button data-d="1" aria-pressed="false"><i class="sw sw1"></i>Fluffy</button>
 </div>
 <div id="toast"></div>
 <div id="actions">
-  <button data-a="sit"><kbd>1</kbd>Sit</button>
-  <button data-a="drink"><kbd>2</kbd>Drink</button>
-  <button data-a="eat"><kbd>3</kbd>Eat</button>
-  <button data-a="pee"><kbd>4</kbd>Pee</button>
-  <button data-a="poo"><kbd>5</kbd>Poo</button>
-  <button data-a="roll"><kbd>6</kbd>Roll over</button>
-  <button data-a="lie"><kbd>7</kbd>Lie down</button>
-  <button data-a="dig"><kbd>8</kbd>Dig</button>
+  <button data-a="sit"><kbd>1</kbd><span data-i18n="act.sit">Zit</span></button>
+  <button data-a="drink"><kbd>2</kbd><span data-i18n="act.drink">Drinken</span></button>
+  <button data-a="eat"><kbd>3</kbd><span data-i18n="act.eat">Eten</span></button>
+  <button data-a="pee"><kbd>4</kbd><span data-i18n="act.pee">Plassen</span></button>
+  <button data-a="poo"><kbd>5</kbd><span data-i18n="act.poo">Kakken</span></button>
+  <button data-a="roll"><kbd>6</kbd><span data-i18n="act.roll">Rollen</span></button>
+  <button data-a="lie"><kbd>7</kbd><span data-i18n="act.lie">Liggen</span></button>
+  <button data-a="dig"><kbd>8</kbd><span id="diglabel" data-i18n="act.dig">Graven</span></button>
 </div>
 <div id="tasks" hidden>
   <div class="thead"><span id="tasktitle"></span><span id="tasktimer" class="timer">0:00</span></div>
@@ -116,17 +121,17 @@
 <div id="bubble" hidden></div>
 <div id="menu" class="overlay">
   <div class="panel">
-    <p class="eyebrow">A day in the meadow</p>
+    <p class="eyebrow" data-i18n="menu.eyebrow">Een dag in de weide</p>
     <h1>Daido Dog Sim</h1>
-    <p class="sub">Choose a dog with the buttons at the top right, then pick a level. Every level starts with a poop on the marked spot and ends with the bowl of food your dog has earned.</p>
+    <p class="sub" data-i18n="menu.sub">Kies een hond met de knoppen rechtsboven en kies dan een level. Elk level begint met een hoopje op de gemarkeerde plek en eindigt met de kom eten die je hond heeft verdiend.</p>
     <div id="levellist"></div>
-    <div class="row"><button id="freeplay">Free roam</button><button id="closemenu" hidden>Back to the level</button></div>
-    <p class="keys">WASD move · Shift run · 1–8 actions · 8 digs, or buries what you carry · M menu</p>
+    <div class="row"><button id="freeplay" data-i18n="menu.free">Vrij rondlopen</button><button id="closemenu" hidden>Terug naar het level</button></div>
+    <p class="keys" data-i18n="menu.keys">WASD bewegen · Shift rennen · 1–8 acties · 8 graaft, of begraaft wat je draagt · M menu · L taal</p>
   </div>
 </div>
 <div id="card" class="overlay" hidden><div class="panel"><div id="cardbody"></div><div class="row" id="cardbtns"></div></div></div>
 <div id="joy"><div id="knob"></div></div>
-<button id="runbtn">RUN</button>
+<button id="runbtn" data-i18n="ui.run">REN</button>
 
 <script type="module">
 import * as THREE from 'three';
@@ -141,6 +146,85 @@ const damp=(a,b,k,dt)=>lerp(a,b,1-Math.exp(-k*dt));
 const ease=t=>t*t*(3-2*t);
 const wrapA=a=>{while(a>Math.PI)a-=2*Math.PI;while(a<-Math.PI)a+=2*Math.PI;return a;};
 function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+
+// =====================================================================
+// Interface language: Dutch (default) and English
+// =====================================================================
+const STR={
+nl:{
+  'ui.loading':'De weide wordt opgebouwd…','ui.help':'WASD / pijltjes bewegen · Shift rennen · R draven · C wissel hond · M menu · slepen om rond te kijken · scrollwiel zoomen',
+  'ui.chooseDog':'Kies je hond','ui.menu':'Menu','ui.openMenu':'Open het menu','ui.lang':'Taal','ui.run':'REN','ui.langSet':'Taal: Nederlands',
+  'act.sit':'Zit','act.drink':'Drinken','act.eat':'Eten','act.pee':'Plassen','act.poo':'Kakken','act.roll':'Rollen','act.lie':'Liggen','act.dig':'Graven','act.bury':'Begraven',
+  'st.standing':'Staat','st.panting':'Hijgt','st.walking':'Wandelt','st.trotting':'Draaft','st.running':'Rent','st.onTheWay':'Onderweg…',
+  'st.sit':'Zit','st.lie':'Ligt','st.drink':'Drinkt','st.eat':'Eet','st.pee':'Plast','st.poo':'Doet een hoopje','st.roll':'Rolt om','st.dig':'Graaft',
+  'menu.eyebrow':'Een dag in de weide','menu.sub':'Kies een hond met de knoppen rechtsboven en kies dan een level. Elk level begint met een hoopje op de gemarkeerde plek en eindigt met de kom eten die je hond heeft verdiend.',
+  'menu.free':'Vrij rondlopen','menu.backLevel':'Terug naar het level','menu.backGame':'Terug naar het spel','menu.keys':'WASD bewegen · Shift rennen · 1–8 acties · 8 graaft, of begraaft wat je draagt · M menu · L taal',
+  'menu.locked':'Op slot','menu.new':'Nieuw','menu.best':'Beste {t}','menu.unlock':'Voltooi het vorige level om dit te ontgrendelen',
+  'card.levelOf':'Level {n} van {m}','card.start':'Starten','card.complete':'Level {n} voltooid','card.goodDog':'Brave hond!','card.finished':'{dog} voltooide “{level}” in {time}. Beste tijd: {best}.',
+  'card.next':'Volgend level','card.replay':'Opnieuw','card.menu':'Menu','tasks.title':'Level {n} · {name}',
+  'lvl0.name':'Eerste ochtend','lvl0.blurb':'Een rustige start rond de tuin.',
+  'lvl1.name':'De ronde markeren','lvl1.blurb':'Patrouilleer langs het pad en laat je geurtje achter.',
+  'lvl2.name':'Begraven schat','lvl2.blurb':'Snuffel een bot op en verstop het op een veilige plek.',
+  'lvl3.name':'De lange wandeling','lvl3.blurb':'Volg de beek naar het noorden en trek dan naar de velden.',
+  'lvl4.name':'Verstoppertje','lvl4.blurb':'Je baasje heeft zich verstopt. Breng de pantoffel terug en graaf je speeltjes op.',
+  'task.poo':'Doe een hoopje op de gemarkeerde plek','task.eat':'Eet je welverdiende eten op','task.drinkWater':'Drink wat water','task.bones':'Verzamel de glimmende botten','task.human':'Zoek je baasje',
+  'task.markCross':'Plas tegen het stenen kruis','task.bonesPath':'Verzamel de glimmende botten langs het pad','task.findBall':'Zoek de tennisbal','task.bringBall':'Breng de bal naar je baasje',
+  'task.digBone':'Snuffel het begraven bot op en graaf het uit','task.drinkStream':'Drink uit de beek','task.buryOak':'Begraaf het bot onder de grote eik','task.humanPond':'Zoek je baasje bij de vijver',
+  'task.bonesStream':'Verzamel de botten langs de beek','task.markAlders':'Markeer de twee elzen bij de beek','task.drinkPuddle':'Drink uit een plas op het pad','task.humanField':'Ontmoet je baasje aan de rand van het veld',
+  'task.findSlipper':'Zoek de pantoffel in de haag','task.bringSlipper':'Breng de pantoffel naar je verstopte baasje','task.digToys':'Graaf je begraven speeltjes op','task.drink':'Drink iets',
+  'item.bone':'het oude bot','item.ball':'de tennisbal','item.slipper':'de pantoffel','item.toy':'een piepspeeltje','item.stick':'een stok',
+  'water.bowl':'de waterbak','water.pond':'de vijver','water.stream':'de beek','water.puddle':'een plas',
+  'msg.found':'Gevonden: {item}!','msg.buried':'Je hebt {item} begraven.','msg.stick':'Een stok gevonden!','msg.nothing':'Niets dan aarde hier.','msg.picked':'Opgepakt: {item}',
+  'msg.bowlFilled':'Je etensbak is gevuld!','msg.done':'Klaar: {task}','msg.missed':'Naast de gemarkeerde plek! Ga op de ring staan en probeer opnieuw.',
+  'msg.wrongWater':'Dat is {kind}. Voor deze opdracht heb je {src} nodig.','msg.markedNext':'Gemarkeerd! Nu de volgende.','msg.wrongMark':'Verkeerde plek. Volg de pijl naar de juiste.',
+  'msg.buriedWrong':'Begraven, maar niet onder de grote eik. Graaf het weer op!','msg.freeRoam':'Vrij rondlopen: verken, graaf en speel.',
+  'msg.toWater':'Op weg naar {water} om te drinken…','msg.digWater':'Graven in het water lukt niet.','msg.digGravel':'Het grind is te hard om te graven. Probeer het gras.',
+  'msg.bowlEmptyLevel':'Je etensbak is leeg. Voltooi je opdrachten om je eten te verdienen.','msg.bowlEmptyFree':'De etensbak is leeg. Hij wordt zo weer gevuld.',
+  'msg.toFood':'Op weg naar de etensbak…','msg.spot':'Op zoek naar een goed plekje…','msg.jogOn':'Draven aan','msg.jogOff':'Draven uit','msg.nowPlaying':'Je speelt nu met {name}','msg.allGone':'Alles op!',
+  'say.found':'Daar ben je! Brave hond!','say.thanks':'Dankjewel! Brave hond!',
+},
+en:{
+  'ui.loading':'Building the meadow…','ui.help':'WASD / arrows move · Shift run · R jog · C switch dog · M menu · drag to look · wheel zoom',
+  'ui.chooseDog':'Choose your dog','ui.menu':'Menu','ui.openMenu':'Open the menu','ui.lang':'Language','ui.run':'RUN','ui.langSet':'Language: English',
+  'act.sit':'Sit','act.drink':'Drink','act.eat':'Eat','act.pee':'Pee','act.poo':'Poo','act.roll':'Roll over','act.lie':'Lie down','act.dig':'Dig','act.bury':'Bury',
+  'st.standing':'Standing','st.panting':'Panting','st.walking':'Walking','st.trotting':'Trotting','st.running':'Running','st.onTheWay':'On the way…',
+  'st.sit':'Sitting','st.lie':'Lying down','st.drink':'Drinking','st.eat':'Eating','st.pee':'Peeing','st.poo':'Pooping','st.roll':'Rolling over','st.dig':'Digging',
+  'menu.eyebrow':'A day in the meadow','menu.sub':'Choose a dog with the buttons at the top right, then pick a level. Every level starts with a poop on the marked spot and ends with the bowl of food your dog has earned.',
+  'menu.free':'Free roam','menu.backLevel':'Back to the level','menu.backGame':'Back to the game','menu.keys':'WASD move · Shift run · 1–8 actions · 8 digs, or buries what you carry · M menu · L language',
+  'menu.locked':'Locked','menu.new':'New','menu.best':'Best {t}','menu.unlock':'Finish the previous level to unlock',
+  'card.levelOf':'Level {n} of {m}','card.start':'Start','card.complete':'Level {n} complete','card.goodDog':'Good dog!','card.finished':'{dog} finished “{level}” in {time}. Best time: {best}.',
+  'card.next':'Next level','card.replay':'Replay','card.menu':'Menu','tasks.title':'Level {n} · {name}',
+  'lvl0.name':'First Morning','lvl0.blurb':'A gentle start around the garden.',
+  'lvl1.name':'Marking the Rounds','lvl1.blurb':'Patrol the path and leave your mark.',
+  'lvl2.name':'Buried Treasure','lvl2.blurb':'Sniff out a bone, then hide it somewhere safe.',
+  'lvl3.name':'The Long Walk','lvl3.blurb':'Follow the stream north, then head for the fields.',
+  'lvl4.name':'Hide and Seek','lvl4.blurb':'Your human is hiding. Bring back the slipper and dig up your toys.',
+  'task.poo':'Poop on the marked spot','task.eat':'Eat your well-earned food','task.drinkWater':'Have a drink of water','task.bones':'Collect the shiny bones','task.human':'Find your human',
+  'task.markCross':'Pee on the stone cross','task.bonesPath':'Collect the shiny bones along the path','task.findBall':'Find the tennis ball','task.bringBall':'Bring the ball to your human',
+  'task.digBone':'Sniff out and dig up the buried bone','task.drinkStream':'Drink from the stream','task.buryOak':'Bury the bone under the big oak','task.humanPond':'Find your human by the pond',
+  'task.bonesStream':'Collect the bones along the stream','task.markAlders':'Mark the two alders by the stream','task.drinkPuddle':'Drink from a puddle on the path','task.humanField':'Meet your human at the field edge',
+  'task.findSlipper':'Find the slipper in the hedge','task.bringSlipper':'Bring the slipper to your hiding human','task.digToys':'Dig up your buried toys','task.drink':'Have a drink',
+  'item.bone':'the old bone','item.ball':'the tennis ball','item.slipper':'the slipper','item.toy':'a squeaky toy','item.stick':'a stick',
+  'water.bowl':'the water bowl','water.pond':'the pond','water.stream':'the stream','water.puddle':'a puddle',
+  'msg.found':'Found {item}!','msg.buried':'Buried {item}.','msg.stick':'Found a stick!','msg.nothing':'Nothing here but dirt.','msg.picked':'Picked up {item}',
+  'msg.bowlFilled':'Your food bowl has been filled!','msg.done':'Done: {task}','msg.missed':'Missed the marked spot! Stand on the ring and try again.',
+  'msg.wrongWater':"That's {kind}. This task needs {src}.",'msg.markedNext':'Marked! Now the next one.','msg.wrongMark':'Wrong spot. Follow the arrow to the right one.',
+  'msg.buriedWrong':'Buried, but not under the big oak. Dig it up again!','msg.freeRoam':'Free roam: explore, dig and play.',
+  'msg.toWater':'Heading to {water} for a drink…','msg.digWater':"Can't dig in the water.",'msg.digGravel':'The gravel is too hard to dig. Try the grass.',
+  'msg.bowlEmptyLevel':'Your bowl is empty. Finish your tasks to earn your food.','msg.bowlEmptyFree':'The food bowl is empty. It will be refilled soon.',
+  'msg.toFood':'Heading to the food bowl…','msg.spot':'Looking for a good spot…','msg.jogOn':'Jog mode on','msg.jogOff':'Jog mode off','msg.nowPlaying':'Now playing as {name}','msg.allGone':'All gone!',
+  'say.found':'There you are! Good dog!','say.thanks':'Thank you! Good dog!',
+}};
+const LKEY='dogsim.lang';
+let LANG='nl';try{const s=localStorage.getItem(LKEY);if(s==='en'||s==='nl')LANG=s;}catch(e){}
+function tr(key,vars){let s=(STR[LANG]&&STR[LANG][key])??STR.en[key]??key;if(vars)for(const k in vars)s=s.split('{'+k+'}').join(vars[k]);return s;}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+// fixed HTML: data-i18n sets text, data-i18n-aria sets the accessible name
+function applyStaticLang(){document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n);});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.i18nAria));});
+  document.querySelectorAll('#langswitch button').forEach(b=>{const on=b.dataset.lang===LANG;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});}
+applyStaticLang();
 
 // =====================================================================
 // Renderer / scene
@@ -972,17 +1056,17 @@ function makeItemMesh(kind){const g=new THREE.Group();let m;
   else m=new THREE.Mesh(new THREE.CylinderGeometry(0.011,0.014,0.34,7).rotateZ(Math.PI/2),stickMat);
   m.castShadow=true;g.add(m);return g;}
 const items=[];let carried=null;
-function spawnItem(kind,x,z,state='ground'){const KD=ITEM_KINDS[kind];const it={kind,label:KD.label,restY:KD.restY,mesh:makeItemMesh(kind),pos:new V3(x,groundH(x,z)+KD.restY,z),state,dropT:0};
+function spawnItem(kind,x,z,state='ground'){const KD=ITEM_KINDS[kind];const it={kind,get label(){return tr('item.'+this.kind);},restY:KD.restY,mesh:makeItemMesh(kind),pos:new V3(x,groundH(x,z)+KD.restY,z),state,dropT:0};
   it.mesh.position.copy(it.pos);it.mesh.rotation.y=Math.random()*6;it.mesh.visible=state!=='buried';scene.add(it.mesh);items.push(it);return it;}
 function removeItem(it){if(it.mesh.parent)it.mesh.parent.remove(it.mesh);const i=items.indexOf(it);if(i>=0)items.splice(i,1);if(carried===it)carried=null;}
 function pickUp(it){if(carried&&carried!==it)dropCarried();carried=it;it.state='carried';jawG.add(it.mesh);it.mesh.visible=true;it.mesh.position.set(0,0.014,0.105);it.mesh.rotation.set(0,it.kind==='slipper'?Math.PI/2:0,0);it.mesh.scale.setScalar(1/(D.spec.scale*D.spec.head.scale));sfx.pick();updateDigButton();}
 function dropCarried(){const it=carried;if(!it)return;carried=null;noseTip.getWorldPosition(_v);scene.add(it.mesh);it.mesh.scale.setScalar(1);it.pos.set(_v.x,groundH(_v.x,_v.z)+it.restY,_v.z);it.mesh.position.copy(it.pos);it.mesh.rotation.set(0,dog.heading+Math.PI/2,0);it.state='ground';it.dropT=time+1.5;updateDigButton();}
-function updateDigButton(){const b=document.querySelector('#actions button[data-a="dig"]');if(b)b.lastChild.textContent=carried?'Bury':'Dig';}
+function updateDigButton(){const b=document.getElementById('diglabel');if(b){b.dataset.i18n=carried?'act.bury':'act.dig';b.textContent=tr(b.dataset.i18n);}}
 function resolveDig(h){if(!h)return;let best=null,bd=1.15;
   for(const it of items){if(it.state!=='buried')continue;const d=Math.hypot(it.pos.x-h.x,it.pos.z-h.z);if(d<bd){bd=d;best=it;}}
-  if(best){best.pos.set(h.x,groundH(h.x,h.z)+best.restY,h.z);pickUp(best);toast(`Found ${best.label}!`);levelEvent('dug',{item:best});return;}
-  if(carried){const it=carried;carried=null;scene.add(it.mesh);it.mesh.visible=false;it.mesh.scale.setScalar(1);it.state='buried';it.pos.set(h.x,groundH(h.x,h.z)+it.restY,h.z);it.mesh.position.copy(it.pos);fillHole(h);updateDigButton();toast(`Buried ${it.label}.`);levelEvent('bury',{item:it,x:h.x,z:h.z});return;}
-  if(Math.random()<0.18){const it=spawnItem('stick',h.x,h.z);pickUp(it);toast('Found a stick!');}else toast('Nothing here but dirt.');}
+  if(best){best.pos.set(h.x,groundH(h.x,h.z)+best.restY,h.z);pickUp(best);toast(tr('msg.found',{item:best.label}));levelEvent('dug',{item:best});return;}
+  if(carried){const it=carried;carried=null;scene.add(it.mesh);it.mesh.visible=false;it.mesh.scale.setScalar(1);it.state='buried';it.pos.set(h.x,groundH(h.x,h.z)+it.restY,h.z);it.mesh.position.copy(it.pos);fillHole(h);updateDigButton();toast(tr('msg.buried',{item:it.label}));levelEvent('bury',{item:it,x:h.x,z:h.z});return;}
+  if(Math.random()<0.18){const it=spawnItem('stick',h.x,h.z);pickUp(it);toast(tr('msg.stick'));}else toast(tr('msg.nothing'));}
 
 // ---- the human
 function makeHuman(){const g=new THREE.Group();
@@ -1021,29 +1105,29 @@ const SCENT=makeParticles(160,new THREE.MeshBasicMaterial({color:'#f1ecd2',trans
 const hz=x=>pathZ(x);
 const LEVELS=[
   {name:'First Morning',blurb:'A gentle start around the garden.',start:[2,4,2.3],human:[11.6,1.8],poo:[-1.5,8.5],tasks:[
-    {type:'drink',label:'Have a drink of water'},
-    {type:'bones',label:'Collect the shiny bones',pts:[[-3,5],[-0.5,1.2],[3,-1.2],[5.6,2.6],[6.2,-3.6]]},
-    {type:'human',label:'Find your human'}]},
+    {type:'drink',k:'drinkWater'},
+    {type:'bones',k:'bones',pts:[[-3,5],[-0.5,1.2],[3,-1.2],[5.6,2.6],[6.2,-3.6]]},
+    {type:'human',k:'human'}]},
   {name:'Marking the Rounds',blurb:'Patrol the path and leave your mark.',start:[2,4,2.3],human:[17.6,-2.6],poo:[5.5,6.5],tasks:[
-    {type:'mark',label:'Pee on the stone cross',targets:['cross']},
-    {type:'bones',label:'Collect the shiny bones along the path',pts:[[15,hz(15)+0.4],[17.5,hz(17.5)+0.4],[20,hz(20)+0.4],[22.5,hz(22.5)+0.9],[25,hz(25)+0.4],[26,-1.5],[26.5,1.8],[25.5,4.2]]},
-    {type:'find',label:'Find the tennis ball',item:'ball',at:[26.8,6.4]},
-    {type:'bring',label:'Bring the ball to your human',item:'ball'}]},
+    {type:'mark',k:'markCross',targets:['cross']},
+    {type:'bones',k:'bonesPath',pts:[[15,hz(15)+0.4],[17.5,hz(17.5)+0.4],[20,hz(20)+0.4],[22.5,hz(22.5)+0.9],[25,hz(25)+0.4],[26,-1.5],[26.5,1.8],[25.5,4.2]]},
+    {type:'find',k:'findBall',item:'ball',at:[26.8,6.4]},
+    {type:'bring',k:'bringBall',item:'ball'}]},
   {name:'Buried Treasure',blurb:'Sniff out a bone, then hide it somewhere safe.',start:[1,6,-1.2],human:[-3.5,13.5],poo:[-1.5,2],tasks:[
-    {type:'dig',label:'Sniff out and dig up the buried bone',item:'bone',spots:[[-18.5,3.3]]},
-    {type:'drink',label:'Drink from the stream',source:'stream'},
-    {type:'bury',label:'Bury the bone under the big oak',item:'bone',at:'oak',radius:2.4},
-    {type:'human',label:'Find your human by the pond'}]},
+    {type:'dig',k:'digBone',item:'bone',spots:[[-18.5,3.3]]},
+    {type:'drink',k:'drinkStream',source:'stream'},
+    {type:'bury',k:'buryOak',item:'bone',at:'oak',radius:2.4},
+    {type:'human',k:'humanPond'}]},
   {name:'The Long Walk',blurb:'Follow the stream north, then head for the fields.',start:[-4,9,-0.6],human:[28,-10.5],poo:[-3,6.5],tasks:[
-    {type:'bones',label:'Collect the bones along the stream',pts:[...Array(10)].map((_,i)=>{const z=22+i*5;return [streamX(z)+(i%2?1.6:-1.6),z];})},
-    {type:'mark',label:'Mark the two alders by the stream',targets:['alder1','alder2']},
-    {type:'drink',label:'Drink from a puddle on the path',source:'puddle'},
-    {type:'human',label:'Meet your human at the field edge'}]},
+    {type:'bones',k:'bonesStream',pts:[...Array(10)].map((_,i)=>{const z=22+i*5;return [streamX(z)+(i%2?1.6:-1.6),z];})},
+    {type:'mark',k:'markAlders',targets:['alder1','alder2']},
+    {type:'drink',k:'drinkPuddle',source:'puddle'},
+    {type:'human',k:'humanField'}]},
   {name:'Hide and Seek',blurb:'Your human is hiding. Bring back the slipper and dig up your toys.',start:[2,4,2.3],humanHide:[[-24,19],[21,13],[-11,-6],[6,-12.5],[-2,24]],poo:[3.5,9],tasks:[
-    {type:'find',label:'Find the slipper in the hedge',item:'slipper',at:[-12,hz(-12)-1.42]},
-    {type:'bring',label:'Bring the slipper to your hiding human',item:'slipper',hidden:true},
-    {type:'dig',label:'Dig up your buried toys',item:'toy',spots:[[-22,-1.5],[23,7.5]]},
-    {type:'drink',label:'Have a drink'}]},
+    {type:'find',k:'findSlipper',item:'slipper',at:[-12,hz(-12)-1.42]},
+    {type:'bring',k:'bringSlipper',item:'slipper',hidden:true},
+    {type:'dig',k:'digToys',item:'toy',spots:[[-22,-1.5],[23,7.5]]},
+    {type:'drink',k:'drink'}]},
 ];
 const PKEY='dogsim.progress.v1';let PROG={unlocked:1,best:{}};
 try{const s=JSON.parse(localStorage.getItem(PKEY));if(s&&s.unlocked)PROG={unlocked:s.unlocked,best:s.best||{}};}catch(e){}
@@ -1072,7 +1156,7 @@ function startLevel(i){
   // the marked toilet spot: a little flag on a stake
   {const [px,pz]=L.poo,gy=groundH(px,pz);const stake=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.014,0.7,6),stickMat);stake.position.set(px+0.62,gy+0.35,pz);stake.castShadow=true;G.group.add(stake);
    const flag=new THREE.Mesh(new THREE.PlaneGeometry(0.22,0.14),new THREE.MeshStandardMaterial({color:'#e7b321',side:THREE.DoubleSide,roughness:0.8}));flag.position.set(px+0.62+0.11,gy+0.62,pz);G.group.add(flag);G.flag=flag;}
-  G.tasks=[{type:'poo',label:'Poop on the marked spot',at:L.poo},...L.tasks.map(t=>({...t})),{type:'eat',label:'Eat your well-earned food'}];
+  G.tasks=[{type:'poo',k:'poo',at:L.poo},...L.tasks.map(t=>({...t})),{type:'eat',k:'eat'}];
   G.ti=0;activateTask();renderTasks();document.getElementById('tasks').hidden=false;showCard('intro');
 }
 function curTask(){return G.mode==='level'&&!G.done?G.tasks[G.ti]:null;}
@@ -1082,19 +1166,19 @@ function activateTask(){const t=curTask();if(!t)return;
   if(t.type==='dig'){t.found=0;for(const [x,z] of t.spots)spawnItem(t.item,x,z,'buried');}
   if(t.type==='mark')t.mi=0;
   if(t.type==='drink')t.laps=0;
-  if(t.type==='eat'){bowls.food.kibble=60;bowls.food.mesh.count=60;toast('Your food bowl has been filled!');for(let i=0;i<24;i++)emit(SPARK,new V3(bowls.food.x,groundH(bowls.food.x,bowls.food.z)+0.1,bowls.food.z),new V3((Math.random()-.5)*1.2,0.8+Math.random()*1.2,(Math.random()-.5)*1.2),1.2,0.008);}
+  if(t.type==='eat'){bowls.food.kibble=60;bowls.food.mesh.count=60;toast(tr('msg.bowlFilled'));for(let i=0;i<24;i++)emit(SPARK,new V3(bowls.food.x,groundH(bowls.food.x,bowls.food.z)+0.1,bowls.food.z),new V3((Math.random()-.5)*1.2,0.8+Math.random()*1.2,(Math.random()-.5)*1.2),1.2,0.008);}
 }
-function completeTask(){const t=curTask();if(!t)return;t.done=true;sfx.task();toast(`Done: ${t.label}`);G.ti++;
+function completeTask(){const t=curTask();if(!t)return;t.done=true;sfx.task();toast(tr('msg.done',{task:taskLabel(t)}));G.ti++;
   if(G.ti>=G.tasks.length){levelComplete();return;}activateTask();renderTasks();}
 function levelComplete(){G.done=true;sfx.level();const i=G.li;const prev=PROG.best[i];if(!prev||G.time<prev)PROG.best[i]=G.time;PROG.unlocked=Math.max(PROG.unlocked,Math.min(LEVELS.length,i+2));saveProg();
   beam.visible=ring.visible=arrow.visible=false;renderTasks();setTimeout(()=>showCard('done'),900);}
 function levelEvent(type,d){const t=curTask();if(!t)return;
-  if(type==='poo'&&t.type==='poo'){if(Math.hypot(d.x-t.at[0],d.z-t.at[1])<1.1)completeTask();else{toast('Missed the marked spot! Stand on the ring and try again.');sfx.miss();}}
-  else if(type==='drinkLap'&&t.type==='drink'){if(t.source&&d.kind!==t.source){if(!t.warned){toast(`That's the ${d.kind}. This task needs the ${t.source}.`);t.warned=true;}return;}t.laps++;if(t.laps>=6)completeTask();}
-  else if(type==='pee'&&t.type==='mark'){const lm=LANDMARKS[t.targets[t.mi]];if(Math.hypot(dog.pos.x-lm.x,dog.pos.z-lm.z)<lm.r+1.4){t.mi++;sfx.collect();if(t.mi>=t.targets.length)completeTask();else{toast('Marked! Now the next one.');renderTasks();}}else toast('Wrong spot. Follow the arrow to the right one.');}
+  if(type==='poo'&&t.type==='poo'){if(Math.hypot(d.x-t.at[0],d.z-t.at[1])<1.1)completeTask();else{toast(tr('msg.missed'));sfx.miss();}}
+  else if(type==='drinkLap'&&t.type==='drink'){if(t.source&&d.kind!==t.source){if(!t.warned){toast(tr('msg.wrongWater',{kind:tr('water.'+d.kind),src:tr('water.'+t.source)}));t.warned=true;}return;}t.laps++;if(t.laps>=6)completeTask();}
+  else if(type==='pee'&&t.type==='mark'){const lm=LANDMARKS[t.targets[t.mi]];if(Math.hypot(dog.pos.x-lm.x,dog.pos.z-lm.z)<lm.r+1.4){t.mi++;sfx.collect();if(t.mi>=t.targets.length)completeTask();else{toast(tr('msg.markedNext'));renderTasks();}}else toast(tr('msg.wrongMark'));}
   else if(type==='pickup'&&t.type==='find'&&d.item.kind===t.item)completeTask();
   else if(type==='dug'&&t.type==='dig'&&d.item.kind===t.item){t.found++;if(t.found>=t.spots.length)completeTask();else renderTasks();}
-  else if(type==='bury'&&t.type==='bury'&&d.item.kind===t.item){const lm=LANDMARKS[t.at];if(Math.hypot(d.x-lm.x,d.z-lm.z)<t.radius)completeTask();else toast('Buried, but not under the big oak. Dig it up again!');}
+  else if(type==='bury'&&t.type==='bury'&&d.item.kind===t.item){const lm=LANDMARKS[t.at];if(Math.hypot(d.x-lm.x,d.z-lm.z)<t.radius)completeTask();else toast(tr('msg.buriedWrong'));}
   else if(type==='eat'&&t.type==='eat')completeTask();
 }
 function nearestWater(kind){const list=waterSpots().filter(o=>!kind||o.data.kind===kind);return list[0]||null;}
@@ -1115,9 +1199,9 @@ function taskTarget(t){if(!t)return null;const L=LANDMARKS;
     case 'eat':return _tv.set(bowls.food.x,0,bowls.food.z);
   }return null;}
 function taskProgress(t){if(t.type==='bones')return ` ${t.got}/${t.total}`;if(t.type==='mark'&&t.targets.length>1)return ` ${t.mi}/${t.targets.length}`;if(t.type==='dig'&&t.spots.length>1)return ` ${t.found||0}/${t.spots.length}`;return '';}
-function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.getElementById('tasktitle').textContent=`Level ${G.li+1} · ${L.name}`;
+function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.getElementById('tasktitle').textContent=tr('tasks.title',{n:G.li+1,name:levelName(G.li)});
   const ol=document.getElementById('tasklist');ol.innerHTML='';
-  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=t.label+(i===G.ti?taskProgress(t):'');ol.appendChild(li);});}
+  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);});}
 function updateLevel(dt){
   if(G.human){G.human.update(dt);const hb=document.getElementById('bubble');if(!hb.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){hb.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';hb.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)hb.hidden=true;}}
   if(G.flag)G.flag.rotation.y=Math.sin(time*2)*0.4;
@@ -1128,8 +1212,8 @@ function updateLevel(dt){
   const S=D.spec.scale;
   if(t.type==='bones'){for(let i=G.bones.length-1;i>=0;i--){const b=G.bones[i];if(Math.hypot(b.x-dog.pos.x,b.z-dog.pos.z)<0.7){for(let k=0;k<14;k++)emit(SPARK,b.m.position,new V3((Math.random()-.5)*1.5,0.5+Math.random(),(Math.random()-.5)*1.5),0.7,0.006);scene.remove(b.m);G.bones.splice(i,1);t.got++;sfx.collect();renderTasks();if(t.got>=t.total)completeTask();}}}
   if(G.human){const hd=Math.hypot(G.human.g.position.x-dog.pos.x,G.human.g.position.z-dog.pos.z);
-    if(t.type==='human'&&hd<1.9){say('There you are! Good dog!');G.human.wave=3;completeTask();}
-    else if(t.type==='bring'&&hd<1.9&&carried&&carried.kind===t.item){const it=carried;dropCarried();it.noPick=true;it.state='delivered';say('Thank you! Good dog!');G.human.wave=3;completeTask();}}
+    if(t.type==='human'&&hd<1.9){say(tr('say.found'));G.human.wave=3;completeTask();}
+    else if(t.type==='bring'&&hd<1.9&&carried&&carried.kind===t.item){const it=carried;dropCarried();it.noPick=true;it.state='delivered';say(tr('say.thanks'));G.human.wave=3;completeTask();}}
   if(t.type==='dig'){for(const it of items){if(it.state!=='buried'||it.kind!==t.item)continue;if(Math.hypot(it.pos.x-dog.pos.x,it.pos.z-dog.pos.z)<9&&Math.random()<dt*9)emit(SCENT,new V3(it.pos.x+(Math.random()-.5)*0.35,groundH(it.pos.x,it.pos.z)+0.05,it.pos.z+(Math.random()-.5)*0.35),new V3((Math.random()-.5)*0.05,0.25+Math.random()*0.2,(Math.random()-.5)*0.05),2.4,0.007);}}
   // markers
   const tg=taskTarget(t);
@@ -1148,26 +1232,31 @@ function say(text){const hb=document.getElementById('bubble');hb.textContent=tex
 // ---- menus and cards
 const menuEl=document.getElementById('menu'),cardEl=document.getElementById('card');
 function uiOpen(){return !menuEl.hidden||!cardEl.hidden;}
+function taskLabel(t){return tr('task.'+t.k);}
+function levelName(i){return tr(`lvl${i}.name`);}
+function setLang(l){if(l===LANG||!STR[l])return;LANG=l;try{localStorage.setItem(LKEY,l);}catch(e){}
+  applyStaticLang();updateDigButton();lastStatus='';renderMenu();renderTasks();if(!cardEl.hidden&&G.cardKind)showCard(G.cardKind);toast(tr('ui.langSet'));}
+document.querySelectorAll('#langswitch button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.lang);b.blur();}));
 function openMenu(){renderMenu();menuEl.hidden=false;keys.clear();const f=menuEl.querySelector('button:not([disabled])');if(f)f.focus();}
 function closeMenu(){menuEl.hidden=true;}
 function renderMenu(){const box=document.getElementById('levellist');box.innerHTML='';
   LEVELS.forEach((L,i)=>{const b=document.createElement('button');b.className='lvlbtn';const locked=i>=PROG.unlocked;b.disabled=locked;
     b.innerHTML=`<span class="ln">${i+1}</span><span class="lt"><b></b><small></small></span><span class="ls"></span>`;
-    b.querySelector('b').textContent=L.name;b.querySelector('small').textContent=locked?'Finish the previous level to unlock':L.blurb;
-    b.querySelector('.ls').textContent=PROG.best[i]!=null?`Best ${fmtTime(PROG.best[i])}`:locked?'Locked':'New';
+    b.querySelector('b').textContent=levelName(i);b.querySelector('small').textContent=locked?tr('menu.unlock'):tr(`lvl${i}.blurb`);
+    b.querySelector('.ls').textContent=PROG.best[i]!=null?tr('menu.best',{t:fmtTime(PROG.best[i])}):locked?tr('menu.locked'):tr('menu.new');
     b.addEventListener('click',()=>{closeMenu();startLevel(i);});box.appendChild(b);});
-  document.getElementById('closemenu').hidden=!G.started;document.getElementById('closemenu').textContent=G.mode==='level'?'Back to the level':'Back to the game';}
-function showCard(kind){const body=document.getElementById('cardbody'),btns=document.getElementById('cardbtns');body.innerHTML='';btns.innerHTML='';const L=LEVELS[G.li];
+  document.getElementById('closemenu').hidden=!G.started;document.getElementById('closemenu').textContent=G.mode==='level'?tr('menu.backLevel'):tr('menu.backGame');}
+function showCard(kind){G.cardKind=kind;const body=document.getElementById('cardbody'),btns=document.getElementById('cardbtns');body.innerHTML='';btns.innerHTML='';const L=LEVELS[G.li];
   const addBtn=(label,fn,primary)=>{const b=document.createElement('button');b.textContent=label;if(primary)b.className='primary';b.addEventListener('click',fn);btns.appendChild(b);return b;};
-  if(kind==='intro'){body.innerHTML=`<p class="eyebrow">Level ${G.li+1} of ${LEVELS.length}</p><h2></h2><p class="blurb"></p><ol class="plan"></ol>`;
-    body.querySelector('h2').textContent=L.name;body.querySelector('.blurb').textContent=L.blurb;const ol=body.querySelector('.plan');for(const t of G.tasks){const li=document.createElement('li');li.textContent=t.label;ol.appendChild(li);}
-    const p=addBtn('Start',()=>{cardEl.hidden=true;},true);cardEl.hidden=false;keys.clear();p.focus();}
-  else{const best=PROG.best[G.li];body.innerHTML=`<p class="eyebrow">Level ${G.li+1} complete</p><h2>Good dog!</h2><p class="blurb"></p>`;
-    body.querySelector('.blurb').textContent=`${D.spec.name} finished “${L.name}” in ${fmtTime(G.time)}. Best time: ${fmtTime(best)}.`;
-    let p;if(G.li+1<LEVELS.length)p=addBtn('Next level',()=>{cardEl.hidden=true;startLevel(G.li+1);},true);
-    addBtn('Replay',()=>{cardEl.hidden=true;startLevel(G.li);});addBtn('Menu',()=>{cardEl.hidden=true;endLevel();openMenu();});
+  if(kind==='intro'){body.innerHTML=`<p class="eyebrow"></p><h2></h2><p class="blurb"></p><ol class="plan"></ol>`;body.querySelector('.eyebrow').textContent=tr('card.levelOf',{n:G.li+1,m:LEVELS.length});
+    body.querySelector('h2').textContent=levelName(G.li);body.querySelector('.blurb').textContent=tr(`lvl${G.li}.blurb`);const ol=body.querySelector('.plan');for(const t of G.tasks){const li=document.createElement('li');li.textContent=taskLabel(t);ol.appendChild(li);}
+    const p=addBtn(tr('card.start'),()=>{cardEl.hidden=true;},true);cardEl.hidden=false;keys.clear();p.focus();}
+  else{const best=PROG.best[G.li];body.innerHTML=`<p class="eyebrow"></p><h2></h2><p class="blurb"></p>`;body.querySelector('.eyebrow').textContent=tr('card.complete',{n:G.li+1});body.querySelector('h2').textContent=tr('card.goodDog');
+    body.querySelector('.blurb').textContent=tr('card.finished',{dog:D.spec.name,level:levelName(G.li),time:fmtTime(G.time),best:fmtTime(best)});
+    let p;if(G.li+1<LEVELS.length)p=addBtn(tr('card.next'),()=>{cardEl.hidden=true;startLevel(G.li+1);},true);
+    addBtn(tr('card.replay'),()=>{cardEl.hidden=true;startLevel(G.li);});addBtn(tr('card.menu'),()=>{cardEl.hidden=true;endLevel();openMenu();});
     cardEl.hidden=false;keys.clear();(p||btns.firstChild).focus();}}
-document.getElementById('freeplay').addEventListener('click',()=>{G.started=true;closeMenu();endLevel();resetWorld();toast('Free roam: explore, dig and play.');});
+document.getElementById('freeplay').addEventListener('click',()=>{G.started=true;closeMenu();endLevel();resetWorld();toast(tr('msg.freeRoam'));});
 document.getElementById('closemenu').addEventListener('click',closeMenu);
 document.getElementById('menubtn').addEventListener('click',e=>{e.currentTarget.blur();openMenu();});
 
@@ -1194,13 +1283,13 @@ function requestAction(name){
   dog.ai=null;
   if(name==='drink'){
     const o=waterSpots()[0];goOrStart(o,'drink',o.data);
-    if(dog.ai)toast({bowl:'Heading to the water bowl…',pond:'Heading to the pond for a drink…',stream:'Heading to the stream for a drink…',puddle:'Heading to the puddle for a drink…'}[o.data.kind]);return;}
-  if(name==='dig'){if(pondE(dog.pos.x,dog.pos.z)<1.0||streamD(dog.pos.x,dog.pos.z)<1.0){toast("Can't dig in the water.");return;}if(pathD(dog.pos.x,dog.pos.z)<0.8){toast('The gravel is too hard to dig. Try the grass.');return;}startAction('dig');return;}
-  if(name==='eat'){const b=bowls.food;if(b.kibble<=0){toast(G.mode==='level'?'Your bowl is empty. Finish your tasks to earn your food.':'The food bowl is empty. It will be refilled soon.');return;}const s=bowlSpot(b);goOrStart(s,'eat',{targetY:groundH(b.x,b.z)+0.03,bowl:b});if(dog.ai)toast('Heading to the food bowl…');return;}
+    if(dog.ai)toast(tr('msg.toWater',{water:tr('water.'+o.data.kind)}));return;}
+  if(name==='dig'){if(pondE(dog.pos.x,dog.pos.z)<1.0||streamD(dog.pos.x,dog.pos.z)<1.0){toast(tr('msg.digWater'));return;}if(pathD(dog.pos.x,dog.pos.z)<0.8){toast(tr('msg.digGravel'));return;}startAction('dig');return;}
+  if(name==='eat'){const b=bowls.food;if(b.kibble<=0){toast(tr(G.mode==='level'?'msg.bowlEmptyLevel':'msg.bowlEmptyFree'));return;}const s=bowlSpot(b);goOrStart(s,'eat',{targetY:groundH(b.x,b.z)+0.03,bowl:b});if(dog.ai)toast(tr('msg.toFood'));return;}
   if(name==='pee'){let best=null,bd=6;for(const o of obstacles){if(!o.mark)continue;const d=Math.hypot(o.x-dog.pos.x,o.z-dog.pos.z)-o.r;if(d<bd){bd=d;best=o;}}
     if(best){let nx=dog.pos.x-best.x,nz=dog.pos.z-best.z;const l=Math.hypot(nx,nz)||1;nx/=l;nz/=l;const sx=best.x+nx*(best.r+0.27),sz=best.z+nz*(best.r+0.27);
       const hL=Math.atan2(nz,-nx),hR=Math.atan2(-nz,nx);const useL=Math.abs(wrapA(hL-dog.heading))<Math.abs(wrapA(hR-dog.heading));
-      goOrStart({x:sx,z:sz,face:useL?hL:hR},'pee',{side:useL?1:-1});if(dog.ai)toast('Looking for a good spot…');}
+      goOrStart({x:sx,z:sz,face:useL?hL:hR},'pee',{side:useL?1:-1});if(dog.ai)toast(tr('msg.spot'));}
     else startAction('pee',{side:Math.random()<0.5?1:-1});return;}
   if(name==='roll'){startAction('roll',{side:Math.random()<0.5?1:-1});return;}
   startAction(name);
@@ -1213,13 +1302,14 @@ function goOrStart(spot,name,data){const d=Math.hypot(spot.x-dog.pos.x,spot.z-do
 const keys=new Set();
 addEventListener('pointerdown',()=>audio(),{once:true});
 addEventListener('keydown',e=>{if(e.repeat)return;audio();
+  if(e.code==='KeyL'){setLang(LANG==='nl'?'en':'nl');return;}
   if(e.code==='Escape'||e.code==='KeyM'){if(!cardEl.hidden)return;if(menuEl.hidden)openMenu();else if(G.mode==='level'||G.started)closeMenu();return;}
   if(uiOpen())return;
-  keys.add(e.code);const map={Digit1:'sit',Digit2:'drink',Digit3:'eat',Digit4:'pee',Digit5:'poo',Digit6:'roll',Digit7:'lie',Digit8:'dig',Numpad1:'sit',Numpad2:'drink',Numpad3:'eat',Numpad4:'pee',Numpad5:'poo',Numpad6:'roll',Numpad7:'lie',Numpad8:'dig'};if(map[e.code])requestAction(map[e.code]);if(e.code==='KeyR'){dog.jog=!dog.jog;toast(dog.jog?'Jog mode on':'Jog mode off');}if(e.code==='KeyC')selectDog((DOGS.indexOf(D)+1)%DOGS.length);});
+  keys.add(e.code);const map={Digit1:'sit',Digit2:'drink',Digit3:'eat',Digit4:'pee',Digit5:'poo',Digit6:'roll',Digit7:'lie',Digit8:'dig',Numpad1:'sit',Numpad2:'drink',Numpad3:'eat',Numpad4:'pee',Numpad5:'poo',Numpad6:'roll',Numpad7:'lie',Numpad8:'dig'};if(map[e.code])requestAction(map[e.code]);if(e.code==='KeyR'){dog.jog=!dog.jog;toast(tr(dog.jog?'msg.jogOn':'msg.jogOff'));}if(e.code==='KeyC')selectDog((DOGS.indexOf(D)+1)%DOGS.length);});
 function selectDog(i){if(DOGS[i]===D)return;if(carried)dropCarried();ST.action=null;dog.ai=null;bindDog(i);headInit=false;standPose(ST.cur);ST.trans=1;
   document.getElementById('dogname').textContent=D.spec.name;
   document.querySelectorAll('#chars button[data-d]').forEach(b=>{const on=+b.dataset.d===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});
-  updateButtons();toast(`Now playing as ${D.spec.name}`);}
+  updateButtons();toast(tr('msg.nowPlaying',{name:D.spec.name}));}
 document.querySelectorAll('#chars button[data-d]').forEach(b=>b.addEventListener('click',()=>{selectDog(+b.dataset.d);b.blur();}));
 addEventListener('keyup',e=>keys.delete(e.code));
 addEventListener('blur',()=>keys.clear());
@@ -1337,7 +1427,7 @@ function actionEffects(A,dt,time){
     // head "IK": nudge the neck until the nose actually reaches the water / food
     if(t>0.7&&ST.trans>=1&&(A.name==='drink'||A.lift<0.05)){const err=_v.y-A.targetY;A.adj=clamp(A.adj+err*7*dt,-0.7,1.65);}
     if(A.name==='drink'){if(A.lap>0.5&&A.lapPh>0.95&&!A.rip){A.rip=true;levelEvent('drinkLap',{kind:A.kind});const y=A.kind==='pond'?WATER_Y:A.targetY;let rx=_v.x,rz=_v.z;if(A.kind==='bowl'){const dx=rx-A.bowl.x,dz=rz-A.bowl.z,d=Math.hypot(dx,dz);if(d>0.06){rx=A.bowl.x+dx/d*0.06;rz=A.bowl.z+dz/d*0.06;}}addRipple(rx,y,rz,A.kind==='pond'?0.45:0.08);if(A.kind==='bowl'){A.bowl.level=Math.max(0,A.bowl.level-0.012);}if(Math.random()<0.5)emit(DROP,_v,new V3((Math.random()-.5)*0.4,0.6+Math.random()*0.4,(Math.random()-.5)*0.4),0.8,0.004);}if(A.lapPh<0.5)A.rip=false;}
-    if(A.name==='eat'){if(A.cyc>0.2&&A.cyc<0.3&&!A.bit&&t>1.2){A.bit=true;A.bites=(A.bites||0)+1;const b=A.bowl;b.kibble=Math.max(0,b.kibble-4);b.mesh.count=b.kibble;if(b.kibble<=0){A.dur=Math.min(A.dur,t+1.2);toast('All gone!');b.refill=12;}}if(A.cyc>0.5)A.bit=false;}
+    if(A.name==='eat'){if(A.cyc>0.2&&A.cyc<0.3&&!A.bit&&t>1.2){A.bit=true;A.bites=(A.bites||0)+1;const b=A.bowl;b.kibble=Math.max(0,b.kibble-4);b.mesh.count=b.kibble;if(b.kibble<=0){A.dur=Math.min(A.dur,t+1.2);toast(tr('msg.allGone'));b.refill=12;}}if(A.cyc>0.5)A.bit=false;}
   }
   if(A.name==='pee'&&A.up>0.9&&t>1.1&&t<A.dur-1.0){if(!A.fired.mark){A.fired.mark=true;levelEvent('pee');}sheath.getWorldPosition(_v);const h=dog.heading,s=A.side;const lx=Math.cos(h)*s,lz=-Math.sin(h)*s,fx=Math.sin(h),fz=Math.cos(h);
     for(let i=0;i<5;i++){const sp=0.8+Math.random()*0.2;emit(PEE,_v,new V3(lx*sp+fx*0.05+(Math.random()-.5)*0.05,-0.1+(Math.random()-.5)*0.08,lz*sp+fz*0.05+(Math.random()-.5)*0.05),1.5,0.0065+Math.random()*0.003);}}
@@ -1372,7 +1462,7 @@ function updateCamera(dt,time){
   const p=cam.tgt.clone().add(off);const gy=groundH(p.x,p.z)+0.18;if(p.y<gy)p.y=gy;
   camera.position.copy(p);camera.lookAt(cam.tgt);
 }
-function statusText(){if(ST.action)return ST.action.def.label;if(dog.ai)return 'On the way…';const v=dog.speed;if(v<0.15)return dog.pant>0.3?'Panting':'Standing';if(v<2.2)return 'Walking';if(v<5)return 'Trotting';return 'Running';}
+function statusText(){if(ST.action)return tr('st.'+ST.action.name);if(dog.ai)return tr('st.onTheWay');const v=dog.speed;if(v<0.15)return tr(dog.pant>0.3?'st.panting':'st.standing');if(v<2.2)return tr('st.walking');if(v<5)return tr('st.trotting');return tr('st.running');}
 
 // =====================================================================
 // Main loop
@@ -1397,7 +1487,7 @@ function step(fixed,noRender){
   applyPose(ST.cur,dt,time);
   // pick up items the dog walks its nose into
   if(!carried&&!ST.action){const S=D.spec.scale;const mx=dog.pos.x+Math.sin(dog.heading)*0.5*S,mz=dog.pos.z+Math.cos(dog.heading)*0.5*S;
-    for(const it of items){if(it.state!=='ground'||it.noPick||time<it.dropT)continue;if(Math.hypot(it.pos.x-mx,it.pos.z-mz)<0.4){pickUp(it);toast(`Picked up ${it.label}`);levelEvent('pickup',{item:it});break;}}}
+    for(const it of items){if(it.state!=='ground'||it.noPick||time<it.dropT)continue;if(Math.hypot(it.pos.x-mx,it.pos.z-mz)<0.4){pickUp(it);toast(tr('msg.picked',{item:it.label}));levelEvent('pickup',{item:it});break;}}}
   updateLevel(dt);
   if(ST.action)actionEffects(ST.action,dt,time);
   updateEffects(dt);

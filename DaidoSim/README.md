@@ -26,6 +26,8 @@ Choose between two dogs, **Daido** and **Fluffy**, with the buttons at the top r
 
 Levels unlock one at a time. Your progress and best time for each level are saved in the browser's `localStorage`.
 
+The interface is in **Dutch** by default. Switch to **English** with the **NL | EN** buttons at the top right, or press **L**. The game remembers your choice.
+
 ## Controls
 
 | Action | Keyboard / mouse | Touch |
@@ -37,6 +39,7 @@ Levels unlock one at a time. Your progress and best time for each level are save
 | Sit · Drink · Eat · Pee · Poo · Roll over · Lie down · Dig | 1–8 (or the action buttons) | Action buttons |
 | Dig, or bury what you're carrying | 8 | Dig button |
 | Switch dog | Buttons at the top right | Buttons at the top right |
+| Switch language (Dutch / English) | L, or the NL \| EN buttons | NL \| EN buttons |
 | Menu | M / Esc | Menu button |
 
 ## Requirements

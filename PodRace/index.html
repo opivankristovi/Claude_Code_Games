@@ -333,7 +333,7 @@ function iconCanvas(type){const c=document.createElement('canvas');c.width=c.hei
 const PU_ICON={},PU_URL={};
 for(const k of PU_KEYS){const c=iconCanvas(k);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;PU_ICON[k]=t;PU_URL[k]=c.toDataURL();}
 {const L=$('legend');for(const k of PU_KEYS){const img=document.createElement('img');img.src=PU_URL[k];img.style.background=PU[k].color;
-  const s=document.createElement('span');s.innerHTML=`<b style="all:unset;color:${PU[k].color};font-weight:700">${PU[k].name}</b> — ${PU[k].desc}`;L.append(img,s);}}
+  const s=document.createElement('span');const b=document.createElement('b');b.style.all='unset';b.style.color=PU[k].color;b.style.fontWeight='700';b.textContent=PU[k].name;s.append(b, ` — ${PU[k].desc}`);L.append(img,s);}}
 
 // ============================================================ track
 const N=3600,LAPS=3,TRACK_HALF=22,DLIM=17.5,S0=60;

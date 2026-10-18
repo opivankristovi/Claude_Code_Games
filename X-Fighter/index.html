@@ -1556,15 +1556,16 @@ function bracket(x, y, s, c) {
 const typeColor = { fighter: '#ff5a3c', turret: '#ffa040', dome: '#ffd060', bridge: '#ffd060', port: '#ffd060' };
 let lastHud = {};
 function setText(id, v) { if (lastHud[id] !== v) { lastHud[id] = v; $(id).textContent = v; } }
-function drawHUD(dt) {
+function updateHUDEffects(dt) {
   hx.clearRect(0, 0, W, H);
   if (msgT > 0) { msgT -= dt; if (msgT <= 0) msgEl.style.opacity = 0; }
   flashV = damp(flashV, 0, 1.6, dt); flashEl.style.opacity = flashV.toFixed(3);
   player.hitFlash = damp(player.hitFlash, 0, 4, dt);
   const low = (state === 'playing' && player.shield < 30) ? (0.25 + 0.2 * Math.sin(time * 8)) : 0;
   vigEl.style.opacity = Math.min(1, player.hitFlash * 0.9 + low).toFixed(3);
-  if (!(state === 'playing' || state === 'clear')) return;
-  // DOM panel values
+}
+
+function updateDOMPanels() {
   setText('score', String(score).padStart(6, '0'));
   const tl = Math.max(0, stageTime); setText('timer', `${Math.floor(tl / 60)}:${String(Math.floor(tl % 60)).padStart(2, '0')}`);
   $('timer').classList.toggle('low', tl < 20);
@@ -1574,7 +1575,9 @@ function drawHUD(dt) {
   $('boostBar').firstElementChild.style.width = `calc(${player.boost}% - 2px)`;
   const tk = player.torps + '/' + stage.torps;
   if (lastHud.torps !== tk) { lastHud.torps = tk; let h = ''; for (let i = 0; i < stage.torps; i++) h += `<span class="${i < player.torps ? '' : 'used'}"></span>`; $('torps').innerHTML = h; }
+}
 
+function drawTargets() {
   hx.lineWidth = 1.5; hx.font = '600 10px Orbitron, sans-serif'; hx.textAlign = 'center';
   let arrowT = null, arrowD = 1e9;
   for (const t of targetsList) {
@@ -1602,6 +1605,9 @@ function drawHUD(dt) {
     hx.save(); hx.translate(x, y); hx.rotate(a); hx.fillStyle = typeColor[arrowT.type] || '#fff'; hx.globalAlpha = 0.85;
     hx.beginPath(); hx.moveTo(14, 0); hx.lineTo(-6, -9); hx.lineTo(-2, 0); hx.lineTo(-6, 9); hx.closePath(); hx.fill(); hx.restore();
   }
+}
+
+function drawTargetLock() {
   if (lock.target && lock.target.alive) {
     toScreen(lock.target.pos, sp);
     if (!sp.behind) {
@@ -1611,7 +1617,9 @@ function drawHUD(dt) {
       if (k) { hx.fillStyle = '#ffd060'; hx.font = '700 11px Orbitron, sans-serif'; hx.fillText('LOCK', sp.x, sp.y - 28); hx.font = '600 10px Orbitron, sans-serif'; }
     }
   }
-  // crosshair
+}
+
+function drawCrosshair(dt) {
   if (player.alive) {
     toScreen(_v1.copy(player.fwd).multiplyScalar(300).add(player.pos), sp);
     const cx = sp.x, cy = sp.y; hx.strokeStyle = 'rgba(127,227,255,0.9)'; hx.lineWidth = 1.5;
@@ -1627,7 +1635,9 @@ function drawHUD(dt) {
     hx.strokeStyle = 'rgba(127,227,255,0.25)'; hx.lineWidth = 1; hx.beginPath(); hx.moveTo(W / 2, H / 2); hx.lineTo(mx, my); hx.stroke();
     hx.strokeStyle = 'rgba(127,227,255,0.7)'; hx.beginPath(); hx.arc(mx, my, 5, 0, 7); hx.stroke();
   }
-  // trench range indicator
+}
+
+function drawTrenchIndicator() {
   if (stage.trench && S.finale < 0) {
     const dist = player.pos.z - S.portZ;
     const bw = Math.min(360, W * 0.5), bx = W / 2 - bw / 2, by = 92;
@@ -1638,6 +1648,16 @@ function drawHUD(dt) {
       hx.fillText('IN RANGE — FIRE TORPEDO', W / 2, H * 0.66); hx.font = '600 10px Orbitron, sans-serif';
     }
   }
+}
+
+function drawHUD(dt) {
+  updateHUDEffects(dt);
+  if (!(state === 'playing' || state === 'clear')) return;
+  updateDOMPanels();
+  drawTargets();
+  drawTargetLock();
+  drawCrosshair(dt);
+  drawTrenchIndicator();
   drawRadar();
 }
 function drawRadar() {

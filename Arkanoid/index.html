@@ -324,8 +324,7 @@ function updateBall(b, dt) {
   if (b.trail.length > 14) b.trail.shift();
 }
 
-function update(dt) {
-  G.t += dt;
+function updateVisuals(dt) {
   for (const s of stars) { s.y += s.z * 18 * dt; if (s.y > H) { s.y = 0; s.x = Math.random() * W; } }
   G.shake = Math.max(0, G.shake - dt * 40);
   G.flash = Math.max(0, G.flash - dt);
@@ -339,12 +338,9 @@ function update(dt) {
   G.floaters = G.floaters.filter(f => f.life > 0);
   if (G.banner) { G.banner.t -= dt; if (G.banner.t <= 0) G.banner = null; }
   for (const b of G.bricks) b.flash = Math.max(0, b.flash - dt * 5);
+}
 
-  if (G.state === 'title' || G.state === 'over') return;
-  if (G.state === 'paused') return;
-
-  G.levelT += dt;
-  // paddle
+function updatePaddle(dt) {
   const speed = 900;
   if (keys.ArrowLeft || keys.a) P.target -= speed * dt;
   if (keys.ArrowRight || keys.d) P.target += speed * dt;
@@ -357,7 +353,9 @@ function update(dt) {
   P.cool = Math.max(0, P.cool - dt);
   for (const k in G.fx) G.fx[k] = Math.max(0, G.fx[k] - dt);
   if (G.fx.laser > 0 && (keys[' '] || keys.mouse)) fireLaser();
+}
 
+function updateBallsAndState(dt) {
   if (G.state === 'clear') {
     G.timer -= dt;
     if (G.timer <= 0) nextLevel();
@@ -367,8 +365,9 @@ function update(dt) {
   const before = G.balls.length;
   G.balls = G.balls.filter(b => !b.dead);
   if (G.state === 'play' && G.balls.length === 0 && before > 0) loseBall();
+}
 
-  // lasers
+function updateLasers(dt) {
   for (const l of G.bolts) {
     l.y -= 800 * dt;
     for (const k of G.bricks) {
@@ -379,8 +378,9 @@ function update(dt) {
     if (l.y < HUD_H) l.dead = true;
   }
   G.bolts = G.bolts.filter(l => !l.dead);
+}
 
-  // power-up capsules
+function updatePowerups(dt) {
   for (const d of G.drops) {
     d.y += d.vy * dt; d.t += dt;
     const w = POWERS[d.k].w * 0 + 44;
@@ -389,8 +389,9 @@ function update(dt) {
     } else if (d.y > H + 20) d.dead = true;
   }
   G.drops = G.drops.filter(d => !d.dead);
+}
 
-  // level clear
+function checkLevelClear() {
   if (G.state === 'play' && G.left <= 0) {
     G.state = 'clear'; G.timer = 2.4; SFX.clear();
     addScore(500 * G.level);
@@ -398,6 +399,22 @@ function update(dt) {
     for (let i = 0; i < 6; i++) burst(rand(100, W - 100), rand(150, 400), PALETTE[i], 25, 300, 4);
     for (const b of G.balls) { b.vx *= 0.5; b.vy *= 0.5; }
   }
+}
+
+function update(dt) {
+  G.t += dt;
+  updateVisuals(dt);
+
+  if (G.state === 'title' || G.state === 'over') return;
+  if (G.state === 'paused') return;
+
+  G.levelT += dt;
+
+  updatePaddle(dt);
+  updateBallsAndState(dt);
+  updateLasers(dt);
+  updatePowerups(dt);
+  checkLevelClear();
 }
 
 // ---------- drawing ----------

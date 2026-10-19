@@ -1141,7 +1141,7 @@ function endLevel(){
   if(G.human){const k=obstacles.indexOf(G.human.ob);if(k>=0)obstacles.splice(k,1);G.human=null;}
   for(const b of G.bones)scene.remove(b.m);G.bones=[];
   G.mode='free';G.tasks=[];G.li=-1;beam.visible=ring.visible=arrow.visible=false;
-  document.getElementById('tasks').hidden=true;document.getElementById('bubble').hidden=true;
+  document.getElementById('tasks').hidden=true;bubbleEl.hidden=true;
   bowls.food.kibble=60;bowls.food.mesh.count=60;
 }
 function startLevel(i){
@@ -1204,7 +1204,7 @@ function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.
   G.curTaskEl=null;
   G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);if(i===G.ti&&!G.done)G.curTaskEl=li.querySelector('.td');});}
 function updateLevel(dt){
-  if(G.human){G.human.update(dt);const hb=document.getElementById('bubble');if(!hb.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){hb.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';hb.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)hb.hidden=true;}}
+  if(G.human){G.human.update(dt);if(!bubbleEl.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){bubbleEl.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';bubbleEl.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)bubbleEl.hidden=true;}}
   if(G.flag)G.flag.rotation.y=Math.sin(time*2)*0.4;
   for(const b of G.bones){b.m.rotation.y+=dt*2.2;b.m.position.y=b.y+0.05*Math.sin(time*2.5+b.ph);if(Math.random()<dt*2)emit(SPARK,b.m.position.clone().add(new V3((Math.random()-.5)*0.2,0,(Math.random()-.5)*0.2)),new V3(0,0.2,0),0.8,0.005);}
   const t=curTask();
@@ -1228,10 +1228,10 @@ function updateLevel(dt){
   else{beam.visible=ring.visible=arrow.visible=false;}
   document.getElementById('tasktimer').textContent=fmtTime(G.time);
 }
-function say(text){const hb=document.getElementById('bubble');hb.textContent=text;hb.hidden=false;G.bubbleT=time+3;}
+function say(text){bubbleEl.textContent=text;bubbleEl.hidden=false;G.bubbleT=time+3;}
 
 // ---- menus and cards
-const menuEl=document.getElementById('menu'),cardEl=document.getElementById('card');
+const menuEl=document.getElementById('menu'),cardEl=document.getElementById('card'),bubbleEl=document.getElementById('bubble');
 function uiOpen(){return !menuEl.hidden||!cardEl.hidden;}
 function taskLabel(t){return tr('task.'+t.k);}
 function levelName(i){return tr(`lvl${i}.name`);}

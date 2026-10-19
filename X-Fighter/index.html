@@ -1537,7 +1537,16 @@ const $ = id => document.getElementById(id);
 const hudEl = $('hud'), screenEl = $('screen'), msgEl = $('msg'), vigEl = $('vignette'), flashEl = $('flash');
 const hc = $('hud2d'), hx = hc.getContext('2d');
 let msgT = 0, flashV = 0, hitMarker = 0;
-function showMsg(t, sub = '', dur = 2.5) { msgEl.innerHTML = t + (sub ? `<small>${sub}</small>` : ''); msgEl.style.opacity = 1; msgT = dur; }
+function showMsg(t, sub = '', dur = 2.5) {
+  msgEl.textContent = t;
+  if (sub) {
+    const small = document.createElement('small');
+    small.textContent = sub;
+    msgEl.appendChild(small);
+  }
+  msgEl.style.opacity = 1;
+  msgT = dur;
+}
 function flash(v) { flashV = Math.max(flashV, v); }
 function updateObjective() { $('objective').textContent = stage.objective; }
 function resizeHud() { hc.width = W * DPR; hc.height = H * DPR; hx.setTransform(DPR, 0, 0, DPR, 0, 0); }

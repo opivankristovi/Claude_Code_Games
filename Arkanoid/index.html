@@ -555,14 +555,7 @@ function centerText(t, y, size, color, glow) {
   ctx.restore();
 }
 
-function draw() {
-  ctx.save();
-  if (G.shake > 0) ctx.translate(rand(-1, 1) * G.shake * 0.5, rand(-1, 1) * G.shake * 0.5);
-  drawBackground();
-  // playfield side glow
-  ctx.strokeStyle = 'rgba(100,150,255,.25)'; ctx.lineWidth = 3;
-  ctx.strokeRect(0, HUD_H, W, H - HUD_H);
-
+function drawEntities() {
   for (const b of G.bricks) if (b.alive) drawBrick(b);
   for (const d of G.drops) drawCapsule(d);
   for (const l of G.bolts) {
@@ -583,13 +576,9 @@ function draw() {
     if (G.state !== 'over') drawPaddle();
     for (const b of G.balls) drawBall(b);
   }
-  // floating score text
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold 14px "Segoe UI",sans-serif';
-  for (const f of G.floaters) { ctx.globalAlpha = clamp(f.life, 0, 1); ctx.fillStyle = f.color; ctx.fillText(f.text, f.x, f.y); }
-  ctx.globalAlpha = 1;
-  if (G.flash > 0) { ctx.fillStyle = `rgba(255,60,90,${G.flash * 0.6})`; ctx.fillRect(0, 0, W, H); }
-  drawHUD();
+}
 
+function drawGameStates() {
   // hint to launch
   if (G.state === 'play' && G.balls.some(b => b.stuck !== null) && !G.banner) {
     ctx.globalAlpha = 0.6 + 0.4 * Math.sin(G.t * 5);
@@ -628,6 +617,27 @@ function draw() {
     centerText('CLICK / SPACE TO PLAY AGAIN', 500, 22, '#fff');
     ctx.globalAlpha = 1;
   }
+}
+
+function draw() {
+  ctx.save();
+  if (G.shake > 0) ctx.translate(rand(-1, 1) * G.shake * 0.5, rand(-1, 1) * G.shake * 0.5);
+  drawBackground();
+  // playfield side glow
+  ctx.strokeStyle = 'rgba(100,150,255,.25)'; ctx.lineWidth = 3;
+  ctx.strokeRect(0, HUD_H, W, H - HUD_H);
+
+  drawEntities();
+
+  // floating score text
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold 14px "Segoe UI",sans-serif';
+  for (const f of G.floaters) { ctx.globalAlpha = clamp(f.life, 0, 1); ctx.fillStyle = f.color; ctx.fillText(f.text, f.x, f.y); }
+  ctx.globalAlpha = 1;
+  if (G.flash > 0) { ctx.fillStyle = `rgba(255,60,90,${G.flash * 0.6})`; ctx.fillRect(0, 0, W, H); }
+  drawHUD();
+
+  drawGameStates();
+
   ctx.restore();
 }
 

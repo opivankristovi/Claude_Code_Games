@@ -1472,7 +1472,7 @@ const clock=new THREE.Clock();let time=0;
 dog.groundY=groundH(dog.pos.x,dog.pos.z);standPose(ST.cur);
 function frame(){
   requestAnimationFrame(frame);
-  try{step();}catch(err){console.error(err);if(ST.action)ST.action=null;}
+  try{step();}catch(err){if(ST.action)ST.action=null;}
 }
 function step(fixed,noRender){
   const dt=fixed||Math.min(clock.getDelta(),0.05);time+=dt;

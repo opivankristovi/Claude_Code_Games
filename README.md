@@ -6,11 +6,36 @@ Each game is one self-contained `index.html`: no build step, no bundler, no asse
 
 | Game | Folder (own README) | Genre |
 | --- | --- | --- |
+| **Katana Creed** | [`Katana Creed/`](Katana%20Creed/README.md) | Stealth-action ninja (Tenchu remake) |
 | **X-Fighter**: Assault on the Iron Fortress | [`X-Fighter/`](X-Fighter/README.md) | 3D space combat shooter |
 | **Sandstorm Circuit** | [`PodRace/`](PodRace/README.md) | Combat podracing |
 | **Daido Dog Sim** | [`DaidoSim/`](DaidoSim/README.md) | Dog life sim / exploration |
 | **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/README.md) | Brick breaker |
 | **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
+
+---
+
+## Katana Creed
+
+A remake of the PS1 stealth classic *Tenchu: Stealth Assassins*: the same ten missions plus training, rebuilt with realistic 3D graphics and smooth free-run controls in the style of *Assassin's Creed* on a PS3/PS4 gamepad. Play as **Rikimaru** or **Ayame** and sneak through merchant districts, mountain checkpoints, bandit caves, a pirate harbour, a cult temple and a burning castle.
+
+Stay in the shadows, crouch past guards and strike from behind or from above for one-hit stealth kills. If you're spotted, you fight with lock-on, blocks, parries and combos. Sprint to free-run: vault, climb walls, mantle onto roofs, vault over palisades and swing up with the grappling hook. Each mission ends with a rank from *Thug* to *Grand Master*, and progress is saved in the browser's `localStorage`.
+
+### Controls
+
+| Action | Keyboard / mouse | Gamepad (PlayStation layout) |
+| --- | --- | --- |
+| Move / camera | WASD / mouse | Left stick / right stick |
+| Sprint / free-run | Shift (hold) | R2 (hold) |
+| Jump · climb · leap | Space | ✕ |
+| Attack · stealth kill | Left click / J | □ |
+| Crouch · drop from wall | C / Ctrl | ○ |
+| Lock on & block (tap to parry) | Right click / K (hold) | L1 (hold) |
+| Grappling hook | E | R1 |
+| Use item · interact | F | △ |
+| Switch item | Q / R · mouse wheel | D-pad ◀ ▶ |
+| Ki sense | Tab (hold) | L2 (hold) |
+| Pause | Esc / P | Options |
 
 ---
 
@@ -150,6 +175,7 @@ You start with 3 lives and earn one extra life at 10,000 points. The maze change
 
 **Online** (GitHub Pages):
 
+- Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
 - X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
 - Sandstorm Circuit: <https://opivankristovi.github.io/Claude_Code_Games/PodRace/>
 - Daido Dog Sim: <https://opivankristovi.github.io/Claude_Code_Games/DaidoSim/>
@@ -173,7 +199,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid need WebGL.
 - An internet connection for the 3D games: three.js (and, for most of them, Google Fonts) load from CDNs. Neon Arkanoid needs no external files.
 - A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
-- X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
+- Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
 - Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
 
 ## Repository layout
@@ -185,6 +211,9 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 │   └── README.md
 ├── DaidoSim/
 │   ├── index.html   # Daido Dog Sim
+│   └── README.md
+├── Katana Creed/
+│   ├── index.html   # Katana Creed
 │   └── README.md
 ├── PodRace/
 │   ├── index.html   # Sandstorm Circuit

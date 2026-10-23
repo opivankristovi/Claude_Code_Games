@@ -1132,7 +1132,7 @@ const LEVELS=[
 const PKEY='dogsim.progress.v1';let PROG={unlocked:1,best:{}};
 try{const s=JSON.parse(localStorage.getItem(PKEY));if(s&&s.unlocked)PROG={unlocked:s.unlocked,best:s.best||{}};}catch(e){}
 function saveProg(){try{localStorage.setItem(PKEY,JSON.stringify(PROG));}catch(e){}}
-const G={mode:'free',li:-1,tasks:[],ti:0,time:0,group:null,human:null,bones:[],done:false,panelT:0};
+const G={mode:'free',li:-1,tasks:[],ti:0,time:0,group:null,human:null,bones:[],done:false,panelT:0,curTaskEl:null};
 const fmtTime=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 
 function resetWorld(){clearHoles();for(const p of poos)scene.remove(p.m);poos.length=0;for(const p of puddles)scene.remove(p.m);puddles.length=0;for(const it of [...items])removeItem(it);carried=null;updateDigButton();}
@@ -1141,7 +1141,7 @@ function endLevel(){
   if(G.human){const k=obstacles.indexOf(G.human.ob);if(k>=0)obstacles.splice(k,1);G.human=null;}
   for(const b of G.bones)scene.remove(b.m);G.bones=[];
   G.mode='free';G.tasks=[];G.li=-1;beam.visible=ring.visible=arrow.visible=false;
-  document.getElementById('tasks').hidden=true;document.getElementById('bubble').hidden=true;
+  document.getElementById('tasks').hidden=true;bubbleEl.hidden=true;
   bowls.food.kibble=60;bowls.food.mesh.count=60;
 }
 function startLevel(i){
@@ -1201,9 +1201,10 @@ function taskTarget(t){if(!t)return null;const L=LANDMARKS;
 function taskProgress(t){if(t.type==='bones')return ` ${t.got}/${t.total}`;if(t.type==='mark'&&t.targets.length>1)return ` ${t.mi}/${t.targets.length}`;if(t.type==='dig'&&t.spots.length>1)return ` ${t.found||0}/${t.spots.length}`;return '';}
 function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.getElementById('tasktitle').textContent=tr('tasks.title',{n:G.li+1,name:levelName(G.li)});
   const ol=document.getElementById('tasklist');ol.innerHTML='';
-  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';const s1=document.createElement('span');s1.className='tk';const s2=document.createElement('span');s2.className='tl';const s3=document.createElement('span');s3.className='td';li.append(s1,s2,s3);s2.textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);});}
+  G.curTaskEl=null;
+  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);if(i===G.ti&&!G.done)G.curTaskEl=li.querySelector('.td');});}
 function updateLevel(dt){
-  if(G.human){G.human.update(dt);const hb=document.getElementById('bubble');if(!hb.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){hb.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';hb.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)hb.hidden=true;}}
+  if(G.human){G.human.update(dt);if(!bubbleEl.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){bubbleEl.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';bubbleEl.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)bubbleEl.hidden=true;}}
   if(G.flag)G.flag.rotation.y=Math.sin(time*2)*0.4;
   for(const b of G.bones){b.m.rotation.y+=dt*2.2;b.m.position.y=b.y+0.05*Math.sin(time*2.5+b.ph);if(Math.random()<dt*2)emit(SPARK,b.m.position.clone().add(new V3((Math.random()-.5)*0.2,0,(Math.random()-.5)*0.2)),new V3(0,0.2,0),0.8,0.005);}
   const t=curTask();
@@ -1223,14 +1224,14 @@ function updateLevel(dt){
     const dx=tg.x-dog.pos.x,dz=tg.z-dog.pos.z,dist=Math.hypot(dx,dz);
     let yaw=Math.atan2(dx,dz);if(t.type==='bring'&&t.hidden&&carried)yaw+=0.6*Math.sin(time*0.7); // hiding human: only a rough sense of direction
     arrow.visible=dist>1.6&&!uiOpen();headG.getWorldPosition(_v);arrow.position.set(_v.x,_v.y+0.3*S+0.06*Math.sin(time*3),_v.z);arrow.rotation.set(0,yaw,0);
-    G.panelT-=dt;if(G.panelT<0){G.panelT=0.25;const cur=document.querySelector('#tasklist li.cur .td');if(cur)cur.textContent=dist>2?` · ${Math.round(dist)} m`:'';}}
+    G.panelT-=dt;if(G.panelT<0){G.panelT=0.25;if(G.curTaskEl)G.curTaskEl.textContent=dist>2?` · ${Math.round(dist)} m`:'';}}
   else{beam.visible=ring.visible=arrow.visible=false;}
   document.getElementById('tasktimer').textContent=fmtTime(G.time);
 }
-function say(text){const hb=document.getElementById('bubble');hb.textContent=text;hb.hidden=false;G.bubbleT=time+3;}
+function say(text){bubbleEl.textContent=text;bubbleEl.hidden=false;G.bubbleT=time+3;}
 
 // ---- menus and cards
-const menuEl=document.getElementById('menu'),cardEl=document.getElementById('card');
+const menuEl=document.getElementById('menu'),cardEl=document.getElementById('card'),bubbleEl=document.getElementById('bubble');
 function uiOpen(){return !menuEl.hidden||!cardEl.hidden;}
 function taskLabel(t){return tr('task.'+t.k);}
 function levelName(i){return tr(`lvl${i}.name`);}
@@ -1471,7 +1472,7 @@ const clock=new THREE.Clock();let time=0;
 dog.groundY=groundH(dog.pos.x,dog.pos.z);standPose(ST.cur);
 function frame(){
   requestAnimationFrame(frame);
-  try{step();}catch(err){console.error(err);if(ST.action)ST.action=null;}
+  try{step();}catch(err){if(ST.action)ST.action=null;}
 }
 function step(fixed,noRender){
   const dt=fixed||Math.min(clock.getDelta(),0.05);time+=dt;

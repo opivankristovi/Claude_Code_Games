@@ -1201,6 +1201,8 @@ function taskTarget(t){if(!t)return null;const L=LANDMARKS;
 function taskProgress(t){if(t.type==='bones')return ` ${t.got}/${t.total}`;if(t.type==='mark'&&t.targets.length>1)return ` ${t.mi}/${t.targets.length}`;if(t.type==='dig'&&t.spots.length>1)return ` ${t.found||0}/${t.spots.length}`;return '';}
 function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.getElementById('tasktitle').textContent=tr('tasks.title',{n:G.li+1,name:levelName(G.li)});
   const ol=document.getElementById('tasklist');ol.innerHTML='';
+  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);});}
+let taskTimerEl;
   G.curTaskEl=null;
   G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);if(i===G.ti&&!G.done)G.curTaskEl=li.querySelector('.td');});}
 function updateLevel(dt){
@@ -1226,7 +1228,8 @@ function updateLevel(dt){
     arrow.visible=dist>1.6&&!uiOpen();headG.getWorldPosition(_v);arrow.position.set(_v.x,_v.y+0.3*S+0.06*Math.sin(time*3),_v.z);arrow.rotation.set(0,yaw,0);
     G.panelT-=dt;if(G.panelT<0){G.panelT=0.25;if(G.curTaskEl)G.curTaskEl.textContent=dist>2?` · ${Math.round(dist)} m`:'';}}
   else{beam.visible=ring.visible=arrow.visible=false;}
-  document.getElementById('tasktimer').textContent=fmtTime(G.time);
+  if(!taskTimerEl) taskTimerEl = document.getElementById('tasktimer');
+  taskTimerEl.textContent=fmtTime(G.time);
 }
 function say(text){bubbleEl.textContent=text;bubbleEl.hidden=false;G.bubbleT=time+3;}
 

@@ -1201,10 +1201,9 @@ function taskTarget(t){if(!t)return null;const L=LANDMARKS;
 function taskProgress(t){if(t.type==='bones')return ` ${t.got}/${t.total}`;if(t.type==='mark'&&t.targets.length>1)return ` ${t.mi}/${t.targets.length}`;if(t.type==='dig'&&t.spots.length>1)return ` ${t.found||0}/${t.spots.length}`;return '';}
 function renderTasks(){if(G.mode!=='level')return;const L=LEVELS[G.li];document.getElementById('tasktitle').textContent=tr('tasks.title',{n:G.li+1,name:levelName(G.li)});
   const ol=document.getElementById('tasklist');ol.innerHTML='';
-  G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);});}
-let taskTimerEl;
   G.curTaskEl=null;
   G.tasks.forEach((t,i)=>{const li=document.createElement('li');li.className=t.done?'done':i===G.ti&&!G.done?'cur':'todo';li.innerHTML=`<span class="tk"></span><span class="tl"></span><span class="td"></span>`;li.querySelector('.tl').textContent=taskLabel(t)+(i===G.ti?taskProgress(t):'');ol.appendChild(li);if(i===G.ti&&!G.done)G.curTaskEl=li.querySelector('.td');});}
+let taskTimerEl;
 function updateLevel(dt){
   if(G.human){G.human.update(dt);if(!bubbleEl.hidden){G.human.head.getWorldPosition(_v2);_v2.y+=0.32;_v2.project(camera);if(_v2.z<1){bubbleEl.style.left=((_v2.x*0.5+0.5)*innerWidth)+'px';bubbleEl.style.top=((-_v2.y*0.5+0.5)*innerHeight)+'px';}if(time>G.bubbleT)bubbleEl.hidden=true;}}
   if(G.flag)G.flag.rotation.y=Math.sin(time*2)*0.4;

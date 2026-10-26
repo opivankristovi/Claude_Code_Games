@@ -4,6 +4,14 @@ A third-person stealth-action ninja game in a single HTML file: a remake of the 
 
 Play as **Rikimaru**, in a black hood and mask with armoured shoulders and a katana on his back, or **Ayame**, in a red hood and scarf, with long red sash tails and twin kodachi.
 
+## Screenshots
+
+|   |   |
+|---|---|
+| ![Title screen](screenshots/title.jpg)<br>*Title screen* | ![Mission 0, Training: Rikimaru on the lantern path to the Azuma dojo](screenshots/training.jpg)<br>*Mission 0, Training: Rikimaru on the lantern path to the Azuma dojo* |
+| ![Mission 7, Infiltrate the Manji Cult: Ayame and a suspicious warrior monk](screenshots/manji-temple.jpg)<br>*Mission 7, Infiltrate the Manji Cult: Ayame and a suspicious warrior monk* | ![Ki sense: the world turns grey and enemies glow red](screenshots/ki-sense.jpg)<br>*Ki sense: the world turns grey and enemies glow red* |
+| ![Mission 8, Cure the Princess: the snowbound peaks](screenshots/snowbound-peaks.jpg)<br>*Mission 8, Cure the Princess: the snowbound peaks* | ![Mission 9, Reclaim the Castle: Gohda castle in flames](screenshots/burning-castle.jpg)<br>*Mission 9, Reclaim the Castle: Gohda castle in flames* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>

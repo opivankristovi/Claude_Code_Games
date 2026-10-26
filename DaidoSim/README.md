@@ -2,6 +2,13 @@
 
 A 3D dog life sim in a single HTML file. Spend a day in the meadow as a dog.
 
+## Screenshots
+
+|   |   |
+|---|---|
+| ![Level menu, with the interface in English](screenshots/menu.jpg)<br>*Level menu, with the interface in English* | ![Level 1, First Morning, with the task checklist](screenshots/first-morning.jpg)<br>*Level 1, First Morning, with the task checklist* |
+| ![Fluffy by the pond](screenshots/fluffy-pond.jpg)<br>*Fluffy by the pond* | ![Fluffy rolling over](screenshots/roll-over.jpg)<br>*Fluffy rolling over* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/DaidoSim/>

@@ -2,6 +2,12 @@
 
 A Pac-Man-style maze chase in 3D, in a single HTML file, with a neon look and a gangsta-rap / party theme. The theme includes drug references (mushrooms, "XTC pills") and police.
 
+## Screenshots
+
+|   |   |   |
+|---|---|---|
+| ![Title screen](screenshots/title.jpg)<br>*Title screen* | ![Level 1: the cops close in](screenshots/chase.jpg)<br>*Level 1: the cops close in* | ![Level 3: the maze changes colour](screenshots/level-3.jpg)<br>*Level 3: the maze changes colour* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>

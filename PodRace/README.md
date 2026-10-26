@@ -2,6 +2,13 @@
 
 A combat podracing game in a single HTML file. Race a twin-engine pod across a procedurally generated desert: **3 laps against 5 AI pilots**. (The folder is called `PodRace`; the game's title is Sandstorm Circuit.)
 
+## Screenshots
+
+|   |   |
+|---|---|
+| ![Title screen with controls and power-ups](screenshots/title.jpg)<br>*Title screen with controls and power-ups* | ![Countdown on the starting grid](screenshots/starting-grid.jpg)<br>*Countdown on the starting grid* |
+| ![Chasing the pack with three power-ups active](screenshots/pack.jpg)<br>*Chasing the pack with three power-ups active* | ![Racing a rival at 630 km/h](screenshots/canyon.jpg)<br>*Racing a rival at 630 km/h* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/PodRace/>

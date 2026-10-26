@@ -2,6 +2,13 @@
 
 A 3D space combat shooter in a single HTML file. Fly a starfighter through a three-mission campaign against the Iron Fortress.
 
+## Screenshots
+
+|   |   |
+|---|---|
+| ![Title screen](screenshots/title.jpg)<br>*Title screen* | ![Mission 1: dogfighting the interceptor screen](screenshots/outer-perimeter.jpg)<br>*Mission 1: dogfighting the interceptor screen* |
+| ![Mission 2: flying low over the dreadnought's hull](screenshots/dreadnought.jpg)<br>*Mission 2: flying low over the dreadnought's hull* | ![Mission 3: barriers and turrets in the trench](screenshots/trench-run.jpg)<br>*Mission 3: barriers and turrets in the trench* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>

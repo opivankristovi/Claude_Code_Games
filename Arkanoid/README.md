@@ -2,6 +2,13 @@
 
 A neon brick breaker in a single HTML file. It draws on a plain 2D `<canvas>` and loads nothing from outside, so it also works offline.
 
+## Screenshots
+
+|   |   |
+|---|---|
+| ![Title screen](screenshots/title.jpg)<br>*Title screen* | ![Level 1: multi-ball, with a Slow capsule falling](screenshots/multiball.jpg)<br>*Level 1: multi-ball, with a Slow capsule falling* |
+| ![Level 4: laser paddle, explosive and silver bricks](screenshots/laser.jpg)<br>*Level 4: laser paddle, explosive and silver bricks* | ![Level 5: fireballs, capsules and an ×8 combo](screenshots/fireball.jpg)<br>*Level 5: fireballs, capsules and an ×8 combo* |
+
 ## Play
 
 **Live:** <https://opivankristovi.github.io/Claude_Code_Games/Arkanoid/>

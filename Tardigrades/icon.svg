@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Tardigrades</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9dc8a"/>
+      <stop offset=".45" stop-color="#2f7a55"/>
+      <stop offset="1" stop-color="#0b2a22"/>
+    </linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffbd0" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#fffbd0" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="seg" cx=".34" cy=".26" r=".8">
+      <stop offset="0" stop-color="#ffe6e2"/>
+      <stop offset=".45" stop-color="#f7aea8"/>
+      <stop offset="1" stop-color="#8f5b53"/>
+    </radialGradient>
+    <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b4a2c"/>
+      <stop offset="1" stop-color="#2e1c10"/>
+    </linearGradient>
+    <linearGradient id="moss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c4f27a"/>
+      <stop offset="1" stop-color="#3f8a1f"/>
+    </linearGradient>
+    <linearGradient id="tube" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b4c27a"/>
+      <stop offset=".5" stop-color="#6f7d3c"/>
+      <stop offset="1" stop-color="#2f3618"/>
+    </linearGradient>
+    <linearGradient id="stem" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1d4a33"/>
+      <stop offset=".3" stop-color="#4f9a64"/>
+      <stop offset="1" stop-color="#173f2a"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <path d="M60-10H130L420 520H300Z" fill="url(#ray)"/>
+    <path d="M200-10H240L520 380V470Z" fill="url(#ray)" opacity=".7"/>
+    <!-- giant moss stems in the background -->
+    <g opacity=".75">
+      <path d="M58 520Q48 300 70 120L84 120Q70 300 82 520Z" fill="url(#stem)"/>
+      <path d="M440 520Q456 330 430 160L444 160Q470 330 456 520Z" fill="url(#stem)"/>
+      <g fill="#3f8a3a">
+        <path d="M76 200q30-20 46-6q-24 12-46 6z"/><path d="M74 260q-30-22-48-8q24 14 48 8z"/><path d="M78 320q32-18 48-2q-26 10-48 2z"/>
+        <path d="M436 230q30-22 50-8q-26 14-50 8z"/><path d="M440 290q-32-20-50-4q26 12 50 4z"/><path d="M444 350q30-18 46-2q-24 10-46 2z"/>
+      </g>
+    </g>
+    <!-- bubbles -->
+    <g fill="none" stroke="#eafff0" stroke-width="5" opacity=".7">
+      <circle cx="402" cy="96" r="16"/><circle cx="440" cy="54" r="9"/><circle cx="112" cy="70" r="11"/>
+    </g>
+    <!-- ground -->
+    <path d="M-10 420Q90 396 180 410T360 404T522 414V522H-10Z" fill="url(#soil)"/>
+    <path d="M-10 420Q90 396 180 410T360 404T522 414V436Q440 426 360 428T180 432T-10 442Z" fill="url(#moss)"/>
+    <ellipse cx="256" cy="414" rx="170" ry="16" fill="#000" opacity=".3"/>
+    <!-- the tardigrade (game coordinates, scaled up) -->
+    <g transform="translate(236 300) scale(10.5)" stroke-linecap="round">
+      <g stroke-width="5.8" stroke="#3a1f12">
+        <path d="M-9.2 2.5L-8.4 8.6M-2.7 2.5L-2.5 8.6M4.3 2.5L4.6 8.6M10.8 2.5L11 8.6"/>
+      </g>
+      <g stroke-width="4.1" stroke="#8f5b53">
+        <path d="M-9.2 2.5L-8.4 8.6M-2.7 2.5L-2.5 8.6M4.3 2.5L4.6 8.6M10.8 2.5L11 8.6"/>
+      </g>
+      <g fill="#30190e">
+        <ellipse cx="-10.5" cy="-1.2" rx="9.2" ry="8.3"/><ellipse cx="-4" cy="-2.2" rx="10.5" ry="9.5"/>
+        <ellipse cx="3" cy="-2.2" rx="10.3" ry="9.3"/><ellipse cx="9" cy="-1.4" rx="8.9" ry="8.1"/>
+        <circle cx="14.5" cy="-0.5" r="6.6"/>
+      </g>
+      <g fill="url(#seg)">
+        <ellipse cx="-10.5" cy="-1.2" rx="8.1" ry="7.2"/><ellipse cx="-4" cy="-2.2" rx="9.4" ry="8.4"/>
+        <ellipse cx="3" cy="-2.2" rx="9.2" ry="8.2"/><ellipse cx="9" cy="-1.4" rx="7.8" ry="7"/>
+        <circle cx="14.5" cy="-0.5" r="5.6"/>
+      </g>
+      <g fill="none" stroke="#5a2e1c" stroke-opacity=".4" stroke-width=".9">
+        <path d="M-6.8 -9.5Q-8.4 -2 -6.8 5.5M0 -10Q-1.6 -2 0 5.5M6.5 -9.5Q4.9 -2 6.5 5.5"/>
+      </g>
+      <g fill="#fff" fill-opacity=".5">
+        <circle cx="-12" cy="-4" r=".8"/><circle cx="-7" cy="-7.5" r=".8"/><circle cx="4" cy="-8.4" r=".8"/><circle cx="8.5" cy="-6" r=".8"/><circle cx="-9" cy="1.5" r=".8"/>
+      </g>
+      <circle cx="19.3" cy="0.8" r="2.3" fill="#8f5b53"/>
+      <circle cx="19.8" cy="0.9" r="1.05" fill="#3a1f14"/>
+      <circle cx="15.8" cy="-2.7" r="1.35" fill="#120804"/>
+      <circle cx="15.3" cy="-3.2" r=".5" fill="#fff"/>
+      <!-- bandana -->
+      <path d="M9.4 -3.6A5.5 5.5 0 0 1 17.6 -5.2" fill="none" stroke="#8a1630" stroke-width="3.4"/>
+      <path d="M9.4 -3.6A5.5 5.5 0 0 1 17.6 -5.2" fill="none" stroke="#ff5a7a" stroke-width="2.4"/>
+      <path d="M9.6 -2Q6 -4.5 3 -2.4L4 -0.4Q7 -1.4 9.4 -0.3Z" fill="#ff5a7a"/>
+      <path d="M9.6 -2.4Q6.5 -8 3.6 -7.6L4.6 -5.8Q7.4 -5.4 9.6 -1.4Z" fill="#ff5a7a"/>
+      <!-- near legs with claws -->
+      <g stroke-width="5.8" stroke="#6e4740">
+        <path d="M-11 2.5L-11.6 8.6M-4.5 2.5L-4.2 8.6M2.5 2.5L2.8 8.6M9 2.5L9.6 8.6"/>
+      </g>
+      <g stroke-width="4.1" stroke="#f7aea8">
+        <path d="M-11 2.5L-11.6 8.6M-4.5 2.5L-4.2 8.6M2.5 2.5L2.8 8.6M9 2.5L9.6 8.6"/>
+      </g>
+      <g fill="none" stroke="#2a160c" stroke-width=".9">
+        <path d="M-12.4 10q1 1.4 2 .8M-11.6 10q1 1.4 2 .8M-5 10q1 1.4 2 .8M-4.2 10q1 1.4 2 .8M2 10q1 1.4 2 .8M2.8 10q1 1.4 2 .8M8.8 10q1 1.4 2 .8M9.6 10q1 1.4 2 .8"/>
+      </g>
+      <!-- shoulder bazooka -->
+      <g transform="translate(1 -8) rotate(-24)">
+        <rect x="-10" y="-3.4" width="24" height="6.8" rx="1" fill="url(#tube)"/>
+        <rect x="13" y="-4" width="3.2" height="8" fill="#2a2a2a"/>
+        <rect x="-11" y="-3.8" width="2.2" height="7.6" fill="#2a2a2a"/>
+        <rect x="2" y="-3.4" width="2.2" height="6.8" fill="#e0c870"/>
+      </g>
+    </g>
+  </g>
+</svg>

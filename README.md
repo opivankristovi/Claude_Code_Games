@@ -16,6 +16,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
 | **Tuxemon 3D** | [`Tuxemon-3D/`](Tuxemon-3D/README.md) | Monster-catching RPG (Tuxemon remake) |
 | **Space Fodder** | [`Space-Fodder/`](Space-Fodder/README.md) | Top-down squad shooter (Cannon Fodder style) |
+| **Ass Monkey Empire** | [`Ass Monkey/`](Ass%20Monkey/README.md) | Jungle platformer trilogy (Donkey Kong Country 1–3 remake) |
 
 ---
 
@@ -31,6 +32,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 - Shakur Boy: <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>
 - Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
 - Space Fodder: <https://opivankristovi.github.io/Claude_Code_Games/Space-Fodder/>
+- Ass Monkey Empire: <https://opivankristovi.github.io/Claude_Code_Games/Ass%20Monkey/>
 
 **Locally:**
 
@@ -53,6 +55,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
 - Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
 - Space Fodder: mouse and keyboard, or touch; no gamepad support.
+- Ass Monkey Empire: keyboard or a standard gamepad; no touch controls.
 
 ---
 
@@ -256,12 +259,37 @@ On touch screens, tap to move; the Fire and Bomb buttons auto-aim at the nearest
 
 ---
 
+## Ass Monkey Empire
+
+A 3D side-scrolling platformer trilogy that remakes the three *Donkey Kong Country* games, with original characters, enemies, levels and music. The heroes are baboons who gallop on all fours, and each game has its own duo: **Bongo & Pip**, **Pip & Lulu**, and **Lulu & Bobo**. Together the three games have more than 100 levels across 22 worlds, and the worlds follow the same order and level types as the originals: jungle runs, treetops with vines, underwater swims, barrel-cannon chains, mine carts, lights-out caves, ice, factories, brambles, rigging, lava and rising-flood climbs, with a boss at the end of every world.
+
+Stomp or roll into enemies, carry and throw barrels, ride Tusk the warthog, Sprong the frog and Narly the narwhal, collect 100 bananas or the letters **B-U-T-T** for extra lives, and clear bonus rooms for medals that unlock the secret worlds. Progress is saved per game in the browser's `localStorage`.
+
+### Controls
+
+| Action | Keyboard | Gamepad |
+| --- | --- | --- |
+| Move · climb · swim | Arrow keys / WASD | Left stick / D-pad |
+| Jump · fire barrel cannon | Space / K / Z | ✕ / A |
+| Run · roll · carry & throw barrels | Shift / J / X | □ / X · R2 |
+| Ground slap (Bongo, Bobo) | ↓ + run | ↓ + □ |
+| Glide (Lulu) | Hold jump while falling | Hold ✕ |
+| Team-up throw (games 2 & 3) | E / L / C | △ / Y |
+| Swap baboons | Q / Tab | L1 / R1 |
+| Pause | Esc / P | Options |
+
+---
+
 ## Repository layout
 
 ```
 .
 ├── Arkanoid/
 │   ├── index.html   # Neon Arkanoid
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   └── README.md
+├── Ass Monkey/
+│   ├── index.html   # Ass Monkey Empire
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── DaidoSim/

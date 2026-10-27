@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Ass Monkey Empire</title>
+  <defs>
+    <radialGradient id="bg" cx=".55" cy=".4" r=".8">
+      <stop offset="0" stop-color="#8fd65e"/>
+      <stop offset=".5" stop-color="#2f8a36"/>
+      <stop offset="1" stop-color="#0c3315"/>
+    </radialGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff2a8" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ffd23f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mane" cx=".42" cy=".35" r=".7">
+      <stop offset="0" stop-color="#e2ddd2"/>
+      <stop offset=".65" stop-color="#b4ad9e"/>
+      <stop offset="1" stop-color="#7d776b"/>
+    </radialGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a49e91"/>
+      <stop offset="1" stop-color="#6f695e"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4b8ad"/>
+      <stop offset="1" stop-color="#c47168"/>
+    </linearGradient>
+    <linearGradient id="banana" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff07a"/>
+      <stop offset="1" stop-color="#e8a810"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#062010" flood-opacity=".55"/>
+    </filter>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <circle cx="330" cy="200" r="210" fill="url(#sun)"/>
+    <!-- jungle leaves -->
+    <g fill="#0f4a1c" fill-opacity=".85">
+      <path d="M-20 60Q90 20 150 90Q70 110 -20 120Z"/>
+      <path d="M532 40Q420 10 360 70Q450 100 532 100Z"/>
+      <path d="M-30 470Q60 380 150 420Q90 480 -30 520Z"/>
+      <path d="M540 470Q470 400 400 440Q450 500 540 520Z"/>
+    </g>
+    <g filter="url(#shadow)">
+      <!-- silver cape mane -->
+      <path d="M355.4 312.8 L375.3 354.2 L345.5 344.8 L353.9 394.7 L328.8 373.4 L324.3 429.5 L306.2 396.8 L288.2 456.5 L279.1 413.7 L247.8 474.1 L249.0 423.2 L205.3 481.3 L217.7 424.6 L163.3 477.8 L187.0 417.9 L124.2 463.7 L158.7 403.4 L90.2 439.7 L134.4 382.1 L63.4 407.4 L115.5 355.2 L45.3 368.6 L103.2 324.1 L36.9 325.6 L98.1 290.8 L38.7 280.8 L100.6 257.2 L50.7 236.8 L110.5 225.2 L72.1 196.3 L127.2 196.6 L101.7 161.5 L149.8 173.2 L137.8 134.5 L176.9 156.3 L178.2 116.9 L207.0 146.8 L220.7 109.7 L238.3 145.4 L262.7 113.2 L269.0 152.1 L301.8 127.3 L297.3 166.6 L335.8 151.3 L321.6 187.9 L362.6 183.6 L340.5 214.8 L380.7 222.4 L352.8 245.9 L389.1 265.4 L357.9 279.2 L387.3 310.2Z" fill="url(#mane)"/>
+      <path d="M50 512Q110 372 236 366Q370 376 440 512Z" fill="url(#fur)"/>
+      <path d="M319.8 317.9 L317.2 357.5 L300.6 343.6 L285.3 386.3 L274.8 362.0 L247.0 404.3 L244.8 371.1 L206.3 409.6 L213.5 370.2 L166.9 401.9 L184.1 359.3 L132.9 381.8 L159.3 339.4 L107.5 351.3 L141.6 312.5 L93.2 313.4 L132.8 281.3 L91.4 271.8 L133.7 248.8 L102.3 230.6 L144.2 218.1 L124.8 193.9 L163.4 192.4 L156.7 165.1 L189.2 174.0 L195.0 147.1 L219.2 164.9 L235.7 141.8 L250.5 165.8 L275.1 149.5 L279.9 176.7 L309.1 169.6 L304.7 196.6 L334.5 200.1 L322.4 223.5 L348.8 238.0 L331.2 254.7 L350.6 279.6 L330.3 287.2 L339.7 320.8Z" fill="#bdb6a7"/>
+      <path d="M187 372L160 418 M168 360L131 400 M151 343L108 376 M140 323L91 347 M133 300L82 315 M132 277L81 281 M137 254L88 248 M147 233L102 218 M163 215L124 192 M181 201L151 172 M203 192L182 160 M226 189L216 155 M250 191L249 159 M272 199L281 170" stroke="#ece8de" stroke-width="5" stroke-linecap="round" stroke-opacity=".55" fill="none"/>
+      <!-- ear -->
+      <ellipse cx="178" cy="236" rx="22" ry="27" fill="url(#fur)"/>
+      <ellipse cx="180" cy="238" rx="11" ry="15" fill="#d98e86"/>
+      <!-- cranium -->
+      <ellipse cx="252" cy="222" rx="88" ry="78" fill="url(#fur)"/>
+      <!-- bare face and long muzzle -->
+      <ellipse cx="296" cy="252" rx="56" ry="66" fill="url(#face)"/>
+      <path d="M270 214Q356 200 424 254Q450 278 438 304Q426 328 394 326Q326 322 270 300Z" fill="url(#face)"/>
+      <path d="M300 214Q364 214 418 252" fill="none" stroke="#ffd6cc" stroke-width="7" stroke-linecap="round" stroke-opacity=".7"/>
+      <path d="M300 300Q370 312 426 306" fill="none" stroke="#5a1e18" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="434" cy="276" rx="20" ry="16" fill="#8e4a46"/>
+      <ellipse cx="440" cy="276" rx="5" ry="4" fill="#2a120c"/>
+      <!-- heavy brow and eye -->
+      <path d="M232 204Q296 176 352 202Q352 214 344 216Q298 200 240 226Z" fill="#6b655a"/>
+      <ellipse cx="318" cy="230" rx="17" ry="12" fill="#fff"/>
+      <circle cx="321" cy="231" r="9.5" fill="#c8902a"/>
+      <circle cx="322" cy="231" r="5" fill="#120c08"/>
+      <circle cx="325" cy="227" r="2.5" fill="#fff"/>
+      <!-- green bandana with knot tails -->
+      <path d="M78 150Q120 150 160 176L150 196Q112 186 70 204Z" fill="#1b8a3c"/>
+      <path d="M86 112Q130 130 164 170L156 186Q118 160 74 148Z" fill="#22a24a"/>
+      <path d="M160 166Q250 112 338 166L330 192Q250 146 166 196Z" fill="#2fbf58"/>
+      <path d="M170 172Q250 130 330 172" fill="none" stroke="#9bf0a8" stroke-width="4" stroke-opacity=".6"/>
+      <!-- banana -->
+      <path d="M268 460Q360 470 448 404Q462 398 466 408Q404 494 300 488Q262 484 268 460Z" fill="url(#banana)" stroke="#7a5200" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M448 404L466 388L470 408Z" fill="#6b4a1f"/>
+    </g>
+  </g>
+</svg>

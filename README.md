@@ -2,7 +2,7 @@
 
 A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).
 
-Each game is one self-contained `index.html`, except Tuxemon 3D, which splits its code into `css/` and `js/` files next to its `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
+Each game is one self-contained `index.html`, except Tuxemon 3D and Space Fodder, which split their code into `css/` and `js/` files next to their `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid and Space Fodder draw on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
 
 Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`, `icon-192.png`, `apple-touch-icon.png`) for buttons, launchers and home-screen shortcuts. Each page links it as its favicon and touch icon.
 
@@ -15,6 +15,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/README.md) | Brick breaker |
 | **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
 | **Tuxemon 3D** | [`Tuxemon-3D/`](Tuxemon-3D/README.md) | Monster-catching RPG (Tuxemon remake) |
+| **Space Fodder** | [`Space-Fodder/`](Space-Fodder/README.md) | Top-down squad shooter (Cannon Fodder style) |
 
 ---
 
@@ -29,6 +30,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 - Neon Arkanoid: <https://opivankristovi.github.io/Claude_Code_Games/Arkanoid/>
 - Shakur Boy: <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>
 - Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
+- Space Fodder: <https://opivankristovi.github.io/Claude_Code_Games/Space-Fodder/>
 
 **Locally:**
 
@@ -44,12 +46,13 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 
 ### Requirements
 
-- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid need WebGL.
+- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid and Space Fodder need WebGL.
 - An internet connection for the 3D games: three.js (and, for most of them, Google Fonts) load from CDNs. Neon Arkanoid needs no external files.
 - A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
 - Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
 - Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
 - Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
+- Space Fodder: mouse and keyboard, or touch; no gamepad support.
 
 ---
 
@@ -230,6 +233,29 @@ Menus also work with the mouse.
 
 ---
 
+## Space Fodder
+
+A top-down squad shooter in the spirit of *Cannon Fodder*. Lead a line of armoured drop troopers through twelve missions on five alien worlds against an insectoid swarm: destroy nests, escort colonists to the extraction beacon, and finally kill the brood mother. Every trooper has a name and gains rank as they survive; the fallen go on a memorial wall. Split the squad into up to three teams, and drive tanks, buggies and hovercraft. Art, sound, music and missions are all generated in code, and progress is saved in the browser's `localStorage`. The game's own README has a field manual with the stats of every unit.
+
+Space Fodder is CC0 1.0 (public domain); see [`Space-Fodder/LICENSE`](Space-Fodder/LICENSE).
+
+### Controls
+
+| Action | Mouse / keyboard |
+| --- | --- |
+| Move the squad | Left click / hold |
+| Fire at the cursor | Right click / hold, or F (Ctrl + click on a trackpad) |
+| Throw a grenade / fire a rocket | Space, E, middle click, or both buttons |
+| Choose grenades or rockets | 1 / 2, Q or Tab |
+| Split marked troopers into a new team | Click names in the squad list, then X |
+| Command another team / join a team | C or click a team name / J |
+| Board a vehicle / get out | Click the vehicle / R |
+| Pause / mute | Esc or P / M |
+
+On touch screens, tap to move; the Fire and Bomb buttons auto-aim at the nearest threat, and the Team, Split and Out buttons manage teams and vehicles.
+
+---
+
 ## Repository layout
 
 ```
@@ -253,6 +279,13 @@ Menus also work with the mouse.
 ├── Shakur-Boy/
 │   ├── index.html   # Shakur Boy: Shroom Run 3D
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   └── README.md
+├── Space-Fodder/
+│   ├── index.html   # Space Fodder
+│   ├── css/, js/    # its stylesheet and game code
+│   ├── docs/images/ # README screenshots (+ tools/readme-images.js to regenerate them)
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   ├── LICENSE      # CC0 1.0, for this folder
 │   └── README.md
 ├── Tuxemon-3D/
 │   ├── index.html   # Tuxemon 3D

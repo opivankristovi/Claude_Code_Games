@@ -35,7 +35,7 @@ Everything in the game is original and generated in code: art, sound, music, nam
 There is no build step. Open `index.html` in a browser, or serve the folder:
 
 ### Live-link:
-https://opivankristovi.github.io/Space-Fodder/
+https://opivankristovi.github.io/Claude_Code_Games/Space-Fodder/
 
 ```sh
 npx serve .

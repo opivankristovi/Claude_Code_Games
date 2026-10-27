@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Space Fodder</title>
+  <defs>
+    <radialGradient id="dirt" cx=".45" cy=".4" r=".75">
+      <stop offset="0" stop-color="#a65a2c"/>
+      <stop offset=".65" stop-color="#7a3e1e"/>
+      <stop offset="1" stop-color="#4a2410"/>
+    </radialGradient>
+    <radialGradient id="armor" cx=".5" cy=".5" fx=".32" fy=".27" r=".6">
+      <stop offset="0" stop-color="#a9c0d2"/>
+      <stop offset="1" stop-color="#2a3a48"/>
+    </radialGradient>
+    <radialGradient id="pad" cx=".5" cy=".5" fx=".32" fy=".27" r=".6">
+      <stop offset="0" stop-color="#a9c0d2"/>
+      <stop offset="1" stop-color="#5f7890"/>
+    </radialGradient>
+    <radialGradient id="helmet" cx=".5" cy=".5" fx=".32" fy=".27" r=".6">
+      <stop offset="0" stop-color="#b9cddd"/>
+      <stop offset="1" stop-color="#2f3f4c"/>
+    </radialGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#7ff0ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#7ff0ff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#dirt)"/>
+    <!-- Grit and boot prints in the dust -->
+    <g fill="#3e1e0c" opacity=".45">
+      <circle cx="70" cy="96" r="5"/><circle cx="118" cy="420" r="4"/><circle cx="430" cy="380" r="6"/>
+      <circle cx="402" cy="70" r="4"/><circle cx="60" cy="300" r="3"/><circle cx="460" cy="220" r="3"/>
+      <circle cx="300" cy="470" r="4"/><circle cx="180" cy="40" r="3"/>
+    </g>
+    <g fill="#3e1e0c" opacity=".35" transform="translate(96 404) rotate(-40)">
+      <rect x="-30" y="-12" width="20" height="10" rx="4"/><rect x="0" y="4" width="20" height="10" rx="4"/>
+      <rect x="-90" y="-12" width="20" height="10" rx="4"/><rect x="-60" y="4" width="20" height="10" rx="4"/>
+    </g>
+
+    <!-- Drop shadow -->
+    <ellipse cx="274" cy="284" rx="130" ry="96" fill="#000" opacity=".28" transform="rotate(-40 274 284)"/>
+
+    <!-- The trooper, drawn like the in-game sprite, facing up and right -->
+    <g transform="translate(256 262) rotate(-40) scale(12.5) translate(-1.5 0)">
+      <!-- Boots -->
+      <rect x="-3" y="-6.5" width="7" height="3.6" rx="1.5" fill="#1d2328"/>
+      <rect x="-3" y="2.9" width="7" height="3.6" rx="1.5" fill="#1d2328"/>
+      <!-- Backpack and leader's antenna -->
+      <rect x="-10" y="-5" width="6" height="10" rx="2" fill="#3a4652"/>
+      <rect x="-9" y="-4" width="4" height="1.5" fill="#fff" opacity=".12"/>
+      <path d="M-9 -4 L-15 -8" stroke="#222" stroke-width=".8"/>
+      <circle cx="-15" cy="-8" r="1.1" fill="#ff4040"/>
+      <!-- Torso armour -->
+      <ellipse cx="-1" cy="0" rx="5.8" ry="8.2" fill="url(#armor)"/>
+      <path d="M-4 -5 L2 0 L-4 5" fill="none" stroke="#000" stroke-opacity=".35" stroke-width=".7"/>
+      <!-- Rifle and arms -->
+      <rect x="1" y="1.4" width="17" height="2.6" fill="#1b2025"/>
+      <rect x="6" y="3.6" width="3" height="2.4" fill="#1b2025"/>
+      <rect x="12" y="1" width="3" height="3.4" fill="#39424a"/>
+      <ellipse cx="4" cy="3.2" rx="2.4" ry="1.8" fill="#5f7890"/>
+      <ellipse cx="10" cy="2.7" rx="2.1" ry="1.7" fill="#5f7890"/>
+      <!-- Shoulder pads with amber rank stripes -->
+      <ellipse cx="0" cy="-7" rx="3.3" ry="3" fill="url(#pad)"/>
+      <rect x="-1.6" y="-8.6" width="3.2" height="1.2" fill="#ffb13a"/>
+      <ellipse cx="0" cy="7" rx="3.3" ry="3" fill="url(#pad)"/>
+      <rect x="-1.6" y="7.4" width="3.2" height="1.2" fill="#ffb13a"/>
+      <!-- Helmet and glowing visor -->
+      <circle cx="1" cy="0" r="5" fill="url(#helmet)"/>
+      <path d="M-3.5 0 L0 0" stroke="#000" stroke-opacity=".35" stroke-width=".6"/>
+      <circle cx="3" cy="0" r="5" fill="url(#glow)"/>
+      <path d="M3.79 -3.29 A4.2 4.2 0 0 1 3.79 3.29 L2.57 1.72 A2.2 2.2 0 0 0 2.57 -1.72 Z" fill="#7ff0ff"/>
+    </g>
+  </g>
+</svg>

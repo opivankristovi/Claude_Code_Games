@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Launcher for Claude Code Games, a collection of browser games built with Claude Code.">
 <meta name="theme-color" content="#05060f">
+<script>try { const t = localStorage.getItem('launcher.theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -18,9 +19,16 @@
   --dim: #8492b8;
   --cyan: #4dd8ff;
   --mag: #ff4dd8;
-  --line: rgba(77, 216, 255, .22);
+  --line: color-mix(in srgb, var(--cyan) 22%, transparent);
   --card: rgba(14, 18, 44, .62);
+  --n1: #2a1463; --n2: #0d3360; --n3: #3a0f4f;
 }
+/* dark themes, picked from the THEME menu and saved in localStorage */
+:root[data-theme="ember"]    { --bg: #0b0504; --ink: #fff1e8; --dim: #b39484; --cyan: #ffb04a; --mag: #ff4d3d; --card: rgba(34, 14, 10, .62); --n1: #4a1406; --n2: #3d1d06; --n3: #2e0a12; }
+:root[data-theme="ocean"]    { --bg: #020a12; --ink: #e6fbff; --dim: #7fa3b3; --cyan: #3de0d0; --mag: #3d8bff; --card: rgba(8, 24, 38, .62); --n1: #06324a; --n2: #0a2a5a; --n3: #062a2a; }
+:root[data-theme="jungle"]   { --bg: #030904; --ink: #ecffe8; --dim: #87a88a; --cyan: #7dff5a; --mag: #d4ff3a; --card: rgba(10, 26, 12, .62); --n1: #0f3a14; --n2: #1d3a06; --n3: #052a1a; }
+:root[data-theme="amethyst"] { --bg: #08040f; --ink: #f6eeff; --dim: #a090c0; --cyan: #c08cff; --mag: #ff7ad9; --card: rgba(22, 10, 40, .62); --n1: #3a0f6a; --n2: #2a0640; --n3: #1a0a4a; }
+:root[data-theme="graphite"] { --bg: #09090b; --ink: #eef0f3; --dim: #8b8f98; --cyan: #cfd6df; --mag: #8a94a6; --card: rgba(28, 30, 36, .7); --n1: #1e2026; --n2: #15171c; --n3: #202228; }
 * { box-sizing: border-box; }
 html { color-scheme: dark; }
 body {
@@ -34,9 +42,9 @@ a { color: inherit; }
 .sky {
   position: fixed; inset: 0; z-index: -3;
   background:
-    radial-gradient(ellipse 80% 55% at 50% -12%, #2a1463 0%, transparent 70%),
-    radial-gradient(ellipse 60% 45% at 100% 105%, #0d3360 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at -5% 100%, #3a0f4f 0%, transparent 70%),
+    radial-gradient(ellipse 80% 55% at 50% -12%, var(--n1) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 100% 105%, var(--n2) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at -5% 100%, var(--n3) 0%, transparent 70%),
     var(--bg);
 }
 #stars { position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%; }
@@ -52,7 +60,7 @@ a { color: inherit; }
 .horizon {
   position: fixed; left: 0; right: 0; bottom: 46vh; height: 2px; z-index: -1; pointer-events: none;
   background: linear-gradient(90deg, transparent, var(--mag) 30%, var(--cyan) 70%, transparent);
-  box-shadow: 0 0 24px 4px rgba(255, 77, 216, .35); opacity: .55;
+  box-shadow: 0 0 24px 4px color-mix(in srgb, var(--mag) 35%, transparent); opacity: .55;
 }
 .scan {
   position: fixed; inset: 0; z-index: 50; pointer-events: none;
@@ -65,36 +73,64 @@ header {
   display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
 }
 .brand { display: flex; align-items: center; gap: 18px; }
-.brand img { width: 64px; height: 64px; filter: drop-shadow(0 0 14px rgba(77, 216, 255, .45)); }
+.brand img { width: 64px; height: 64px; filter: drop-shadow(0 0 14px color-mix(in srgb, var(--cyan) 45%, transparent)); }
 h1 {
   margin: 0; font-family: Orbitron, sans-serif; font-weight: 900; letter-spacing: .08em;
   font-size: clamp(1.5rem, 4.2vw, 2.6rem); line-height: 1.05;
-  text-shadow: 0 0 18px rgba(77, 216, 255, .55);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--cyan) 55%, transparent);
 }
 h1 span {
   background: linear-gradient(90deg, var(--cyan), var(--mag)); -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: none; filter: drop-shadow(0 0 12px rgba(255, 77, 216, .5));
+  text-shadow: none; filter: drop-shadow(0 0 12px color-mix(in srgb, var(--mag) 50%, transparent));
 }
 .tagline { margin: 6px 0 0; color: var(--dim); letter-spacing: .32em; text-transform: uppercase; font-size: .78rem; font-weight: 600; }
 .hud { display: flex; gap: 10px; flex-wrap: wrap; }
 .hud span {
   font-family: Orbitron, sans-serif; font-size: .7rem; letter-spacing: .16em; padding: 8px 12px;
-  border: 1px solid rgba(77, 216, 255, .3); border-radius: 6px; background: rgba(77, 216, 255, .06); color: var(--cyan);
+  border: 1px solid color-mix(in srgb, var(--cyan) 30%, transparent); border-radius: 6px; background: color-mix(in srgb, var(--cyan) 6%, transparent); color: var(--cyan);
 }
 .hud .live::before {
   content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%;
   background: #3dff9a; box-shadow: 0 0 8px #3dff9a; animation: blink 1.6s ease-in-out infinite; vertical-align: 1px;
 }
 @keyframes blink { 50% { opacity: .25; } }
+.side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.theme-pick { display: flex; align-items: center; gap: 8px; font-family: Orbitron, sans-serif; font-size: .65rem; letter-spacing: .2em; color: var(--dim); }
+.controls select, .controls button {
+  font-family: Orbitron, sans-serif; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); cursor: pointer;
+  padding: 7px 12px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--cyan) 30%, transparent);
+  background-color: color-mix(in srgb, var(--cyan) 6%, var(--bg));
+}
+.controls select {
+  -webkit-appearance: none; appearance: none; padding-right: 30px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--cyan) 50%), linear-gradient(135deg, var(--cyan) 50%, transparent 50%);
+  background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.controls select option { background: var(--bg); color: var(--ink); }
+.controls select:hover, .controls button:hover, .controls select:focus-visible, .controls button:focus-visible {
+  outline: none; border-color: var(--cyan); box-shadow: 0 0 12px color-mix(in srgb, var(--cyan) 35%, transparent);
+}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .section-title {
   width: min(1180px, 100% - 32px); margin: 22px auto 0; display: flex; align-items: center; gap: 14px;
   font-family: Orbitron, sans-serif; font-size: .8rem; letter-spacing: .3em; color: var(--dim);
 }
-.section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(77, 216, 255, .5), transparent); }
+.section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, color-mix(in srgb, var(--cyan) 50%, transparent), transparent); }
 
 /* ---------- game grid ---------- */
 main { flex: 1; }
+/* rearranging: drag a button (long-press on touch), or Shift + arrow keys */
+.grid { -webkit-user-select: none; user-select: none; }
+.game { -webkit-touch-callout: none; -webkit-user-drag: none; }
+.grid > li.dragging { z-index: 30; pointer-events: none; }
+.grid > li.dragging .game {
+  border-color: var(--accent); cursor: grabbing;
+  box-shadow: 0 0 0 1px var(--accent), 0 26px 60px -12px var(--accent);
+}
+body.arranging, body.arranging .game { cursor: grabbing; }
+body.arranging .info { opacity: 0 !important; }
 .grid {
   list-style: none; margin: 18px auto 0; padding: 0; width: min(1180px, 100% - 32px);
   display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 22px;
@@ -110,6 +146,8 @@ main { flex: 1; }
   animation: rise .6s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * 70ms);
 }
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+/* the intro plays once: moving a button in the page would otherwise restart it */
+body.ready .game { animation: none; }
 /* HUD corner brackets */
 .game::before, .game::after {
   content: ""; position: absolute; width: 22px; height: 22px; border: 2px solid var(--accent);
@@ -173,7 +211,7 @@ body.launching .game .info { opacity: 0; }
 footer {
   width: min(1180px, 100% - 32px); margin: 40px auto 0; padding: 18px 0 28px;
   display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  color: var(--dim); font-size: .9rem; border-top: 1px solid rgba(77, 216, 255, .15);
+  color: var(--dim); font-size: .9rem; border-top: 1px solid color-mix(in srgb, var(--cyan) 15%, transparent);
 }
 footer a { color: var(--cyan); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
@@ -199,6 +237,8 @@ body.launching .game.chosen { transform: scale(1.08); }
 @media (max-width: 520px) {
   header { padding-top: 24px; }
   .brand img { width: 48px; height: 48px; }
+  .side { align-items: flex-start; }
+  .controls { justify-content: flex-start; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .game { padding: 16px 10px 14px; }
   .title { font-size: .8rem; margin-top: 14px; }
@@ -227,10 +267,25 @@ body.launching .game.chosen { transform: scale(1.08); }
       <p class="tagline">Browser games built with Claude Code</p>
     </div>
   </div>
-  <div class="hud" aria-hidden="true">
-    <span class="live" id="count">GAMES</span>
-    <span id="input">INPUT · KEYBOARD</span>
-    <span id="clock">--:--</span>
+  <div class="side">
+    <div class="hud" aria-hidden="true">
+      <span class="live" id="count">GAMES</span>
+      <span id="input">INPUT · KEYBOARD</span>
+      <span id="clock">--:--</span>
+    </div>
+    <div class="controls">
+      <button type="button" id="resetOrder" hidden>Reset order</button>
+      <label class="theme-pick">THEME
+        <select id="theme">
+          <option value="neon">Neon Grid</option>
+          <option value="ember">Ember Forge</option>
+          <option value="ocean">Deep Ocean</option>
+          <option value="jungle">Toxic Jungle</option>
+          <option value="amethyst">Amethyst Night</option>
+          <option value="graphite">Graphite</option>
+        </select>
+      </label>
+    </div>
   </div>
 </header>
 
@@ -297,10 +352,11 @@ body.launching .game.chosen { transform: scale(1.08); }
 
 <footer>
   <span>Every game runs in the browser, no install · <a href="https://github.com/opivankristovi/Claude_Code_Games">Source on GitHub</a></span>
-  <span class="keys"><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> select · <kbd>ENTER</kbd> play · gamepad: D-pad + <kbd>A</kbd> / <kbd>✕</kbd></span>
+  <span class="keys"><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> select · <kbd>ENTER</kbd> play · gamepad: D-pad + <kbd>A</kbd> / <kbd>✕</kbd> · drag or <kbd>SHIFT</kbd>+arrows to rearrange</span>
 </footer>
 
 <div class="launch" aria-hidden="true"><p id="launchText"></p></div>
+<p class="sr-only" id="announce" aria-live="polite"></p>
 
 <script>
 (() => {
@@ -363,7 +419,7 @@ body.launching .game.chosen { transform: scale(1.08); }
   });
 
   // ---- arrow-key and gamepad navigation ----
-  const columns = () => cards.filter(c => c.offsetTop === cards[0].offsetTop).length || 1;
+  const columns = () => cards.filter(c => c.parentElement.offsetTop === cards[0].parentElement.offsetTop).length || 1;
   const move = (dx, dy) => {
     let i = cards.indexOf(document.activeElement);
     if (i < 0) { cards[0].focus(); return; }
@@ -373,7 +429,10 @@ body.launching .game.chosen { transform: scale(1.08); }
   };
   const DIRS = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
   addEventListener('keydown', e => {
-    if (DIRS[e.key]) { e.preventDefault(); move(...DIRS[e.key]); }
+    if (!DIRS[e.key] || (e.target.closest && e.target.closest('select, input, textarea'))) return;
+    e.preventDefault();
+    if (e.shiftKey && cards.includes(document.activeElement)) shiftCard(document.activeElement, ...DIRS[e.key]);
+    else move(...DIRS[e.key]);
   });
 
   let padLoop = false, lastMove = 0, lastA = true;
@@ -395,6 +454,117 @@ body.launching .game.chosen { transform: scale(1.08); }
     lastA = a;
     requestAnimationFrame(poll);
   };
+  // ---- themes ----
+  const THEMES = { neon: '#05060f', ember: '#0b0504', ocean: '#020a12', jungle: '#030904', amethyst: '#08040f', graphite: '#09090b' };
+  const store = {
+    get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: (k, v) => { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } },
+  };
+  const applyTheme = t => {
+    if (!THEMES[t]) t = 'neon';
+    document.documentElement.dataset.theme = t; $('theme').value = t;
+    document.querySelector('meta[name="theme-color"]').content = THEMES[t];
+  };
+  applyTheme(store.get('launcher.theme'));
+  $('theme').addEventListener('change', e => { applyTheme(e.target.value); store.set('launcher.theme', e.target.value); });
+
+  // ---- rearranging: saved order, drag and drop, Shift + arrows ----
+  const grid = document.querySelector('.grid'), ORDER_KEY = 'launcher.order';
+  const items = () => [...grid.children];
+  const hrefOf = li => li.querySelector('.game').getAttribute('href');
+  const titleOf = li => li.querySelector('.title').textContent;
+  const say = t => { $('announce').textContent = t; };
+  const defaultOrder = items().map(hrefOf);
+  const syncCards = () => cards.splice(0, cards.length, ...items().map(li => li.querySelector('.game')));
+  const saveOrder = () => {
+    const order = items().map(hrefOf), isDefault = order.join() === defaultOrder.join();
+    store.set(ORDER_KEY, isDefault ? null : JSON.stringify(order)); $('resetOrder').hidden = isDefault;
+  };
+  const applyOrder = saved => {
+    const byHref = new Map(items().map(li => [hrefOf(li), li]));
+    const order = saved.filter(h => byHref.has(h));
+    // games added since the order was saved keep their default place
+    defaultOrder.forEach((h, i) => { if (!order.includes(h)) order.splice(Math.min(i, order.length), 0, h); });
+    grid.append(...order.map(h => byHref.get(h))); syncCards();
+  };
+  try { const saved = JSON.parse(store.get(ORDER_KEY)); if (Array.isArray(saved)) applyOrder(saved); } catch (e) { }
+  saveOrder();
+  for (const el of grid.querySelectorAll('a, img')) el.draggable = false;
+  setTimeout(() => document.body.classList.add('ready'), 600 + cards.length * 70 + 100);
+
+  // animate the other buttons sliding to their new places
+  function flip(skip, change) {
+    const others = items().filter(li => li !== skip), before = new Map(others.map(li => [li, li.getBoundingClientRect()]));
+    change();
+    if (reduced) return;
+    for (const li of others) {
+      const a = before.get(li), b = li.getBoundingClientRect(), dx = a.left - b.left, dy = a.top - b.top;
+      if (dx || dy) li.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    }
+  }
+  $('resetOrder').addEventListener('click', () => { flip(null, () => applyOrder(defaultOrder)); saveOrder(); say('Order reset'); });
+  function shiftCard(card, dx, dy) {
+    const list = items(), li = card.parentElement, from = list.indexOf(li);
+    const to = Math.max(0, Math.min(list.length - 1, from + dx + dy * columns()));
+    if (to === from) return;
+    flip(null, () => list[to].insertAdjacentElement(to > from ? 'afterend' : 'beforebegin', li));
+    card.focus(); syncCards(); saveOrder();
+    say(`${titleOf(li)} moved to position ${to + 1} of ${list.length}`);
+  }
+
+  let drag = null, suppressClick = false;
+  const follow = () => {
+    const d = drag; d.li.style.transform = 'none';
+    const r = d.li.getBoundingClientRect();
+    d.li.style.transform = `translate(${d.x - d.gx - r.left}px, ${d.y - d.gy - r.top}px) scale(1.04)`;
+  };
+  const startDrag = () => {
+    const d = drag; d.active = true; clearTimeout(d.timer);
+    const r = d.li.getBoundingClientRect(); d.gx = d.x0 - r.left; d.gy = d.y0 - r.top;
+    d.li.classList.add('dragging'); document.body.classList.add('arranging');
+    if (d.touch && navigator.vibrate) navigator.vibrate(15);
+    follow();
+  };
+  const endDrag = () => {
+    const d = drag; drag = null; if (!d) return;
+    clearTimeout(d.timer); if (!d.active) return;
+    const li = d.li, r1 = li.getBoundingClientRect();
+    li.classList.remove('dragging'); li.style.transform = ''; document.body.classList.remove('arranging');
+    const r2 = li.getBoundingClientRect();
+    if (!reduced) li.animate([{ transform: `translate(${r1.left - r2.left}px, ${r1.top - r2.top}px)` }, { transform: 'none' }], { duration: 200, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    syncCards(); saveOrder(); say(`${titleOf(li)} moved to position ${items().indexOf(li) + 1}`);
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 60);
+  };
+  grid.addEventListener('pointerdown', e => {
+    const li = e.target.closest('.grid > li');
+    if (!li || e.button !== 0 || drag) return;
+    const touch = e.pointerType !== 'mouse';
+    drag = { li, id: e.pointerId, touch, active: false, x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY };
+    // touch needs a long press, so a normal swipe still scrolls the page
+    if (touch) drag.timer = setTimeout(() => { if (drag && !drag.active) startDrag(); }, 320);
+  });
+  addEventListener('pointermove', e => {
+    const d = drag; if (!d || e.pointerId !== d.id) return;
+    d.x = e.clientX; d.y = e.clientY;
+    if (!d.active) {
+      const moved = Math.hypot(d.x - d.x0, d.y - d.y0);
+      if (d.touch) { if (moved > 10) { clearTimeout(d.timer); drag = null; } } else if (moved > 8) startDrag();
+      return;
+    }
+    const hit = document.elementFromPoint(d.x, d.y), over = hit && hit.closest('.grid > li');
+    if (over && over !== d.li && !over.getAnimations().length) {
+      const list = items(), from = list.indexOf(d.li), to = list.indexOf(over);
+      flip(d.li, () => over.insertAdjacentElement(from < to ? 'afterend' : 'beforebegin', d.li));
+    }
+    if (d.y < 70) scrollBy(0, -12); else if (d.y > innerHeight - 70) scrollBy(0, 12);
+    follow();
+  });
+  addEventListener('pointerup', e => { if (drag && e.pointerId === drag.id) endDrag(); });
+  addEventListener('pointercancel', e => { if (drag && e.pointerId === drag.id) endDrag(); });
+  addEventListener('touchmove', e => { if (drag && drag.active) e.preventDefault(); }, { passive: false });
+  grid.addEventListener('contextmenu', e => { if (drag && drag.touch) e.preventDefault(); });
+  grid.addEventListener('click', e => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); } }, true);
+
   addEventListener('gamepadconnected', () => {
     setInput('GAMEPAD');
     if (!cards.includes(document.activeElement)) cards[0].focus();

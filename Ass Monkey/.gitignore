@@ -1,0 +1,4 @@
+# The original cartridge images are a local reference only: never commit them.
+referentie/
+# Local preview config
+.claude/

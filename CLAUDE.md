@@ -1,6 +1,6 @@
 # Claude Code Games
 
-Browser games, each one a self-contained `index.html` in its own top-level folder, plus a launcher page (`index.html` at the root) that links to every game. GitHub Pages serves the repo from `main`: <https://opivankristovi.github.io/Claude_Code_Games/>.
+Browser games, each in its own top-level folder with an `index.html` (a single self-contained file, except Tuxemon 3D, which loads its own `css/` and `js/`), plus a launcher page (`index.html` at the root) that links to every game. GitHub Pages serves the repo from `main`: <https://opivankristovi.github.io/Claude_Code_Games/>.
 
 ## Adding a game (required every time)
 

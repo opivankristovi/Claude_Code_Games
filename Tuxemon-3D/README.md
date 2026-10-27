@@ -4,15 +4,17 @@ A 3D browser remake of [Tuxemon](https://github.com/Tuxemon/Tuxemon), the open s
 
 ## Play
 
-**Play online: https://opivankristovi.github.io/Tuxemon-3D/**
+**Live:** <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
 
-To run it locally, double-click **`Play Tuxemon 3D.cmd`**. It starts a small local web server and opens the game in your browser. Close the server window to stop it.
+To run it locally on Windows, double-click **`Play Tuxemon 3D.cmd`** in this folder. It starts a small local web server and opens the game in your browser. Close the server window to stop it.
 
-Or from a terminal:
+Or from a terminal, in this folder:
 
 ```sh
 python serve.py 8765 --open
 ```
+
+You can also serve the whole repository from its root with `python3 -m http.server 8000` and open <http://localhost:8000/Tuxemon-3D/>.
 
 The game uses ES module imports, so it needs to be served over http rather than opened as a file. Three.js loads from a CDN, so you need an internet connection the first time.
 

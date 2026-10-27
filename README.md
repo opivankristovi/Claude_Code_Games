@@ -22,7 +22,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 
 ## How to play
 
-**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Hover over a button, or select it with the arrow keys, to see a short summary of the game. Or go straight to a game:
+**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Hover over a button, or select it with the arrow keys, to see a short summary of the game. Drag the buttons (long-press on touch screens, or Shift + arrow keys) to put them in your own order, and pick a dark colour theme from the THEME menu; both are saved in your browser. Or go straight to a game:
 
 - Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
 - X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>

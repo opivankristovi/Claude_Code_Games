@@ -21,7 +21,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 
 ## How to play
 
-**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Or go straight to a game:
+**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Hover over a button, or select it with the arrow keys, to see a short summary of the game. Or go straight to a game:
 
 - Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
 - X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
@@ -315,7 +315,7 @@ Every game needs its own logo and a button in the launcher. The full checklist i
 
 1. Create a new folder with the game's `index.html` and a `README.md` (description, live link, how to run, controls).
 2. Draw an `icon.svg` logo in the folder and run `node scripts/render-icons.js "<folder>"` to export `icon-512.png`, `icon-192.png` and `apple-touch-icon.png`. Link them from the game's `<head>`.
-3. Add a button for the game to the launcher (`index.html` at the root).
+3. Add a button for the game, with a short hover summary, to the launcher (`index.html` at the root).
 4. Add the game to this README: a row in the table at the top, a section with its controls, and its live link.
 
 `npm run test:launcher` checks steps 2 and 3 and runs in CI on every push, so a game without a logo or a launcher button fails the build.

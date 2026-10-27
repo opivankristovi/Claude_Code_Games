@@ -29,6 +29,16 @@ for (const g of games) {
     assert.ok(launcher.includes(`href="${url}"`), `index.html has no button linking to ${url}`);
     assert.ok(launcher.includes(`src="${url}icon.svg"`), `index.html button for ${g} does not use ${url}icon.svg`);
   });
+
+  test(`${g}: launcher button has a hover summary`, () => {
+    const start = launcher.indexOf(`href="${url}"`);
+    assert.ok(start >= 0, `index.html has no button linking to ${url}`);
+    const button = launcher.slice(start, launcher.indexOf('</a>', start));
+    const id = (button.match(/aria-describedby="([^"]+)"/) || [])[1];
+    assert.ok(id, `button for ${g} has no aria-describedby`);
+    const info = button.match(new RegExp(`<span class="info" id="${id}" aria-hidden="true">([^<]+)</span>`));
+    assert.ok(info && info[1].trim(), `button for ${g} has no <span class="info" id="${id}"> summary`);
+  });
 }
 
 test('launcher has no buttons for missing games', () => {

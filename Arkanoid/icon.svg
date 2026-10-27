@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Neon Arkanoid</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0e2a"/>
+      <stop offset="1" stop-color="#2b0d36"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#7a5cff" stroke-opacity=".14" stroke-width="2"/>
+    </pattern>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".45"/>
+      <stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigglow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <rect width="512" height="512" fill="url(#grid)"/>
+
+    <!-- bricks: 4 columns x 5 rows, a few already broken -->
+    <g filter="url(#glow)">
+      <g fill="#ff4d6d">
+        <rect x="54" y="72" width="92" height="32" rx="7"/><rect x="158" y="72" width="92" height="32" rx="7"/>
+        <rect x="262" y="72" width="92" height="32" rx="7"/><rect x="366" y="72" width="92" height="32" rx="7"/>
+      </g>
+      <g fill="#ff9b3d">
+        <rect x="54" y="114" width="92" height="32" rx="7"/><rect x="158" y="114" width="92" height="32" rx="7"/>
+        <rect x="262" y="114" width="92" height="32" rx="7"/><rect x="366" y="114" width="92" height="32" rx="7"/>
+      </g>
+      <g fill="#ffd84d">
+        <rect x="54" y="156" width="92" height="32" rx="7"/><rect x="158" y="156" width="92" height="32" rx="7"/>
+        <rect x="366" y="156" width="92" height="32" rx="7"/>
+      </g>
+      <g fill="#3ddc84">
+        <rect x="54" y="198" width="92" height="32" rx="7"/>
+        <rect x="366" y="198" width="92" height="32" rx="7"/>
+      </g>
+      <g fill="#4dd8ff">
+        <rect x="54" y="240" width="92" height="32" rx="7"/>
+      </g>
+    </g>
+    <g fill="url(#shine)">
+      <rect x="54" y="72" width="92" height="32" rx="7"/><rect x="158" y="72" width="92" height="32" rx="7"/>
+      <rect x="262" y="72" width="92" height="32" rx="7"/><rect x="366" y="72" width="92" height="32" rx="7"/>
+      <rect x="54" y="114" width="92" height="32" rx="7"/><rect x="158" y="114" width="92" height="32" rx="7"/>
+      <rect x="262" y="114" width="92" height="32" rx="7"/><rect x="366" y="114" width="92" height="32" rx="7"/>
+      <rect x="54" y="156" width="92" height="32" rx="7"/><rect x="158" y="156" width="92" height="32" rx="7"/>
+      <rect x="366" y="156" width="92" height="32" rx="7"/>
+      <rect x="54" y="198" width="92" height="32" rx="7"/><rect x="366" y="198" width="92" height="32" rx="7"/>
+      <rect x="54" y="240" width="92" height="32" rx="7"/>
+    </g>
+
+    <!-- ball trail and ball -->
+    <path d="M232 410 L292 300" stroke="#4dd8ff" stroke-opacity=".35" stroke-width="14" stroke-linecap="round"/>
+    <path d="M262 355 L292 300" stroke="#bff3ff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="300" cy="286" r="21" fill="#effcff" filter="url(#bigglow)"/>
+
+    <!-- paddle -->
+    <g filter="url(#glow)">
+      <rect x="150" y="418" width="212" height="34" rx="17" fill="#4dd8ff"/>
+      <path d="M167 418h25v34h-25a17 17 0 0 1 0-34z" fill="#ff4d6d"/>
+      <path d="M345 418h-25v34h25a17 17 0 0 0 0-34z" fill="#ff4d6d"/>
+    </g>
+    <rect x="170" y="423" width="172" height="8" rx="4" fill="#fff" fill-opacity=".55"/>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Shakur Boy: Shroom Run 3D</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#140630"/>
+      <stop offset="1" stop-color="#22094a"/>
+    </linearGradient>
+    <radialGradient id="skin" cx=".38" cy=".3" r=".75">
+      <stop offset="0" stop-color="#eaa36a"/>
+      <stop offset=".7" stop-color="#c9814a"/>
+      <stop offset="1" stop-color="#8e5228"/>
+    </radialGradient>
+    <pattern id="band" width="24" height="34" patternUnits="userSpaceOnUse" y="146">
+      <rect width="24" height="34" fill="#16206e"/>
+      <circle cx="6" cy="11" r="3.5" fill="#fff"/><circle cx="18" cy="23" r="3.5" fill="#fff"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="aura" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <clipPath id="head"><path d="M222 272L322 219A118 118 0 1 0 322 325Z"/></clipPath>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+    <g id="shroom">
+      <path d="M-10 0h20l4 30h-28z" fill="#f6e7cf"/>
+      <path d="M-30 4Q-32 -30 0 -32Q32 -30 30 4Z" fill="#ff5fd2"/>
+      <circle cx="-14" cy="-12" r="5" fill="#fff"/><circle cx="8" cy="-20" r="4" fill="#fff"/><circle cx="16" cy="-4" r="4" fill="#fff"/>
+    </g>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <!-- neon maze walls -->
+    <g fill="none" stroke="#7a5cff" stroke-width="10" stroke-linejoin="round" filter="url(#glow)">
+      <path d="M-10 88H200V60M300 60V88H522"/>
+      <path d="M-10 448H150V420M360 420V448H522"/>
+      <path d="M430 150V230M430 320V380"/>
+    </g>
+    <!-- trail of shrooms -->
+    <g filter="url(#glow)">
+      <use href="#shroom" transform="translate(392 276) scale(.8)"/>
+      <use href="#shroom" transform="translate(474 276) scale(.8)"/>
+    </g>
+    <ellipse cx="216" cy="276" rx="150" ry="150" fill="#ff66ff" fill-opacity=".28" filter="url(#aura)"/>
+
+    <!-- Shakur Boy: chomper with bandana and shades -->
+    <!-- bandana tails -->
+    <path d="M160 160Q122 140 86 150L90 166Q122 160 156 176Z" fill="#16206e" stroke="#4a5cff" stroke-width="3"/>
+    <path d="M156 170Q118 172 88 200L100 210Q126 188 158 182Z" fill="#16206e" stroke="#4a5cff" stroke-width="3"/>
+    <path d="M222 272L322 219A118 118 0 1 0 322 325Z" fill="url(#skin)"/>
+    <path d="M222 272L322 219L330 228L238 272L330 316L322 325Z" fill="#8a1c33"/>
+    <g clip-path="url(#head)">
+      <rect x="90" y="146" width="260" height="34" fill="url(#band)"/>
+      <path d="M90 146H350M90 180H350" stroke="#4a5cff" stroke-width="5"/>
+    </g>
+    <!-- shades -->
+    <path d="M248 194H312Q314 214 300 222H262Q248 214 248 194Z" fill="#050505"/>
+    <path d="M220 198H250" stroke="#050505" stroke-width="6"/>
+    <path d="M262 201H296" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

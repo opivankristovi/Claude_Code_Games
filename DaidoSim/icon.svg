@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Daido Dog Sim</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fd3ec"/>
+      <stop offset="1" stop-color="#d8f1f6"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6cbf4e"/>
+      <stop offset="1" stop-color="#3b8a34"/>
+    </linearGradient>
+    <radialGradient id="coat" cx=".4" cy=".3" r=".8">
+      <stop offset="0" stop-color="#3a3a42"/>
+      <stop offset="1" stop-color="#121216"/>
+    </radialGradient>
+    <radialGradient id="muzzle" cx=".5" cy=".7" r=".7">
+      <stop offset="0" stop-color="#9a9aa0"/>
+      <stop offset=".6" stop-color="#55555c"/>
+      <stop offset="1" stop-color="#26262c"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <circle cx="420" cy="92" r="40" fill="#fff6c8"/>
+    <g fill="#fff" fill-opacity=".9">
+      <ellipse cx="96" cy="86" rx="46" ry="18"/><ellipse cx="128" cy="74" rx="30" ry="20"/>
+    </g>
+    <path d="M0 330Q130 290 256 314T512 304V512H0Z" fill="url(#grass)"/>
+    <g stroke="#2f7a2a" stroke-width="5" stroke-linecap="round">
+      <path d="M40 430l-6-24M56 432l4-26M454 424l-6-24M470 428l6-22M90 470l-4-22M430 470l4-22"/>
+    </g>
+    <!-- bone -->
+    <g transform="rotate(-18 92 380)" fill="#fbf3df" stroke="#c9b88c" stroke-width="3">
+      <path d="M62 372h60a10 10 0 1 1 8 16a10 10 0 1 1-8 16h-60a10 10 0 1 1-8-16a10 10 0 1 1 8-16z"/>
+    </g>
+
+    <!-- Daido: glossy black coat, white chest star, greying muzzle, teal collar -->
+    <path d="M150 512Q156 380 256 372Q356 380 362 512Z" fill="url(#coat)"/>
+    <path d="M256 418Q236 446 244 512H268Q276 446 256 418Z" fill="#f4f1ea"/>
+    <path d="M178 368Q256 400 334 368L340 396Q256 430 172 396Z" fill="#3fb8c9" stroke="#1f7f8c" stroke-width="3"/>
+    <circle cx="256" cy="420" r="16" fill="#f1c84b" stroke="#a8841c" stroke-width="3"/>
+    <!-- rose ears -->
+    <path d="M150 146Q118 120 100 150Q96 196 132 224Q150 196 170 176Z" fill="#141418"/>
+    <path d="M362 146Q394 120 412 150Q416 196 380 224Q362 196 342 176Z" fill="#141418"/>
+    <path d="M140 154Q122 150 116 166Q118 186 134 200Z" fill="#4a3434"/>
+    <path d="M372 154Q390 150 396 166Q394 186 378 200Z" fill="#4a3434"/>
+    <!-- head -->
+    <ellipse cx="256" cy="240" rx="118" ry="112" fill="url(#coat)"/>
+    <ellipse cx="256" cy="306" rx="74" ry="60" fill="url(#muzzle)"/>
+    <!-- eyes and brows -->
+    <ellipse cx="206" cy="226" rx="17" ry="19" fill="#4a2a12"/>
+    <ellipse cx="306" cy="226" rx="17" ry="19" fill="#4a2a12"/>
+    <circle cx="206" cy="228" r="9" fill="#0a0806"/><circle cx="306" cy="228" r="9" fill="#0a0806"/>
+    <circle cx="212" cy="220" r="5" fill="#fff"/><circle cx="312" cy="220" r="5" fill="#fff"/>
+    <path d="M186 196Q204 186 224 196M288 196Q308 186 326 196" fill="none" stroke="#4d4d55" stroke-width="6" stroke-linecap="round"/>
+    <!-- nose, mouth, tongue -->
+    <path d="M230 278Q256 266 282 278Q284 296 256 306Q228 296 230 278Z" fill="#0b0b0d"/>
+    <ellipse cx="246" cy="279" rx="9" ry="4" fill="#fff" fill-opacity=".45"/>
+    <path d="M256 306V322" stroke="#0b0b0d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M220 324Q240 340 256 322Q272 340 292 324" fill="none" stroke="#0b0b0d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M238 334Q256 338 274 334Q278 376 256 380Q234 376 238 334Z" fill="#ff7f9a" stroke="#d24f6e" stroke-width="3"/>
+    <path d="M256 340V368" stroke="#d24f6e" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

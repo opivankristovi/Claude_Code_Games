@@ -2,7 +2,9 @@
 
 A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).
 
-Each game is one self-contained `index.html`: no build step, no bundler, no asset files. Every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
+Each game is one self-contained `index.html`: no build step, no bundler, no game asset files. Every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
+
+Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`, `icon-192.png`, `apple-touch-icon.png`) for buttons, launchers and home-screen shortcuts. Each page links it as its favicon and touch icon.
 
 | Game | Folder (own README) | Genre |
 | --- | --- | --- |
@@ -208,25 +210,31 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 .
 ├── Arkanoid/
 │   ├── index.html   # Neon Arkanoid
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── DaidoSim/
 │   ├── index.html   # Daido Dog Sim
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── Katana Creed/
 │   ├── index.html   # Katana Creed
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── PodRace/
 │   ├── index.html   # Sandstorm Circuit
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── Shakur-Boy/
 │   ├── index.html   # Shakur Boy: Shroom Run 3D
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── X-Fighter/
 │   ├── index.html   # X-Fighter
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 └── README.md
 ```
 
 ## Adding a game
 
-Create a new folder containing a single `index.html` and a `README.md` (description, live link, how to run, controls), then add a row to the table at the top of this file and a section describing the game and its controls.
+Create a new folder containing a single `index.html` and a `README.md` (description, live link, how to run, controls), plus an `icon.svg` logo with PNG exports (`icon-512.png`, `icon-192.png`, and a full-bleed 180×180 `apple-touch-icon.png`) linked from the page's `<head>`, then add a row to the table at the top of this file and a section describing the game and its controls.

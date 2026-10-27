@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>X-Fighter</title>
+  <defs>
+    <radialGradient id="space" cx=".7" cy=".25" r="1">
+      <stop offset="0" stop-color="#2a1559"/>
+      <stop offset=".55" stop-color="#0d0b2b"/>
+      <stop offset="1" stop-color="#04040f"/>
+    </radialGradient>
+    <radialGradient id="planet" cx=".7" cy=".2" r=".8">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset=".45" stop-color="#2b6cb8"/>
+      <stop offset="1" stop-color="#0a1a3a"/>
+    </radialGradient>
+    <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef2f7"/>
+      <stop offset="1" stop-color="#8d98a8"/>
+    </linearGradient>
+    <radialGradient id="engine">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".35" stop-color="#bff1ff"/>
+      <stop offset="1" stop-color="#3cc8ff"/>
+    </radialGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#space)"/>
+    <ellipse cx="380" cy="120" rx="150" ry="80" fill="#8a3cc8" fill-opacity=".35" filter="url(#soft)"/>
+    <g fill="#fff">
+      <circle cx="44" cy="60" r="2"/><circle cx="130" cy="34" r="1.5"/><circle cx="210" cy="90" r="1.2"/>
+      <circle cx="470" cy="46" r="2"/><circle cx="420" cy="210" r="1.5"/><circle cx="80" cy="200" r="1.5"/>
+      <circle cx="300" cy="40" r="1.2"/><circle cx="486" cy="300" r="1.5"/><circle cx="30" cy="300" r="1.2"/>
+    </g>
+    <circle cx="70" cy="600" r="250" fill="url(#planet)"/>
+    <circle cx="70" cy="600" r="250" fill="none" stroke="#9fe4ff" stroke-opacity=".7" stroke-width="5" filter="url(#glow)"/>
+
+    <!-- starfighter, seen from behind; wings in X attack position -->
+    <g transform="translate(256 272)">
+      <g fill="url(#hull)" stroke="#2c3442" stroke-width="3" stroke-linejoin="round">
+        <path d="M-30 -14L-196 -96L-202 -82L-34 8Z"/>
+        <path d="M30 -14L196 -96L202 -82L34 8Z"/>
+        <path d="M-30 14L-196 96L-202 82L-34 -8Z"/>
+        <path d="M30 14L196 96L202 82L34 -8Z"/>
+      </g>
+      <g fill="#c8202f">
+        <path d="M-120 -58L-160 -78L-162 -72L-122 -51Z"/><path d="M120 -58L160 -78L162 -72L122 -51Z"/>
+        <path d="M-120 58L-160 78L-162 72L-122 51Z"/><path d="M120 58L160 78L162 72L122 51Z"/>
+      </g>
+      <g fill="#ff3b4a" filter="url(#glow)">
+        <circle cx="-203" cy="-93" r="8"/><circle cx="203" cy="-93" r="8"/>
+        <circle cx="-203" cy="93" r="8"/><circle cx="203" cy="93" r="8"/>
+      </g>
+      <g fill="#5d6778">
+        <rect x="-214" y="-104" width="22" height="22" rx="5"/><rect x="192" y="-104" width="22" height="22" rx="5"/>
+        <rect x="-214" y="82" width="22" height="22" rx="5"/><rect x="192" y="82" width="22" height="22" rx="5"/>
+      </g>
+      <circle r="44" fill="url(#hull)" stroke="#2c3442" stroke-width="3"/>
+      <circle r="26" fill="#3a4354"/>
+      <path d="M-44 0H44" stroke="#c8202f" stroke-width="6"/>
+      <g filter="url(#glow)">
+        <circle cx="-62" cy="-30" r="20" fill="url(#engine)"/><circle cx="62" cy="-30" r="20" fill="url(#engine)"/>
+        <circle cx="-62" cy="30" r="20" fill="url(#engine)"/><circle cx="62" cy="30" r="20" fill="url(#engine)"/>
+      </g>
+      <g fill="none" stroke="#2c3442" stroke-width="5">
+        <circle cx="-62" cy="-30" r="22"/><circle cx="62" cy="-30" r="22"/>
+        <circle cx="-62" cy="30" r="22"/><circle cx="62" cy="30" r="22"/>
+      </g>
+    </g>
+  </g>
+</svg>

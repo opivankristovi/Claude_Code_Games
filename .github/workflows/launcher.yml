@@ -1,0 +1,16 @@
+name: Launcher check
+
+# Fails when a game folder is missing its icon set or its button in the root launcher (index.html).
+on:
+  push:
+  pull_request:
+
+jobs:
+  launcher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/launcher.test.js

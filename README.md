@@ -175,7 +175,7 @@ You start with 3 lives and earn one extra life at 10,000 points. The maze change
 
 ## How to play
 
-**Online** (GitHub Pages):
+**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Or go straight to a game:
 
 - Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
 - X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
@@ -192,7 +192,7 @@ cd Claude_Code_Games
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000/<folder>/`, for example <http://localhost:8000/X-Fighter/>.
+Then open <http://localhost:8000/> for the launcher, or `http://localhost:8000/<folder>/` for a game, for example <http://localhost:8000/X-Fighter/>.
 
 Opening `index.html` directly from disk will usually work too, but a local server is more reliable across browsers.
 
@@ -232,9 +232,24 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 │   ├── index.html   # X-Fighter
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
+├── scripts/
+│   ├── games.js         # finds the game folders
+│   └── render-icons.js  # renders icon.svg to the PNG icon set
+├── tests/
+│   └── launcher.test.js # every game has its icons and a launcher button
+├── index.html       # launcher page with a button for every game
+├── icon.svg         # launcher logo (+ PNG exports)
+├── CLAUDE.md        # checklist for adding a game
 └── README.md
 ```
 
 ## Adding a game
 
-Create a new folder containing a single `index.html` and a `README.md` (description, live link, how to run, controls), plus an `icon.svg` logo with PNG exports (`icon-512.png`, `icon-192.png`, and a full-bleed 180×180 `apple-touch-icon.png`) linked from the page's `<head>`, then add a row to the table at the top of this file and a section describing the game and its controls.
+Every game needs its own logo and a button in the launcher. The full checklist is in [`CLAUDE.md`](CLAUDE.md):
+
+1. Create a new folder with the game's `index.html` and a `README.md` (description, live link, how to run, controls).
+2. Draw an `icon.svg` logo in the folder and run `node scripts/render-icons.js "<folder>"` to export `icon-512.png`, `icon-192.png` and `apple-touch-icon.png`. Link them from the game's `<head>`.
+3. Add a button for the game to the launcher (`index.html` at the root).
+4. Add the game to this README: a row in the table at the top, a section with its controls, and its live link.
+
+`npm run test:launcher` checks steps 2 and 3 and runs in CI on every push, so a game without a logo or a launcher button fails the build.

@@ -4,13 +4,16 @@
   "description": "A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).",
   "main": "index.js",
   "scripts": {
-    "test": "jest && node --test DaidoSim/tests/terrain.test.js && node test.js"
+    "test": "jest && node --test DaidoSim/tests/terrain.test.js tests/launcher.test.js && node test.js",
+    "test:launcher": "node --test tests/launcher.test.js",
+    "icons": "node scripts/render-icons.js"
   },
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
       "<rootDir>/test.js",
-      "<rootDir>/DaidoSim/tests/"
+      "<rootDir>/DaidoSim/tests/",
+      "<rootDir>/tests/"
     ]
   },
   "repository": {

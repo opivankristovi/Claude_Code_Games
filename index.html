@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Claude Code Games</title>
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Launcher for Claude Code Games, a collection of browser games built with Claude Code.">
+<meta name="theme-color" content="#05060f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05060f;
+  --ink: #e8f6ff;
+  --dim: #8492b8;
+  --cyan: #4dd8ff;
+  --mag: #ff4dd8;
+  --line: rgba(77, 216, 255, .22);
+  --card: rgba(14, 18, 44, .62);
+}
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body {
+  margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
+  font-family: Rajdhani, system-ui, sans-serif; font-size: 17px; overflow-x: hidden;
+  display: flex; flex-direction: column;
+}
+a { color: inherit; }
+
+/* ---------- backdrop: nebula, stars, moving grid floor, scanlines ---------- */
+.sky {
+  position: fixed; inset: 0; z-index: -3;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -12%, #2a1463 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 100% 105%, #0d3360 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at -5% 100%, #3a0f4f 0%, transparent 70%),
+    var(--bg);
+}
+#stars { position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%; }
+.floor {
+  position: fixed; left: -50%; right: -50%; bottom: 0; height: 46vh; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--line) 2px, transparent 2px), linear-gradient(90deg, var(--line) 2px, transparent 2px);
+  background-size: 72px 72px;
+  transform: perspective(300px) rotateX(58deg); transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 70%); mask-image: linear-gradient(to bottom, transparent, #000 70%);
+  animation: floor 2.4s linear infinite;
+}
+@keyframes floor { to { background-position: 0 72px; } }
+.horizon {
+  position: fixed; left: 0; right: 0; bottom: 46vh; height: 2px; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--mag) 30%, var(--cyan) 70%, transparent);
+  box-shadow: 0 0 24px 4px rgba(255, 77, 216, .35); opacity: .55;
+}
+.scan {
+  position: fixed; inset: 0; z-index: 50; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- header ---------- */
+header {
+  width: min(1180px, 100% - 32px); margin: 0 auto; padding: 36px 0 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 18px; }
+.brand img { width: 64px; height: 64px; filter: drop-shadow(0 0 14px rgba(77, 216, 255, .45)); }
+h1 {
+  margin: 0; font-family: Orbitron, sans-serif; font-weight: 900; letter-spacing: .08em;
+  font-size: clamp(1.5rem, 4.2vw, 2.6rem); line-height: 1.05;
+  text-shadow: 0 0 18px rgba(77, 216, 255, .55);
+}
+h1 span {
+  background: linear-gradient(90deg, var(--cyan), var(--mag)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 0 12px rgba(255, 77, 216, .5));
+}
+.tagline { margin: 6px 0 0; color: var(--dim); letter-spacing: .32em; text-transform: uppercase; font-size: .78rem; font-weight: 600; }
+.hud { display: flex; gap: 10px; flex-wrap: wrap; }
+.hud span {
+  font-family: Orbitron, sans-serif; font-size: .7rem; letter-spacing: .16em; padding: 8px 12px;
+  border: 1px solid rgba(77, 216, 255, .3); border-radius: 6px; background: rgba(77, 216, 255, .06); color: var(--cyan);
+}
+.hud .live::before {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%;
+  background: #3dff9a; box-shadow: 0 0 8px #3dff9a; animation: blink 1.6s ease-in-out infinite; vertical-align: 1px;
+}
+@keyframes blink { 50% { opacity: .25; } }
+
+.section-title {
+  width: min(1180px, 100% - 32px); margin: 22px auto 0; display: flex; align-items: center; gap: 14px;
+  font-family: Orbitron, sans-serif; font-size: .8rem; letter-spacing: .3em; color: var(--dim);
+}
+.section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(77, 216, 255, .5), transparent); }
+
+/* ---------- game grid ---------- */
+main { flex: 1; }
+.grid {
+  list-style: none; margin: 18px auto 0; padding: 0; width: min(1180px, 100% - 32px);
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 22px;
+}
+.game {
+  --accent: var(--cyan);
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  height: 100%; padding: 22px 16px 18px; border-radius: 18px; text-decoration: none;
+  background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.01) 45%), var(--card);
+  border: 1px solid rgba(255, 255, 255, .09);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .25s;
+  animation: rise .6s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+/* HUD corner brackets */
+.game::before, .game::after {
+  content: ""; position: absolute; width: 22px; height: 22px; border: 2px solid var(--accent);
+  opacity: .35; transition: opacity .25s, inset .25s;
+}
+.game::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; border-top-left-radius: 8px; }
+.game::after { bottom: 8px; right: 8px; border-left: 0; border-top: 0; border-bottom-right-radius: 8px; }
+.game:hover, .game:focus-visible {
+  outline: none; transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 18px 50px -14px var(--accent);
+}
+.game:hover::before, .game:hover::after, .game:focus-visible::before, .game:focus-visible::after { opacity: 1; }
+.game:focus-visible .title::after { transform: scaleX(1); }
+
+.icon { position: relative; display: block; width: 100%; aspect-ratio: 1; clip-path: inset(0 round 22%); }
+.icon img { display: block; width: 100%; height: 100%; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.game:hover .icon img, .game:focus-visible .icon img { transform: scale(1.06); }
+/* holographic sweep across the icon */
+.icon::after {
+  content: ""; position: absolute; inset: -40%; pointer-events: none;
+  background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.35) 50%, transparent 58%);
+  opacity: 0; transform: translateX(-60%);
+}
+.game:hover .icon::after, .game:focus-visible .icon::after { opacity: 1; transform: translateX(60%); transition: transform .8s ease, opacity .2s; }
+.icon-wrap { position: relative; display: block; width: min(100%, 168px); }
+.icon-wrap::before {
+  content: ""; position: absolute; inset: 10% 6% -6%; border-radius: 30%; z-index: -1;
+  background: var(--accent); filter: blur(26px); opacity: .25; transition: opacity .25s;
+}
+.game:hover .icon-wrap::before, .game:focus-visible .icon-wrap::before { opacity: .6; }
+
+.title {
+  position: relative; margin-top: 18px; font-family: Orbitron, sans-serif; font-weight: 700;
+  font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.25;
+}
+.title::after {
+  content: ""; position: absolute; left: 10%; right: 10%; bottom: -6px; height: 2px; background: var(--accent);
+  box-shadow: 0 0 10px var(--accent); transform: scaleX(0); transition: transform .25s;
+}
+.game:hover .title::after { transform: scaleX(1); }
+.genre { margin-top: 10px; color: var(--dim); font-weight: 600; font-size: .95rem; }
+.chips { margin-top: auto; padding-top: 14px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.chips span {
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+  color: color-mix(in srgb, var(--accent) 75%, #fff); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* ---------- footer ---------- */
+footer {
+  width: min(1180px, 100% - 32px); margin: 40px auto 0; padding: 18px 0 28px;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  color: var(--dim); font-size: .9rem; border-top: 1px solid rgba(77, 216, 255, .15);
+}
+footer a { color: var(--cyan); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.keys kbd {
+  font-family: Orbitron, sans-serif; font-size: .65rem; padding: 2px 6px; margin: 0 2px;
+  border: 1px solid rgba(255,255,255,.25); border-radius: 4px; color: var(--ink);
+}
+
+/* ---------- launch transition ---------- */
+.launch {
+  position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; pointer-events: none;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--accent, #4dd8ff) 30%, var(--bg)), var(--bg) 70%);
+  opacity: 0; transition: opacity .35s;
+}
+.launch p {
+  margin: 0; font-family: Orbitron, sans-serif; font-weight: 900; letter-spacing: .3em; text-align: center;
+  font-size: clamp(1rem, 3.5vw, 1.8rem); padding: 0 16px; text-shadow: 0 0 20px var(--accent, #4dd8ff);
+}
+.launch small { display: block; margin-top: 10px; font-size: .55em; letter-spacing: .5em; color: var(--dim); }
+body.launching .launch { opacity: 1; }
+body.launching .game.chosen { transform: scale(1.08); }
+
+@media (max-width: 520px) {
+  header { padding-top: 24px; }
+  .brand img { width: 48px; height: 48px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .game { padding: 16px 10px 14px; }
+  .title { font-size: .8rem; margin-top: 14px; }
+  .genre { font-size: .85rem; }
+  .keys { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floor, .game, .hud .live::before { animation: none; }
+  .game, .icon img, .icon::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="horizon"></div>
+<div class="floor"></div>
+<div class="scan"></div>
+
+<header>
+  <div class="brand">
+    <img src="icon.svg" alt="" width="64" height="64">
+    <div>
+      <h1>CLAUDE CODE <span>GAMES</span></h1>
+      <p class="tagline">Browser games built with Claude Code</p>
+    </div>
+  </div>
+  <div class="hud" aria-hidden="true">
+    <span class="live" id="count">GAMES</span>
+    <span id="input">INPUT · KEYBOARD</span>
+    <span id="clock">--:--</span>
+  </div>
+</header>
+
+<main>
+  <h2 class="section-title">SELECT A GAME</h2>
+  <!-- One <li> per game folder. tests/launcher.test.js fails if a game folder has no button here. -->
+  <ul class="grid">
+    <li><a class="game" href="Katana%20Creed/" style="--accent:#e2384a;--i:0">
+      <span class="icon-wrap"><span class="icon"><img src="Katana%20Creed/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">Katana Creed</span>
+      <span class="genre">Stealth-action ninja</span>
+      <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
+    </a></li>
+    <li><a class="game" href="X-Fighter/" style="--accent:#4dd8ff;--i:1">
+      <span class="icon-wrap"><span class="icon"><img src="X-Fighter/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">X-Fighter</span>
+      <span class="genre">3D space combat shooter</span>
+      <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
+    </a></li>
+    <li><a class="game" href="PodRace/" style="--accent:#e8b94a;--i:2">
+      <span class="icon-wrap"><span class="icon"><img src="PodRace/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">Sandstorm Circuit</span>
+      <span class="genre">Combat podracing</span>
+      <span class="chips"><span>Keyboard</span><span>Gamepad</span></span>
+    </a></li>
+    <li><a class="game" href="DaidoSim/" style="--accent:#3fd6c9;--i:3">
+      <span class="icon-wrap"><span class="icon"><img src="DaidoSim/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">Daido Dog Sim</span>
+      <span class="genre">Dog life sim</span>
+      <span class="chips"><span>Keyboard + mouse</span><span>Touch</span></span>
+    </a></li>
+    <li><a class="game" href="Arkanoid/" style="--accent:#ff4d6d;--i:4">
+      <span class="icon-wrap"><span class="icon"><img src="Arkanoid/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">Neon Arkanoid</span>
+      <span class="genre">Brick breaker</span>
+      <span class="chips"><span>Mouse / keyboard</span><span>Touch</span></span>
+    </a></li>
+    <li><a class="game" href="Shakur-Boy/" style="--accent:#ff5fd2;--i:5">
+      <span class="icon-wrap"><span class="icon"><img src="Shakur-Boy/icon.svg" alt="" width="168" height="168"></span></span>
+      <span class="title">Shakur Boy</span>
+      <span class="genre">3D maze chase</span>
+      <span class="chips"><span>Keyboard</span><span>Touch</span></span>
+    </a></li>
+  </ul>
+</main>
+
+<footer>
+  <span>Every game is a single HTML file · <a href="https://github.com/opivankristovi/Claude_Code_Games">Source on GitHub</a></span>
+  <span class="keys"><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> select · <kbd>ENTER</kbd> play · gamepad: D-pad + <kbd>A</kbd> / <kbd>✕</kbd></span>
+</footer>
+
+<div class="launch" aria-hidden="true"><p id="launchText"></p></div>
+
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('.game')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+
+  $('count').textContent = `${cards.length} GAMES ONLINE`;
+
+  const tick = () => { $('clock').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); };
+  tick(); setInterval(tick, 10000);
+
+  let inputMode = '';
+  const setInput = m => { if (m !== inputMode) { inputMode = m; $('input').textContent = 'INPUT · ' + m; } };
+  setInput(matchMedia('(pointer: coarse)').matches ? 'TOUCH' : 'KEYBOARD');
+  addEventListener('keydown', () => setInput('KEYBOARD'));
+  addEventListener('pointerdown', e => setInput(e.pointerType === 'touch' ? 'TOUCH' : 'MOUSE'));
+
+  // ---- starfield ----
+  const cv = $('stars'), cx = cv.getContext('2d');
+  let stars = [], W = 0, H = 0;
+  const resize = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({ length: Math.round(W * H / 5000) }, () => ({
+      x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + .2,
+      s: Math.random() * .25 + .03, p: Math.random() * 6.28
+    }));
+    if (reduced) draw(0);
+  };
+  const draw = t => {
+    cx.clearRect(0, 0, W, H);
+    for (const s of stars) {
+      if (!reduced) { s.y += s.s; if (s.y > H) { s.y = 0; s.x = Math.random() * W; } }
+      cx.globalAlpha = .35 + .65 * Math.abs(Math.sin(t / 1400 + s.p));
+      cx.fillStyle = s.r > 1.2 ? '#bfefff' : '#fff';
+      cx.fillRect(s.x, s.y, s.r, s.r);
+    }
+  };
+  addEventListener('resize', resize); resize();
+  if (!reduced) { const loop = t => { draw(t); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+
+  // ---- launch transition ----
+  const launch = card => {
+    document.body.style.setProperty('--accent', card.style.getPropertyValue('--accent'));
+    $('launchText').innerHTML = '';
+    $('launchText').append(card.querySelector('.title').textContent.toUpperCase(), Object.assign(document.createElement('small'), { textContent: 'LAUNCHING' }));
+    card.classList.add('chosen'); document.body.classList.add('launching');
+    setTimeout(() => { location.href = card.href; }, reduced ? 0 : 450);
+  };
+  for (const c of cards) c.addEventListener('click', e => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault(); launch(c);
+  });
+  // Coming back with the browser's Back button can restore the page mid-transition.
+  addEventListener('pageshow', () => {
+    document.body.classList.remove('launching');
+    cards.forEach(c => c.classList.remove('chosen'));
+  });
+
+  // ---- arrow-key and gamepad navigation ----
+  const columns = () => cards.filter(c => c.offsetTop === cards[0].offsetTop).length || 1;
+  const move = (dx, dy) => {
+    let i = cards.indexOf(document.activeElement);
+    if (i < 0) { cards[0].focus(); return; }
+    i = Math.max(0, Math.min(cards.length - 1, i + dx + dy * columns()));
+    cards[i].focus();
+    cards[i].scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
+  };
+  const DIRS = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+  addEventListener('keydown', e => {
+    if (DIRS[e.key]) { e.preventDefault(); move(...DIRS[e.key]); }
+  });
+
+  let padLoop = false, lastMove = 0, lastA = true;
+  const poll = t => {
+    const pad = [...(navigator.getGamepads ? navigator.getGamepads() : [])].find(Boolean);
+    if (!pad) { padLoop = false; return; }
+    const b = i => pad.buttons[i] && pad.buttons[i].pressed;
+    const ax = pad.axes[0] || 0, ay = pad.axes[1] || 0;
+    const dx = b(14) || ax < -.5 ? -1 : b(15) || ax > .5 ? 1 : 0;
+    const dy = b(12) || ay < -.5 ? -1 : b(13) || ay > .5 ? 1 : 0;
+    if ((dx || dy) && t - lastMove > 180) { setInput('GAMEPAD'); move(dx, dy); lastMove = t; }
+    if (!dx && !dy) lastMove = 0;
+    const a = b(0);
+    if (a && !lastA) {
+      setInput('GAMEPAD');
+      const c = cards.includes(document.activeElement) ? document.activeElement : null;
+      if (c) launch(c); else cards[0].focus();
+    }
+    lastA = a;
+    requestAnimationFrame(poll);
+  };
+  addEventListener('gamepadconnected', () => {
+    setInput('GAMEPAD');
+    if (!cards.includes(document.activeElement)) cards[0].focus();
+    if (!padLoop) { padLoop = true; requestAnimationFrame(poll); }
+  });
+})();
+</script>
+</body>
+</html>

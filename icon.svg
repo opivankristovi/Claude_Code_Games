@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Claude Code Games</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#140a33"/>
+      <stop offset="1" stop-color="#05060f"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4dd8ff"/>
+      <stop offset="1" stop-color="#ff4dd8"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4dd8ff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#4dd8ff" stop-opacity=".45"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <!-- perspective grid floor -->
+    <g stroke="url(#floor)" stroke-width="3">
+      <path d="M0 360H512M0 392H512M0 432H512M0 482H512"/>
+      <path d="M256 330V512M196 330L120 512M316 330L392 512M136 330L-16 512M376 330L528 512"/>
+    </g>
+    <g fill="#fff" fill-opacity=".7">
+      <circle cx="70" cy="70" r="2"/><circle cx="440" cy="64" r="2"/><circle cx="400" cy="130" r="1.5"/>
+      <circle cx="110" cy="150" r="1.5"/><circle cx="250" cy="40" r="1.5"/>
+    </g>
+    <!-- hexagon ring and play triangle -->
+    <path d="M256 74L414 165V347L256 438L98 347V165Z" fill="none" stroke="url(#neon)" stroke-width="20" stroke-linejoin="round" filter="url(#glow)"/>
+    <path d="M214 176L346 256L214 336Z" fill="url(#neon)" stroke="url(#neon)" stroke-width="18" stroke-linejoin="round" filter="url(#glow)"/>
+    <path d="M226 206L310 256L226 306Z" fill="#fff" fill-opacity=".35"/>
+  </g>
+</svg>

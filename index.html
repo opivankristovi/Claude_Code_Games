@@ -148,8 +148,9 @@ main { flex: 1; }
   background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 22%, rgba(5, 6, 15, .82)), rgba(5, 6, 15, .9));
   opacity: 0; transition: opacity .25s;
 }
-.game:focus-visible .info { opacity: 1; }
-@media (hover: hover) { .game:hover .info { opacity: 1; } }
+.game:hover .info, .game:focus-visible .info { opacity: 1; }
+/* a tap on a touch screen also counts as hover: keep the summary hidden while the game launches */
+body.launching .game .info { opacity: 0; }
 
 .title {
   position: relative; margin-top: 18px; font-family: Orbitron, sans-serif; font-weight: 700;

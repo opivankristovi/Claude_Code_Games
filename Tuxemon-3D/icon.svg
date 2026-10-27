@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Tuxemon 3D</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset=".6" stop-color="#cdeaff"/>
+      <stop offset="1" stop-color="#fff2c9"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fd04f"/>
+      <stop offset="1" stop-color="#2e9a3a"/>
+    </linearGradient>
+    <radialGradient id="skin" cx=".36" cy=".28" r=".85">
+      <stop offset="0" stop-color="#8cc6f5"/>
+      <stop offset=".6" stop-color="#4f93d6"/>
+      <stop offset="1" stop-color="#2f66a8"/>
+    </radialGradient>
+    <radialGradient id="shadow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#14431c" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#14431c" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <!-- distant trees -->
+    <g fill="#3fae4a">
+      <circle cx="40" cy="300" r="70"/><circle cx="130" cy="290" r="56"/>
+      <circle cx="390" cy="292" r="58"/><circle cx="480" cy="300" r="72"/>
+    </g>
+    <path d="M-10 330Q256 280 522 330V522H-10Z" fill="url(#grass)"/>
+    <!-- flowers -->
+    <g>
+      <circle cx="58" cy="420" r="9" fill="#ff5d73"/><circle cx="96" cy="452" r="8" fill="#ffd166"/>
+      <circle cx="440" cy="430" r="9" fill="#b07cff"/><circle cx="470" cy="470" r="8" fill="#ff5d73"/>
+      <circle cx="404" cy="476" r="7" fill="#ffd166"/><circle cx="40" cy="486" r="7" fill="#b07cff"/>
+    </g>
+    <ellipse cx="256" cy="452" rx="150" ry="26" fill="url(#shadow)"/>
+
+    <!-- Axolightl -->
+    <g stroke="#1b2547" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+      <!-- gills -->
+      <g fill="#f7a8cf">
+        <path d="M128 232Q72 196 64 150Q104 168 140 212Z"/>
+        <path d="M118 262Q56 250 34 212Q80 218 124 246Z"/>
+        <path d="M384 232Q440 196 448 150Q408 168 372 212Z"/>
+        <path d="M394 262Q456 250 478 212Q432 218 388 246Z"/>
+      </g>
+      <!-- dorsal fin -->
+      <path d="M220 170Q236 96 262 70Q276 120 296 172Z" fill="#4f93d6"/>
+      <!-- feet -->
+      <ellipse cx="176" cy="430" rx="34" ry="24" fill="#3f7fc4"/>
+      <ellipse cx="336" cy="430" rx="34" ry="24" fill="#3f7fc4"/>
+      <!-- body -->
+      <ellipse cx="256" cy="300" rx="152" ry="132" fill="url(#skin)"/>
+      <!-- side fins -->
+      <path d="M108 318Q66 330 60 372Q98 368 122 344Z" fill="#3f7fc4"/>
+      <path d="M404 318Q446 330 452 372Q414 368 390 344Z" fill="#3f7fc4"/>
+    </g>
+    <!-- belly -->
+    <path d="M150 340Q256 300 362 340Q352 418 256 424Q160 418 150 340Z" fill="#f4f7ff"/>
+    <!-- eyes -->
+    <g stroke="#1b2547" stroke-width="8">
+      <circle cx="198" cy="262" r="44" fill="#fff"/>
+      <circle cx="314" cy="262" r="44" fill="#fff"/>
+    </g>
+    <circle cx="204" cy="268" r="27" fill="#141a33"/>
+    <circle cx="308" cy="268" r="27" fill="#141a33"/>
+    <circle cx="194" cy="256" r="10" fill="#fff"/>
+    <circle cx="298" cy="256" r="10" fill="#fff"/>
+    <!-- mouth and cheeks -->
+    <path d="M238 318Q256 332 274 318" fill="none" stroke="#1b2547" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="160" cy="312" rx="16" ry="9" fill="#f7a8cf" opacity=".8"/>
+    <ellipse cx="352" cy="312" rx="16" ry="9" fill="#f7a8cf" opacity=".8"/>
+  </g>
+</svg>

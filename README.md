@@ -2,7 +2,7 @@
 
 A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).
 
-Each game is one self-contained `index.html`: no build step, no bundler, no game asset files. Every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
+Each game is one self-contained `index.html`, except Tuxemon 3D, which splits its code into `css/` and `js/` files next to its `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid draws on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
 
 Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`, `icon-192.png`, `apple-touch-icon.png`) for buttons, launchers and home-screen shortcuts. Each page links it as its favicon and touch icon.
 
@@ -14,6 +14,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Daido Dog Sim** | [`DaidoSim/`](DaidoSim/README.md) | Dog life sim / exploration |
 | **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/README.md) | Brick breaker |
 | **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
+| **Tuxemon 3D** | [`Tuxemon-3D/`](Tuxemon-3D/README.md) | Monster-catching RPG (Tuxemon remake) |
 
 ---
 
@@ -173,6 +174,27 @@ You start with 3 lives and earn one extra life at 10,000 points. The maze change
 
 ---
 
+## Tuxemon 3D
+
+A 3D remake of [Tuxemon](https://github.com/Tuxemon/Tuxemon), the open source monster-catching RPG. The 38 monsters, their types, movesets and the 13-element type chart come from the Tuxemon database; the creatures, characters, town, terrain and music are all generated in code. Pick a starter, explore Candy Town, Route 1, Mirror Lake, the Whispering Woods and the Warden's Shrine, and fight turn-based battles with Tuxemon's rules: techniques with recharge times, status effects, stat stages and type effectiveness. Catch wild Tuxemon, level them up and evolve them, beat the trainers and your rival, and face the Warden as the final boss. Progress is saved in the browser's `localStorage`.
+
+Tuxemon 3D is GPL-3.0, like the Tuxemon project it takes its data from; see [`Tuxemon-3D/LICENSE`](Tuxemon-3D/LICENSE). The rest of this repository is not covered by that licence.
+
+### Controls
+
+| Action | Keyboard |
+| --- | --- |
+| Move (tap to turn, hold to walk) | WASD / arrow keys |
+| Run | Shift |
+| Talk, read signs, confirm | E / Enter / Space |
+| Menu (Tuxemon, Bag, Tuxepedia, Save, Settings) | Esc |
+| Back | Q / X / Backspace |
+| Mute | M |
+
+Menus also work with the mouse.
+
+---
+
 ## How to play
 
 **Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Or go straight to a game:
@@ -183,6 +205,7 @@ You start with 3 lives and earn one extra life at 10,000 points. The maze change
 - Daido Dog Sim: <https://opivankristovi.github.io/Claude_Code_Games/DaidoSim/>
 - Neon Arkanoid: <https://opivankristovi.github.io/Claude_Code_Games/Arkanoid/>
 - Shakur Boy: <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>
+- Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
 
 **Locally:**
 
@@ -203,6 +226,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
 - Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
 - Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
+- Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
 
 ## Repository layout
 
@@ -227,6 +251,13 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 ├── Shakur-Boy/
 │   ├── index.html   # Shakur Boy: Shroom Run 3D
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   └── README.md
+├── Tuxemon-3D/
+│   ├── index.html   # Tuxemon 3D
+│   ├── css/, js/    # its stylesheet and game code
+│   ├── serve.py     # local server (+ Play Tuxemon 3D.cmd for Windows)
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   ├── LICENSE      # GPL-3.0, for this folder
 │   └── README.md
 ├── X-Fighter/
 │   ├── index.html   # X-Fighter

@@ -141,6 +141,15 @@ main { flex: 1; }
   background: var(--accent); filter: blur(26px); opacity: .25; transition: opacity .25s;
 }
 .game:hover .icon-wrap::before, .game:focus-visible .icon-wrap::before { opacity: .6; }
+/* game summary, shown over the icon on hover or keyboard focus */
+.info {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  padding: 14%; font-size: .9rem; font-weight: 600; line-height: 1.22; color: var(--ink); text-wrap: balance;
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 22%, rgba(5, 6, 15, .82)), rgba(5, 6, 15, .9));
+  opacity: 0; transition: opacity .25s;
+}
+.game:focus-visible .info { opacity: 1; }
+@media (hover: hover) { .game:hover .info { opacity: 1; } }
 
 .title {
   position: relative; margin-top: 18px; font-family: Orbitron, sans-serif; font-weight: 700;
@@ -193,11 +202,12 @@ body.launching .game.chosen { transform: scale(1.08); }
   .game { padding: 16px 10px 14px; }
   .title { font-size: .8rem; margin-top: 14px; }
   .genre { font-size: .85rem; }
+  .info { padding: 8%; font-size: .72rem; }
   .keys { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .floor, .game, .hud .live::before { animation: none; }
-  .game, .icon img, .icon::after { transition: none !important; }
+  .game, .icon img, .icon::after, .info { transition: none !important; }
 }
 </style>
 </head>
@@ -227,50 +237,50 @@ body.launching .game.chosen { transform: scale(1.08); }
   <h2 class="section-title">SELECT A GAME</h2>
   <!-- One <li> per game folder. tests/launcher.test.js fails if a game folder has no button here. -->
   <ul class="grid">
-    <li><a class="game" href="Katana%20Creed/" style="--accent:#e2384a;--i:0">
-      <span class="icon-wrap"><span class="icon"><img src="Katana%20Creed/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="Katana%20Creed/" aria-describedby="info-katana" style="--accent:#e2384a;--i:0">
+      <span class="icon-wrap"><span class="icon"><img src="Katana%20Creed/icon.svg" alt="" width="168" height="168"><span class="info" id="info-katana" aria-hidden="true">A remake of Tenchu: Stealth Assassins. Ten stealth missions as Rikimaru or Ayame, with stealth kills and free-running.</span></span></span>
       <span class="title">Katana Creed</span>
       <span class="genre">Stealth-action ninja</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="X-Fighter/" style="--accent:#4dd8ff;--i:1">
-      <span class="icon-wrap"><span class="icon"><img src="X-Fighter/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="X-Fighter/" aria-describedby="info-xfighter" style="--accent:#4dd8ff;--i:1">
+      <span class="icon-wrap"><span class="icon"><img src="X-Fighter/icon.svg" alt="" width="168" height="168"><span class="info" id="info-xfighter" aria-hidden="true">Fly a starfighter through three missions against the Iron Fortress: dogfights, a dreadnought's hull and a trench run.</span></span></span>
       <span class="title">X-Fighter</span>
       <span class="genre">3D space combat shooter</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="PodRace/" style="--accent:#e8b94a;--i:2">
-      <span class="icon-wrap"><span class="icon"><img src="PodRace/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="PodRace/" aria-describedby="info-podrace" style="--accent:#e8b94a;--i:2">
+      <span class="icon-wrap"><span class="icon"><img src="PodRace/icon.svg" alt="" width="168" height="168"><span class="info" id="info-podrace" aria-hidden="true">Three laps of a procedurally generated desert against five AI pilots who shoot and ram. Grab power-ups to fight back.</span></span></span>
       <span class="title">Sandstorm Circuit</span>
       <span class="genre">Combat podracing</span>
       <span class="chips"><span>Keyboard</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="DaidoSim/" style="--accent:#3fd6c9;--i:3">
-      <span class="icon-wrap"><span class="icon"><img src="DaidoSim/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="DaidoSim/" aria-describedby="info-daido" style="--accent:#3fd6c9;--i:3">
+      <span class="icon-wrap"><span class="icon"><img src="DaidoSim/icon.svg" alt="" width="168" height="168"><span class="info" id="info-daido" aria-hidden="true">Spend a day as Daido or Fluffy: drink, dig, fetch and bury bones across five levels, or roam the meadow freely.</span></span></span>
       <span class="title">Daido Dog Sim</span>
       <span class="genre">Dog life sim</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Touch</span></span>
     </a></li>
-    <li><a class="game" href="Arkanoid/" style="--accent:#ff4d6d;--i:4">
-      <span class="icon-wrap"><span class="icon"><img src="Arkanoid/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="Arkanoid/" aria-describedby="info-arkanoid" style="--accent:#ff4d6d;--i:4">
+      <span class="icon-wrap"><span class="icon"><img src="Arkanoid/icon.svg" alt="" width="168" height="168"><span class="info" id="info-arkanoid" aria-hidden="true">Six hand-built levels, then endless random ones. Silver, gold and explosive bricks; lasers, multi-ball and fireballs.</span></span></span>
       <span class="title">Neon Arkanoid</span>
       <span class="genre">Brick breaker</span>
       <span class="chips"><span>Mouse / keyboard</span><span>Touch</span></span>
     </a></li>
-    <li><a class="game" href="Shakur-Boy/" style="--accent:#ff5fd2;--i:5">
-      <span class="icon-wrap"><span class="icon"><img src="Shakur-Boy/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="Shakur-Boy/" aria-describedby="info-shakur" style="--accent:#ff5fd2;--i:5">
+      <span class="icon-wrap"><span class="icon"><img src="Shakur-Boy/icon.svg" alt="" width="168" height="168"><span class="info" id="info-shakur" aria-hidden="true">Pac-Man in a 3D neon maze. Eat mushrooms, dodge four cops, then grab a pill and turn the tables on them.</span></span></span>
       <span class="title">Shakur Boy</span>
       <span class="genre">3D maze chase</span>
       <span class="chips"><span>Keyboard</span><span>Touch</span></span>
     </a></li>
-    <li><a class="game" href="Tuxemon-3D/" style="--accent:#4f93d6;--i:6">
-      <span class="icon-wrap"><span class="icon"><img src="Tuxemon-3D/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="Tuxemon-3D/" aria-describedby="info-tuxemon" style="--accent:#4f93d6;--i:6">
+      <span class="icon-wrap"><span class="icon"><img src="Tuxemon-3D/icon.svg" alt="" width="168" height="168"><span class="info" id="info-tuxemon" aria-hidden="true">A 3D remake of the open source Tuxemon. Catch, train and evolve 38 monsters in turn-based battles, up to the Warden.</span></span></span>
       <span class="title">Tuxemon 3D</span>
       <span class="genre">Monster-catching RPG</span>
       <span class="chips"><span>Keyboard + mouse</span></span>
     </a></li>
-    <li><a class="game" href="Space-Fodder/" style="--accent:#ffb13a;--i:7">
-      <span class="icon-wrap"><span class="icon"><img src="Space-Fodder/icon.svg" alt="" width="168" height="168"></span></span>
+    <li><a class="game" href="Space-Fodder/" aria-describedby="info-fodder" style="--accent:#ffb13a;--i:7">
+      <span class="icon-wrap"><span class="icon"><img src="Space-Fodder/icon.svg" alt="" width="168" height="168"><span class="info" id="info-fodder" aria-hidden="true">Lead a squad of drop troopers through twelve missions on five alien worlds. Tanks, hovercraft, and the dead stay dead.</span></span></span>
       <span class="title">Space Fodder</span>
       <span class="genre">Top-down squad shooter</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Touch</span></span>

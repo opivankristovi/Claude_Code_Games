@@ -18,6 +18,41 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 
 ---
 
+## How to play
+
+**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Or go straight to a game:
+
+- Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
+- X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
+- Sandstorm Circuit: <https://opivankristovi.github.io/Claude_Code_Games/PodRace/>
+- Daido Dog Sim: <https://opivankristovi.github.io/Claude_Code_Games/DaidoSim/>
+- Neon Arkanoid: <https://opivankristovi.github.io/Claude_Code_Games/Arkanoid/>
+- Shakur Boy: <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>
+- Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
+
+**Locally:**
+
+```bash
+git clone https://github.com/opivankristovi/Claude_Code_Games.git
+cd Claude_Code_Games
+python3 -m http.server 8000
+```
+
+Then open <http://localhost:8000/> for the launcher, or `http://localhost:8000/<folder>/` for a game, for example <http://localhost:8000/X-Fighter/>.
+
+Opening `index.html` directly from disk will usually work too, but a local server is more reliable across browsers.
+
+### Requirements
+
+- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid need WebGL.
+- An internet connection for the 3D games: three.js (and, for most of them, Google Fonts) load from CDNs. Neon Arkanoid needs no external files.
+- A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
+- Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
+- Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
+- Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
+
+---
+
 ## Katana Creed
 
 A remake of the PS1 stealth classic *Tenchu: Stealth Assassins*: the same ten missions plus training, rebuilt with realistic 3D graphics and smooth free-run controls in the style of *Assassin's Creed* on a PS3/PS4 gamepad. Play as **Rikimaru** or **Ayame** and sneak through merchant districts, mountain checkpoints, bandit caves, a pirate harbour, a cult temple and a burning castle.
@@ -194,39 +229,6 @@ Tuxemon 3D is GPL-3.0, like the Tuxemon project it takes its data from; see [`Tu
 Menus also work with the mouse.
 
 ---
-
-## How to play
-
-**Online** (GitHub Pages): start from the launcher at <https://opivankristovi.github.io/Claude_Code_Games/>, which has a button for every game (mouse, touch, arrow keys or a gamepad). Or go straight to a game:
-
-- Katana Creed: <https://opivankristovi.github.io/Claude_Code_Games/Katana%20Creed/>
-- X-Fighter: <https://opivankristovi.github.io/Claude_Code_Games/X-Fighter/>
-- Sandstorm Circuit: <https://opivankristovi.github.io/Claude_Code_Games/PodRace/>
-- Daido Dog Sim: <https://opivankristovi.github.io/Claude_Code_Games/DaidoSim/>
-- Neon Arkanoid: <https://opivankristovi.github.io/Claude_Code_Games/Arkanoid/>
-- Shakur Boy: <https://opivankristovi.github.io/Claude_Code_Games/Shakur-Boy/>
-- Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
-
-**Locally:**
-
-```bash
-git clone https://github.com/opivankristovi/Claude_Code_Games.git
-cd Claude_Code_Games
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000/> for the launcher, or `http://localhost:8000/<folder>/` for a game, for example <http://localhost:8000/X-Fighter/>.
-
-Opening `index.html` directly from disk will usually work too, but a local server is more reliable across browsers.
-
-### Requirements
-
-- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid need WebGL.
-- An internet connection for the 3D games: three.js (and, for most of them, Google Fonts) load from CDNs. Neon Arkanoid needs no external files.
-- A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
-- Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
-- Daido Dog Sim, Neon Arkanoid and Shakur Boy: keyboard (and mouse) or touch; no gamepad support.
-- Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
 
 ## Repository layout
 

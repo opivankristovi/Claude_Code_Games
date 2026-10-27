@@ -17,6 +17,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Tuxemon 3D** | [`Tuxemon-3D/`](Tuxemon-3D/README.md) | Monster-catching RPG (Tuxemon remake) |
 | **Space Fodder** | [`Space-Fodder/`](Space-Fodder/README.md) | Top-down squad shooter (Cannon Fodder style) |
 | **Ass Monkey Empire** | [`Ass Monkey/`](Ass%20Monkey/README.md) | Jungle platformer trilogy (Donkey Kong Country 1–3 remake) |
+| **Tardigrades** | [`Tardigrades/`](Tardigrades/README.md) | Turn-based artillery (Worms remake) |
 
 ---
 
@@ -33,6 +34,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 - Tuxemon 3D: <https://opivankristovi.github.io/Claude_Code_Games/Tuxemon-3D/>
 - Space Fodder: <https://opivankristovi.github.io/Claude_Code_Games/Space-Fodder/>
 - Ass Monkey Empire: <https://opivankristovi.github.io/Claude_Code_Games/Ass%20Monkey/>
+- Tardigrades: <https://opivankristovi.github.io/Claude_Code_Games/Tardigrades/>
 
 **Locally:**
 
@@ -56,6 +58,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - Tuxemon 3D: keyboard, with mouse for the menus; no touch or gamepad support.
 - Space Fodder: mouse and keyboard, or touch; no gamepad support.
 - Ass Monkey Empire: keyboard or a standard gamepad; no touch controls.
+- Tardigrades: keyboard + mouse, or a standard gamepad; no touch controls.
 
 ---
 
@@ -280,6 +283,27 @@ Stomp or roll into enemies, carry and throw barrels, ride Tusk the warthog, Spro
 
 ---
 
+## Tardigrades
+
+A remaster of the Mega Drive *Worms*, with tardigrades instead of worms. Teams of chubby, bandana-wearing water bears take turns on randomly generated, fully destructible islands in four landscapes: Moss Forest, Antarctic Ice, Hydrothermal Vent and Lichen Boulders. The 2D canvas gets a 3D look from per-pixel terrain lighting with bevelled crater edges, bump maps and scorch marks, plus parallax backdrops, drop shadows and animated water.
+
+Walk, jump, swing on the ninja rope and pick one of 19 weapons each turn, from the bazooka, grenades and banana bomb to the air strike, dynamite and the walking Super Nematode, while the wind changes every turn. Fallen tardigrades curl up into a tun. You play against one to three CPU teams in three skill levels; the code is set up for hot-seat and online multiplayer later.
+
+### Controls
+
+| Action | Keyboard / mouse | Gamepad |
+| --- | --- | --- |
+| Walk · aim | ← → · ↑ ↓ (or WASD) | Left stick / D-pad |
+| Jump · backflip | Enter · Backspace | Ⓐ · Ⓑ |
+| Fire (hold to charge) | Space | Ⓧ / RT |
+| Weapon menu · cycle weapons | Tab or right-click · Q / E | Ⓨ · LB / RB |
+| Fuse time | 1–5 | – |
+| Pick a target | Left-click | Right stick + Ⓧ |
+| Zoom · look around | Mouse wheel · screen edges, middle-drag | Right stick |
+| Pause · sound | Esc / P · M | Start |
+
+---
+
 ## Repository layout
 
 ```
@@ -314,6 +338,10 @@ Stomp or roll into enemies, carry and throw barrels, ride Tusk the warthog, Spro
 │   ├── docs/images/ # README screenshots (+ tools/readme-images.js to regenerate them)
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   ├── LICENSE      # CC0 1.0, for this folder
+│   └── README.md
+├── Tardigrades/
+│   ├── index.html   # Tardigrades
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── Tuxemon-3D/
 │   ├── index.html   # Tuxemon 3D

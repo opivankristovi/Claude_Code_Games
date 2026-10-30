@@ -2,7 +2,7 @@
 
 A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).
 
-Each game is one self-contained `index.html`, except Tuxemon 3D and Space Fodder, which split their code into `css/` and `js/` files next to their `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid and Space Fodder draw on a plain 2D `<canvas>`. The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
+Each game is one self-contained `index.html`, except Tuxemon 3D and Space Fodder, which split their code into `css/` and `js/` files next to their `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid, Space Fodder and Tardigrades draw on a plain 2D `<canvas>` (Tardigrades with a painted 3D look). The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
 
 Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`, `icon-192.png`, `apple-touch-icon.png`) for buttons, launchers and home-screen shortcuts. Each page links it as its favicon and touch icon.
 
@@ -18,6 +18,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Space Fodder** | [`Space-Fodder/`](Space-Fodder/README.md) | Top-down squad shooter (Cannon Fodder style) |
 | **Ass Monkey Empire** | [`Ass Monkey/`](Ass%20Monkey/README.md) | Jungle platformer trilogy (Donkey Kong Country 1–3 remake) |
 | **Tardigrades** | [`Tardigrades/`](Tardigrades/README.md) | Turn-based artillery (Worms remake) |
+| **Parcour Hobbits** | [`Parcour Hobbits/`](Parcour%20Hobbits/README.md) | Platformer saga (Super Mario All-Stars, World and Yoshi's Island remake) |
 
 ---
 
@@ -35,6 +36,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 - Space Fodder: <https://opivankristovi.github.io/Claude_Code_Games/Space-Fodder/>
 - Ass Monkey Empire: <https://opivankristovi.github.io/Claude_Code_Games/Ass%20Monkey/>
 - Tardigrades: <https://opivankristovi.github.io/Claude_Code_Games/Tardigrades/>
+- Parcour Hobbits: <https://opivankristovi.github.io/Claude_Code_Games/Parcour%20Hobbits/>
 
 **Locally:**
 
@@ -50,7 +52,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 
 ### Requirements
 
-- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid and Space Fodder need WebGL.
+- A modern browser (current Chrome, Edge, Firefox or Safari). All games except Neon Arkanoid, Space Fodder and Tardigrades need WebGL (Parcour Hobbits falls back to a 2D renderer without it).
 - An internet connection for the 3D games: three.js (and, for most of them, Google Fonts) load from CDNs. Neon Arkanoid needs no external files.
 - A dedicated GPU is recommended for the 3D games. If Sandstorm Circuit stutters, press **Q** to switch to the faster graphics mode.
 - Katana Creed, X-Fighter and Sandstorm Circuit: keyboard + mouse, or a standard gamepad (Xbox, PlayStation, Switch Pro layouts); no touch controls.
@@ -59,6 +61,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - Space Fodder: mouse and keyboard, or touch; no gamepad support.
 - Ass Monkey Empire: keyboard or a standard gamepad; no touch controls.
 - Tardigrades: keyboard + mouse, or a standard gamepad; no touch controls.
+- Parcour Hobbits: keyboard, a standard gamepad, or touch (on-screen joystick and buttons).
 
 ---
 
@@ -304,6 +307,27 @@ Walk, jump, swing on the ninja rope and pick one of 19 weapons each turn, from t
 
 ---
 
+## Parcour Hobbits
+
+A remaster of the 16-bit plumber platformers with hobbits instead of plumbers and Truffle the pig instead of the dinosaur. Six games share one engine and follow the originals' gameplay, power-ups and level types: **The Shire Quest** (*Super Mario Bros.*), **The Lost Paths** (*The Lost Levels*), **Dreamland Picnic** (*Super Mario Bros. 2*), **Eight Kingdoms** (*Super Mario Bros. 3*), **Truffle's Island** (*Super Mario World*) and **Parcour Hobbits Babies** (*Yoshi's Island*). The levels are real 3D (three.js): solid blocks, round pipes, spinning metal coins, low-poly scenery, sun shadows, torch and lava lights and bloom, while the hand-drawn characters stand in that world as lit billboards. Without WebGL it falls back to a 2D renderer.
+
+Grow with golden mushrooms, throw fireballs, fly with the oak leaf and the elven cloak, wear frog, badger and dwarf suits, pluck turnips, ride Truffle, and as Truffle snuffle enemies into truffle eggs to throw. Progress is saved per game in the browser's `localStorage`.
+
+### Controls
+
+| Action | Keyboard | Gamepad |
+| --- | --- | --- |
+| Move · climb · duck | Arrow keys / WASD | Left stick / D-pad |
+| Jump (hold for higher, glide, float or flutter) | Space / Z / K | Ⓐ / ✕ |
+| Run · fireball · tail whip · pick up and throw · snout | Shift / X / J | Ⓧ / Ⓨ / R2 |
+| Spin jump · badger statue · aim and throw truffle eggs | C / E / L | Ⓑ / ○ |
+| Change world on the map · open items | Q / R · C | L1 / R1 · Ⓑ |
+| Pause | Esc / P | Start |
+
+On touch screens the game shows a joystick and A, B and C buttons.
+
+---
+
 ## Repository layout
 
 ```
@@ -322,6 +346,10 @@ Walk, jump, swing on the ninja rope and pick one of 19 weapons each turn, from t
 │   └── README.md
 ├── Katana Creed/
 │   ├── index.html   # Katana Creed
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   └── README.md
+├── Parcour Hobbits/
+│   ├── index.html   # Parcour Hobbits (six games)
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── PodRace/

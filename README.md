@@ -9,8 +9,8 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | Game | Folder (own README) | Genre |
 | --- | --- | --- |
 | **Katana Creed** | [`Katana Creed/`](Katana%20Creed/README.md) | Stealth-action ninja (Tenchu remake) |
-| **X-Fighter**: Assault on the Iron Fortress | [`X-Fighter/`](X-Fighter/README.md) | 3D space combat shooter |
-| **Sandstorm Circuit** | [`PodRace/`](PodRace/README.md) | Combat podracing |
+| **X-Fighter**: Assault on the Iron Fortress | [`X-Fighter/`](X-Fighter/README.md) | 3D space combat shooter (Star Wars Arcade remake) |
+| **Sandstorm Circuit** | [`PodRace/`](PodRace/README.md) | Combat podracing (Star Wars Episode I: Racer remake) |
 | **Daido Dog Sim** | [`DaidoSim/`](DaidoSim/README.md) | Dog life sim / exploration |
 | **Neon Arkanoid** | [`Arkanoid/`](Arkanoid/README.md) | Brick breaker |
 | **Shakur Boy: Shroom Run 3D** | [`Shakur-Boy/`](Shakur-Boy/README.md) | Maze chase (Pac-Man style) |
@@ -91,7 +91,7 @@ Stay in the shadows, crouch past guards and strike from behind or from above for
 
 ## X-Fighter: Assault on the Iron Fortress
 
-Fly a starfighter through a three-mission campaign against the Iron Fortress:
+A remake of Sega's *Star Wars Arcade* (Sega 32X, 1994). Fly a starfighter through a three-mission campaign against the Iron Fortress:
 
 1. **Outer Perimeter**: break the interceptor screen by destroying 16 enemy fighters before the clock runs out.
 2. **The Dreadnought**: take out the siege dreadnought's two shield-generator domes, then strike its exposed command bridge while dodging deck turrets.
@@ -118,7 +118,7 @@ Each mission is timed and you have a limited number of homing torpedoes. You sco
 
 ## Sandstorm Circuit (PodRace)
 
-A twin-engine podrace across a procedurally generated desert: **3 laps against 5 AI pilots**. Rivals shoot at you and ram you. Your pod has hull integrity, and your lasers build up heat, so firing nonstop makes them overheat.
+A remake of *Star Wars Episode I: Racer* (1999). A twin-engine podrace across a procedurally generated desert: **3 laps against 5 AI pilots**. Rivals shoot at you and ram you. Your pod has hull integrity, and your lasers build up heat, so firing nonstop makes them overheat.
 
 Fly through bonus pickups on the track to collect power-ups:
 

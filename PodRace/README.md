@@ -1,6 +1,6 @@
 # Sandstorm Circuit
 
-A combat podracing game in a single HTML file. Race a twin-engine pod across a procedurally generated desert: **3 laps against 5 AI pilots**. (The folder is called `PodRace`; the game's title is Sandstorm Circuit.)
+A combat podracing game in a single HTML file, remaking *Star Wars Episode I: Racer* (1999). Race a twin-engine pod across a procedurally generated desert: **3 laps against 5 AI pilots**. (The folder is called `PodRace`; the game's title is Sandstorm Circuit.)
 
 ## Screenshots
 

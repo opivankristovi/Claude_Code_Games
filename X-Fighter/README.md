@@ -1,6 +1,6 @@
 # X-Fighter: Assault on the Iron Fortress
 
-A 3D space combat shooter in a single HTML file. Fly a starfighter through a three-mission campaign against the Iron Fortress.
+A 3D space combat shooter in a single HTML file, remaking Sega's *Star Wars Arcade* (Sega 32X, 1994). Fly a starfighter through a three-mission campaign against the Iron Fortress.
 
 ## Screenshots
 

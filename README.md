@@ -425,7 +425,7 @@ Every game needs its own logo and a button in the launcher. The full checklist i
 
 1. Create a new folder with the game's `index.html` and a `README.md` (description, live link, how to run, controls).
 2. Draw an `icon.svg` logo in the folder and run `node scripts/render-icons.js "<folder>"` to export `icon-512.png`, `icon-192.png` and `apple-touch-icon.png`. Link them from the game's `<head>`.
-3. Add a button for the game, with a short hover summary, to the launcher (`index.html` at the root).
+3. Add a button for the game, with a short hover summary, to the launcher (`index.html` at the root). The buttons are ordered by the release year of the game each one remakes, so put it in its chronological place; games that remake nothing go last.
 4. Add the game to this README: a row in the table at the top, a section with its controls, and its live link.
 
 `npm run test:launcher` checks steps 2 and 3 and runs in CI on every push, so a game without a logo or a launcher button fails the build.

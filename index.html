@@ -291,79 +291,93 @@ body.launching .game.chosen { transform: scale(1.08); }
 
 <main>
   <h2 class="section-title">SELECT A GAME</h2>
-  <!-- One <li> per game folder. tests/launcher.test.js fails if a game folder has no button here. -->
+  <!-- One <li> per game folder. tests/launcher.test.js fails if a game folder has no button here.
+       Buttons are ordered by the release year of the game each one remakes (the comment above each <li>);
+       games that remake nothing come last. Put a new game in its chronological place, not at the end. -->
   <ul class="grid">
+    <!-- Pac-Man, 1980 -->
     <li><a class="game" href="Shakur-Boy/" aria-describedby="info-shakur" style="--accent:#ff5fd2;--i:0">
       <span class="icon-wrap"><span class="icon"><img src="Shakur-Boy/icon.svg" alt="" width="168" height="168"><span class="info" id="info-shakur" aria-hidden="true">Pac-Man in a 3D neon maze. Eat mushrooms, dodge four cops, then grab a pill and turn the tables on them.</span></span></span>
       <span class="title">Shakur Boy</span>
       <span class="genre">3D maze chase</span>
       <span class="chips"><span>Keyboard</span><span>Touch</span></span>
     </a></li>
+    <!-- Arkanoid, 1986 -->
     <li><a class="game" href="Arkanoid/" aria-describedby="info-arkanoid" style="--accent:#ff4d6d;--i:1">
       <span class="icon-wrap"><span class="icon"><img src="Arkanoid/icon.svg" alt="" width="168" height="168"><span class="info" id="info-arkanoid" aria-hidden="true">Six hand-built levels, then endless random ones. Silver, gold and explosive bricks; lasers, multi-ball and fireballs.</span></span></span>
       <span class="title">Neon Arkanoid</span>
       <span class="genre">Brick breaker</span>
       <span class="chips"><span>Mouse / keyboard</span><span>Touch</span></span>
     </a></li>
+    <!-- Super Mario World, 1990 (also remasters SMB 1-3 via All-Stars, and Yoshi's Island) -->
     <li><a class="game" href="Parcour%20Hobbits/" aria-describedby="info-hobbits" style="--accent:#ffc23a;--i:2">
       <span class="icon-wrap"><span class="icon"><img src="Parcour%20Hobbits/icon.svg" alt="" width="168" height="168"><span class="info" id="info-hobbits" aria-hidden="true">Six plumber-style platformers with hobbits: stomp, grow, fly, pluck turnips and ride Truffle the pig.</span></span></span>
       <span class="title">Parcour Hobbits</span>
       <span class="genre">Platformer saga</span>
       <span class="chips"><span>Keyboard</span><span>Gamepad</span><span>Touch</span></span>
     </a></li>
+    <!-- Cannon Fodder, 1993 -->
     <li><a class="game" href="Space-Fodder/" aria-describedby="info-fodder" style="--accent:#ffb13a;--i:3">
       <span class="icon-wrap"><span class="icon"><img src="Space-Fodder/icon.svg" alt="" width="168" height="168"><span class="info" id="info-fodder" aria-hidden="true">Lead a squad of drop troopers through twelve missions on five alien worlds. Tanks, hovercraft, and the dead stay dead.</span></span></span>
       <span class="title">Space Fodder</span>
       <span class="genre">Top-down squad shooter</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Touch</span></span>
     </a></li>
+    <!-- Donkey Kong Country, Nov 1994 (UK Nov 18) -->
     <li><a class="game" href="Ass%20Monkey/" aria-describedby="info-assmonkey" style="--accent:#5fcf4a;--i:4">
       <span class="icon-wrap"><span class="icon"><img src="Ass%20Monkey/icon.svg" alt="" width="168" height="168"><span class="info" id="info-assmonkey" aria-hidden="true">A Donkey Kong Country trilogy remake: two baboons, 100+ levels, barrels, mine carts, animal buddies and bosses.</span></span></span>
       <span class="title">Ass Monkey Empire</span>
       <span class="genre">Jungle platformer trilogy</span>
       <span class="chips"><span>Keyboard</span><span>Gamepad</span></span>
     </a></li>
+    <!-- Star Wars Arcade, Sega 32X, Nov 1994 (NA Nov 21) -->
     <li><a class="game" href="X-Fighter/" aria-describedby="info-xfighter" style="--accent:#4dd8ff;--i:5">
       <span class="icon-wrap"><span class="icon"><img src="X-Fighter/icon.svg" alt="" width="168" height="168"><span class="info" id="info-xfighter" aria-hidden="true">Fly a starfighter through three missions against the Iron Fortress: dogfights, a dreadnought's hull and a trench run.</span></span></span>
       <span class="title">X-Fighter</span>
       <span class="genre">3D space combat shooter</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
     </a></li>
+    <!-- Worms, 1995 -->
     <li><a class="game" href="Tardigrades/" aria-describedby="info-tardigrades" style="--accent:#ff7a8e;--i:6">
       <span class="icon-wrap"><span class="icon"><img src="Tardigrades/icon.svg" alt="" width="168" height="168"><span class="info" id="info-tardigrades" aria-hidden="true">Worms with water bears: turn-based artillery on destructible islands. Bazookas, banana bombs, ninja ropes.</span></span></span>
       <span class="title">Tardigrades</span>
       <span class="genre">Turn-based artillery</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="Katana%20Creed/" aria-describedby="info-katana" style="--accent:#e2384a;--i:7">
+    <!-- Mario Kart 64, 1996 -->
+    <li><a class="game" href="Looney_Soapbox_64/" aria-describedby="info-soapbox" style="--accent:#ff7a1a;--i:7">
+      <span class="icon-wrap"><span class="icon"><img src="Looney_Soapbox_64/icon.svg" alt="" width="168" height="168"><span class="info" id="info-soapbox" aria-hidden="true">A 64-bit kart racer remake with cartoon animals in soapbox cars: 16 courses, items, split-screen and battles.</span></span></span>
+      <span class="title">Soapbox Scramble 64</span>
+      <span class="genre">Cartoon kart racer</span>
+      <span class="chips"><span>Keyboard</span><span>Gamepad</span><span>Touch</span></span>
+    </a></li>
+    <!-- Tenchu: Stealth Assassins, 1998 -->
+    <li><a class="game" href="Katana%20Creed/" aria-describedby="info-katana" style="--accent:#e2384a;--i:8">
       <span class="icon-wrap"><span class="icon"><img src="Katana%20Creed/icon.svg" alt="" width="168" height="168"><span class="info" id="info-katana" aria-hidden="true">A remake of Tenchu: Stealth Assassins. Ten stealth missions as Rikimaru or Ayame, with stealth kills and free-running.</span></span></span>
       <span class="title">Katana Creed</span>
       <span class="genre">Stealth-action ninja</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="PodRace/" aria-describedby="info-podrace" style="--accent:#e8b94a;--i:8">
+    <!-- Star Wars Episode I: Racer, 1999 -->
+    <li><a class="game" href="PodRace/" aria-describedby="info-podrace" style="--accent:#e8b94a;--i:9">
       <span class="icon-wrap"><span class="icon"><img src="PodRace/icon.svg" alt="" width="168" height="168"><span class="info" id="info-podrace" aria-hidden="true">Three laps of a procedurally generated desert against five AI pilots who shoot and ram. Grab power-ups to fight back.</span></span></span>
       <span class="title">Sandstorm Circuit</span>
       <span class="genre">Combat podracing</span>
       <span class="chips"><span>Keyboard</span><span>Gamepad</span></span>
     </a></li>
-    <li><a class="game" href="Tuxemon-3D/" aria-describedby="info-tuxemon" style="--accent:#4f93d6;--i:9">
+    <!-- Tuxemon, open source fan project -->
+    <li><a class="game" href="Tuxemon-3D/" aria-describedby="info-tuxemon" style="--accent:#4f93d6;--i:10">
       <span class="icon-wrap"><span class="icon"><img src="Tuxemon-3D/icon.svg" alt="" width="168" height="168"><span class="info" id="info-tuxemon" aria-hidden="true">A 3D remake of the open source Tuxemon. Catch, train and evolve 38 monsters in turn-based battles, up to the Warden.</span></span></span>
       <span class="title">Tuxemon 3D</span>
       <span class="genre">Monster-catching RPG</span>
       <span class="chips"><span>Keyboard + mouse</span></span>
     </a></li>
-    <li><a class="game" href="DaidoSim/" aria-describedby="info-daido" style="--accent:#3fd6c9;--i:10">
+    <!-- not a remake -->
+    <li><a class="game" href="DaidoSim/" aria-describedby="info-daido" style="--accent:#3fd6c9;--i:11">
       <span class="icon-wrap"><span class="icon"><img src="DaidoSim/icon.svg" alt="" width="168" height="168"><span class="info" id="info-daido" aria-hidden="true">Spend a day as Daido or Fluffy: drink, dig, fetch and bury bones across five levels, or roam the meadow freely.</span></span></span>
       <span class="title">Daido Dog Sim</span>
       <span class="genre">Dog life sim</span>
       <span class="chips"><span>Keyboard + mouse</span><span>Touch</span></span>
-    </a></li>
-    <li><a class="game" href="Looney_Soapbox_64/" aria-describedby="info-soapbox" style="--accent:#ff7a1a;--i:11">
-      <span class="icon-wrap"><span class="icon"><img src="Looney_Soapbox_64/icon.svg" alt="" width="168" height="168"><span class="info" id="info-soapbox" aria-hidden="true">A 64-bit kart racer remake with cartoon animals in soapbox cars: 16 courses, items, split-screen and battles.</span></span></span>
-      <span class="title">Soapbox Scramble 64</span>
-      <span class="genre">Cartoon kart racer</span>
-      <span class="chips"><span>Keyboard</span><span>Gamepad</span><span>Touch</span></span>
     </a></li>
   </ul>
 </main>

@@ -19,6 +19,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 | **Ass Monkey Empire** | [`Ass Monkey/`](Ass%20Monkey/README.md) | Jungle platformer trilogy (Donkey Kong Country 1–3 remake) |
 | **Tardigrades** | [`Tardigrades/`](Tardigrades/README.md) | Turn-based artillery (Worms remake) |
 | **Parcour Hobbits** | [`Parcour Hobbits/`](Parcour%20Hobbits/README.md) | Platformer saga (Super Mario All-Stars, World and Yoshi's Island remake) |
+| **Soapbox Scramble 64** | [`Looney_Soapbox_64/`](Looney_Soapbox_64/README.md) | Cartoon kart racer (Mario Kart 64 remake) |
 
 ---
 
@@ -37,6 +38,7 @@ Each folder also has a square logo, `icon.svg`, with PNG exports (`icon-512.png`
 - Ass Monkey Empire: <https://opivankristovi.github.io/Claude_Code_Games/Ass%20Monkey/>
 - Tardigrades: <https://opivankristovi.github.io/Claude_Code_Games/Tardigrades/>
 - Parcour Hobbits: <https://opivankristovi.github.io/Claude_Code_Games/Parcour%20Hobbits/>
+- Soapbox Scramble 64: <https://opivankristovi.github.io/Claude_Code_Games/Looney_Soapbox_64/>
 
 **Locally:**
 
@@ -62,6 +64,7 @@ Opening `index.html` directly from disk will usually work too, but a local serve
 - Ass Monkey Empire: keyboard or a standard gamepad; no touch controls.
 - Tardigrades: keyboard + mouse, or a standard gamepad; no touch controls.
 - Parcour Hobbits: keyboard, a standard gamepad, or touch (on-screen joystick and buttons).
+- Soapbox Scramble 64: keyboard, standard gamepads (up to four players in split-screen), or touch (on-screen stick and buttons).
 
 ---
 
@@ -328,6 +331,25 @@ On touch screens the game shows a joystick and A, B and C buttons.
 
 ---
 
+## Soapbox Scramble 64
+
+A remaster of *Mario Kart 64* with eight original cartoon animals (a fox, an ostrich, a hen, a penguin, a hamster, a bear, a gator and a moose) racing homemade soapbox cars: a crate, a barrel, a pram, a sled, a teacup, a log, a bathtub and a brass bed. The modes, items, rules and course layouts follow the original: Grand Prix in four cups of four courses at 50cc, 100cc, 150cc and Mirror, Time Trials with saved ghosts, 2–4 player split-screen VS races and balloon battles in four arenas. Peels, bowling balls, homing pies, a winged bomb that hunts the leader, rockets, a lucky horseshoe, a shrink bolt, a spooky sheet and fake crates. Powerslides with mini-turbos, rocket starts and slipstreams. Everything renders in 3D with three.js: shadows, water, lava, snow, floodlights, bloom and a rainbow road in space.
+
+### Controls
+
+| Action | Keyboard (1 player) | Gamepad |
+| --- | --- | --- |
+| Gas · brake / reverse | ↑ / W · ↓ / S | Ⓐ or RT · Ⓑ or LT |
+| Steer | ← → / A D | Left stick / D-pad |
+| Hop and powerslide | Space / Shift | RB / R1 |
+| Use item (hold to drag behind) | E / X / J / Ctrl | Ⓧ or LB |
+| Look back | Q / C | Ⓨ |
+| Pause | Esc / P | Start |
+
+In two-player games player 1 uses W A S D, Space, E and Q, and player 2 the arrow keys, `.`, `/` or Enter and `,`. Players 3 and 4 use gamepads. On touch screens the game shows a steering stick and Item, Hop, Brake and Look buttons.
+
+---
+
 ## Repository layout
 
 ```
@@ -346,6 +368,10 @@ On touch screens the game shows a joystick and A, B and C buttons.
 │   └── README.md
 ├── Katana Creed/
 │   ├── index.html   # Katana Creed
+│   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
+│   └── README.md
+├── Looney_Soapbox_64/
+│   ├── index.html   # Soapbox Scramble 64
 │   ├── icon.svg     # game logo (+ icon-512.png, icon-192.png, apple-touch-icon.png)
 │   └── README.md
 ├── Parcour Hobbits/

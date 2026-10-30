@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Soapbox Scramble 64</title>
+  <defs>
+    <clipPath id="frame"><rect width="512" height="512" rx="112"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f86ff"/>
+      <stop offset=".65" stop-color="#9fd8ff"/>
+      <stop offset="1" stop-color="#fff1c8"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8a94"/>
+      <stop offset="1" stop-color="#55555f"/>
+    </linearGradient>
+    <linearGradient id="crate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff5a3e"/>
+      <stop offset="1" stop-color="#b8261a"/>
+    </linearGradient>
+    <radialGradient id="fur" cx=".4" cy=".35" r=".75">
+      <stop offset="0" stop-color="#ffb36a"/>
+      <stop offset="1" stop-color="#ee6a10"/>
+    </radialGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f9a5a"/>
+      <stop offset="1" stop-color="#2a5e32"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="url(#sky)"/>
+    <!-- sun rays -->
+    <g fill="#fff6c8" opacity=".35">
+      <path d="M380 70 L512 20 L512 70 Z"/><path d="M380 70 L512 120 L512 170 Z"/><path d="M380 70 L470 0 L420 0 Z"/>
+    </g>
+    <circle cx="380" cy="70" r="40" fill="#fff4b0"/>
+    <!-- hills -->
+    <path d="M0 300 Q 90 220 190 290 T 380 270 T 512 280 L512 512 L0 512 Z" fill="#5cb84a"/>
+    <path d="M0 330 Q 140 280 260 330 T 512 320 L512 512 L0 512 Z" fill="#3f9a36"/>
+    <!-- road -->
+    <path d="M-20 512 L180 330 L330 330 L540 512 Z" fill="url(#road)"/>
+    <path d="M180 330 L196 330 L-2 512 L-20 512 Z" fill="#fff"/>
+    <path d="M314 330 L330 330 L540 512 L520 512 Z" fill="#fff"/>
+    <g fill="#e8323c"><path d="M150 357 l18 0 l-24 22 l-18 0 Z"/><path d="M102 401 l18 0 l-30 27 l-18 0 Z"/><path d="M42 455 l18 0 l-36 33 l-18 0 Z"/><path d="M344 357 l18 0 l24 22 l-18 0 Z"/><path d="M396 401 l18 0 l30 27 l-18 0 Z"/><path d="M456 455 l18 0 l36 33 l-18 0 Z"/></g>
+    <!-- speed lines -->
+    <g stroke="#ffffff" stroke-width="9" stroke-linecap="round" opacity=".85">
+      <path d="M40 210 H110"/><path d="M20 250 H90"/><path d="M60 170 H120"/>
+    </g>
+    <!-- shadow -->
+    <ellipse cx="270" cy="458" rx="170" ry="26" fill="#000" opacity=".28"/>
+    <!-- rear wheels -->
+    <g stroke="#20140c" stroke-width="8">
+      <circle cx="140" cy="410" r="52" fill="#2a2a30"/>
+      <circle cx="140" cy="410" r="34" fill="#ffd27a"/>
+      <path d="M140 376 V444 M106 410 H174 M116 386 L164 434 M164 386 L116 434" stroke-width="6"/>
+      <circle cx="140" cy="410" r="9" fill="#c0c0c8"/>
+    </g>
+    <!-- crate body -->
+    <g stroke="#20140c" stroke-width="9" stroke-linejoin="round">
+      <path d="M110 300 L420 300 L440 400 L100 400 Z" fill="url(#crate)"/>
+      <path d="M118 334 H428 M106 368 H434" stroke-width="5" fill="none" opacity=".6"/>
+      <circle cx="330" cy="352" r="30" fill="#fff6e0"/>
+    </g>
+    <path d="M318 336 h18 v36 h10 v10 h-34 v-10 h10 v-24 h-6 Z" fill="#20140c"/>
+    <!-- front wheel -->
+    <g stroke="#20140c" stroke-width="8">
+      <circle cx="400" cy="418" r="44" fill="#2a2a30"/>
+      <circle cx="400" cy="418" r="28" fill="#ffd27a"/>
+      <path d="M400 390 V446 M372 418 H428 M380 398 L420 438 M420 398 L380 438" stroke-width="5"/>
+      <circle cx="400" cy="418" r="8" fill="#c0c0c8"/>
+    </g>
+    <!-- fox driver -->
+    <g stroke="#20140c" stroke-width="9" stroke-linejoin="round">
+      <!-- tail -->
+      <path d="M150 300 C 90 290 70 230 100 200 C 120 240 150 260 190 270 Z" fill="url(#fur)"/>
+      <path d="M100 200 C 92 214 92 228 98 240 C 108 226 112 214 100 200 Z" fill="#fff6e0" stroke-width="6"/>
+      <!-- body -->
+      <path d="M200 300 C 196 240 230 214 270 214 C 312 214 336 244 330 300 Z" fill="url(#fur)"/>
+      <path d="M244 300 C 244 262 256 246 272 246 C 290 246 300 264 298 300 Z" fill="#fff6e0" stroke-width="6"/>
+      <!-- scarf -->
+      <path d="M220 222 C 250 240 296 240 320 222 L 326 240 C 296 262 248 262 214 240 Z" fill="#e8323c"/>
+      <path d="M226 236 C 200 246 176 238 160 222 L 168 252 C 190 266 214 262 232 250 Z" fill="#e8323c"/>
+      <!-- arm to the wheel -->
+      <path d="M312 250 C 340 262 356 276 366 296" fill="none" stroke-width="26" stroke-linecap="round"/>
+      <path d="M312 250 C 340 262 356 276 366 296" fill="none" stroke="#f07a20" stroke-width="12" stroke-linecap="round"/>
+      <!-- ears -->
+      <path d="M206 120 L190 40 L250 92 Z" fill="url(#fur)"/>
+      <path d="M318 96 L362 30 L360 120 Z" fill="url(#fur)"/>
+      <path d="M210 104 L200 60 L234 92 Z" fill="#5a2a0a" stroke-width="5"/>
+      <path d="M332 94 L354 56 L352 106 Z" fill="#5a2a0a" stroke-width="5"/>
+      <!-- head -->
+      <path d="M190 150 C 190 92 236 70 280 72 C 340 74 372 110 368 160 C 366 196 338 214 300 216 L 252 216 C 214 214 190 192 190 150 Z" fill="url(#fur)"/>
+      <!-- cheeks and snout -->
+      <path d="M252 214 C 226 212 208 196 206 176 C 228 182 252 178 268 172 Z" fill="#fff6e0" stroke-width="6"/>
+      <path d="M300 180 C 330 168 372 170 410 178 C 400 198 360 214 304 212 Z" fill="#fff6e0"/>
+      <path d="M296 150 C 330 140 380 148 420 172 C 380 176 334 176 300 182 Z" fill="url(#fur)"/>
+      <ellipse cx="420" cy="172" rx="14" ry="11" fill="#20140c"/>
+      <!-- aviator cap -->
+      <path d="M194 136 C 196 84 240 62 282 64 C 330 66 364 92 368 132 C 330 120 240 120 194 136 Z" fill="url(#cap)"/>
+      <!-- goggles on the cap -->
+      <circle cx="256" cy="112" r="24" fill="#9fe8ff"/>
+      <circle cx="310" cy="110" r="24" fill="#9fe8ff"/>
+      <path d="M232 112 H200 M334 110 H364" stroke-width="10"/>
+      <!-- eyes -->
+      <ellipse cx="282" cy="160" rx="18" ry="22" fill="#fff"/>
+      <ellipse cx="330" cy="156" rx="16" ry="20" fill="#fff"/>
+    </g>
+    <circle cx="288" cy="164" r="9" fill="#2a6a3a"/>
+    <circle cx="335" cy="160" r="8" fill="#2a6a3a"/>
+    <circle cx="290" cy="161" r="4" fill="#111"/>
+    <circle cx="337" cy="157" r="3.5" fill="#111"/>
+    <circle cx="249" cy="104" r="7" fill="#fff" opacity=".8"/>
+    <circle cx="303" cy="102" r="7" fill="#fff" opacity=".8"/>
+    <path d="M340 196 C 356 206 376 204 386 194" fill="none" stroke="#20140c" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

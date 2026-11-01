@@ -621,9 +621,10 @@ const nostrilMat=new THREE.MeshBasicMaterial({color:'#000'});
 function loft(NS,NA,fn){const pos=[],idx=[];for(let i=0;i<=NS;i++){const s=i/NS;for(let j=0;j<NA;j++){const p=fn(s,j/NA*Math.PI*2);pos.push(p[0],p[1],p[2]);}}
   for(let i=0;i<NS;i++)for(let j=0;j<NA;j++){const a=i*NA+j,b=i*NA+(j+1)%NA,c=(i+1)*NA+j,d=(i+1)*NA+(j+1)%NA;idx.push(a,b,c,b,d,c);}
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();return g;}
+const _blobMat=new THREE.Matrix4(),_blobEul=new THREE.Euler();
 function blob(rx,ry,rz,{p=[0,0,0],r=[0,0,0],e=1,seg=22}={}){let g=new THREE.SphereGeometry(1,seg,Math.round(seg*0.75));g.deleteAttribute('uv');g.deleteAttribute('normal');g=mergeVertices(g);const a=g.attributes.position;
   for(let i=0;i<a.count;i++){let x=a.getX(i),y=a.getY(i),z=a.getZ(i);if(e!==1){x=Math.sign(x)*Math.pow(Math.abs(x),e);y=Math.sign(y)*Math.pow(Math.abs(y),e);z=Math.sign(z)*Math.pow(Math.abs(z),e);}a.setXYZ(i,x*rx,y*ry,z*rz);}
-  g.applyMatrix4(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(r[0],r[1],r[2])));g.translate(p[0],p[1],p[2]);g.computeVertexNormals();return g;}
+  _blobEul.set(r[0],r[1],r[2]);_blobMat.makeRotationFromEuler(_blobEul);g.applyMatrix4(_blobMat);g.translate(p[0],p[1],p[2]);g.computeVertexNormals();return g;}
 // paint: fn sets the colour and may return a fur length (metres) for the shell-fur pass
 function paint(g,fn){const a=g.attributes.position;const col=new Float32Array(a.count*3),uv=new Float32Array(a.count*2),fl=new Float32Array(a.count);const c=new THREE.Color();
   for(let i=0;i<a.count;i++){const x=a.getX(i),y=a.getY(i),z=a.getZ(i);const f=fn(x,y,z,c);col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;uv[i*2]=(z+x*0.6)*26;uv[i*2+1]=(y-x*0.4)*26;fl[i]=typeof f==='number'?f:0;}

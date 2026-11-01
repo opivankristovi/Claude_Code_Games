@@ -1006,7 +1006,7 @@ const GRASSB=makeParticles(300,new THREE.MeshStandardMaterial({color:'#5b7a2c',r
 const DROP=makeParticles(200,new THREE.MeshStandardMaterial({color:'#d9ecff',transparent:true,opacity:0.7,roughness:0.05}));
 function emit(ps,p,v,life,size){if(ps.list.length>=ps.max)ps.list.shift();ps.list.push({p:p.clone(),v:v.clone(),life,size});}
 const _m4=new THREE.Matrix4(),_q=new THREE.Quaternion(),_s=new V3();
-function updParticles(ps,dt,onHit,grav=9.8){let n=0;for(let i=ps.list.length-1;i>=0;i--){const q=ps.list[i];q.life-=dt;q.v.y-=grav*dt;q.p.addScaledVector(q.v,dt);const gy=groundH(q.p.x,q.p.z);if(q.p.y<gy+0.01){if(onHit)onHit(q);q.life=0;}if(q.life<=0){ps.list.splice(i,1);}}
+function updParticles(ps,dt,onHit,grav=9.8){let n=0;for(let i=ps.list.length-1;i>=0;i--){const q=ps.list[i];q.life-=dt;q.v.y-=grav*dt;q.p.addScaledVector(q.v,dt);const gy=groundH(q.p.x,q.p.z);if(q.p.y<gy+0.01){if(onHit)onHit(q);q.life=0;}if(q.life<=0){const last = ps.list.pop(); if (i < ps.list.length) ps.list[i] = last;}}
   for(const q of ps.list){_s.setScalar(q.size);_m4.compose(q.p,_q,_s);ps.m.setMatrixAt(n++,_m4);}ps.m.count=n;ps.m.instanceMatrix.needsUpdate=true;}
 const puddles=[];
 const puddleMat=new THREE.MeshStandardMaterial({color:'#2e2c12',transparent:true,opacity:0.45,roughness:0.08,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4});

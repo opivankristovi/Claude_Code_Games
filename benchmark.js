@@ -1,32 +1,45 @@
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM(`
-  <!DOCTYPE html>
-  <body>
-    <ol id="tasklist">
-      <li class="done"><span class="td"></span></li>
-      <li class="done"><span class="td"></span></li>
-      <li class="cur"><span class="td"></span></li>
-      <li class="todo"><span class="td"></span></li>
-    </ol>
-  </body>
-`);
-const document = dom.window.document;
+const { performance } = require('perf_hooks');
 
-const N = 100000;
-
-let start = performance.now();
-for (let i = 0; i < N; i++) {
-  const cur = document.querySelector('#tasklist li.cur .td');
-  if (cur) cur.textContent = 'test';
+function benchSplice(count) {
+  let ripples = [];
+  for (let i = 0; i < count; i++) {
+    ripples.push({ t: Math.random() * 2 }); // some will be removed
+  }
+  const start = performance.now();
+  for (let j = 0; j < 1000; j++) {
+    let copy = [...ripples];
+    for (let i = copy.length - 1; i >= 0; i--) {
+      const r = copy[i];
+      if (r.t >= 1) {
+        copy.splice(i, 1);
+      }
+    }
+  }
+  return performance.now() - start;
 }
-let time1 = performance.now() - start;
 
-start = performance.now();
-const curCached = document.querySelector('#tasklist li.cur .td');
-for (let i = 0; i < N; i++) {
-  if (curCached) curCached.textContent = 'test';
+function benchSwap(count) {
+  let ripples = [];
+  for (let i = 0; i < count; i++) {
+    ripples.push({ t: Math.random() * 2 });
+  }
+  const start = performance.now();
+  for (let j = 0; j < 1000; j++) {
+    let copy = [...ripples];
+    for (let i = copy.length - 1; i >= 0; i--) {
+      const r = copy[i];
+      if (r.t >= 1) {
+        const last = copy.pop();
+        if (i < copy.length) {
+          copy[i] = last;
+        }
+      }
+    }
+  }
+  return performance.now() - start;
 }
-let time2 = performance.now() - start;
 
-console.log(`Baseline (document.querySelector): ${time1.toFixed(2)} ms`);
-console.log(`Optimized (cached): ${time2.toFixed(2)} ms`);
+const n = 10000;
+console.log(`Array size: ${n}`);
+console.log(`Splice time: ${benchSplice(n).toFixed(2)} ms`);
+console.log(`Swap time:   ${benchSwap(n).toFixed(2)} ms`);

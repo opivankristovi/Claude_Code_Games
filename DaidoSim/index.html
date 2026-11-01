@@ -1450,7 +1450,7 @@ function updateEffects(dt){
   updParticles(PEE,dt,q=>addPuddle(q.p.x,q.p.z));updParticles(DIRT,dt);updParticles(GRASSB,dt);updParticles(DROP,dt);
   for(let i=puddles.length-1;i>=0;i--){const p=puddles[i];p.age+=dt;if(p.age>25){p.m.material.opacity=0.45*(1-smooth(25,40,p.age));if(p.age>40){scene.remove(p.m);puddles.splice(i,1);}}}
   for(const p of poos){if(!p.settled){p.vy-=9.8*dt;p.m.position.y+=p.vy*dt;const gy=groundH(p.m.position.x,p.m.position.z)+0.012;if(p.m.position.y<gy){p.m.position.y=gy;p.settled=true;}}}
-  for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.t+=dt;const u=r.t/1.4;r.m.scale.setScalar(0.02+r.maxR*u);r.m.material.opacity=0.35*(1-u);if(u>=1){scene.remove(r.m);r.m.material.dispose();ripples.splice(i,1);}}
+  for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.t+=dt;const u=r.t/1.4;r.m.scale.setScalar(0.02+r.maxR*u);r.m.material.opacity=0.35*(1-u);if(u>=1){scene.remove(r.m);r.m.material.dispose();const last=ripples.pop();if(i<ripples.length)ripples[i]=last;}}
   const w=bowls.water;w.mesh.position.y=0.012+0.045*w.level;w.mesh.scale.setScalar(0.1+0.03*w.level);w.mesh.visible=w.level>0.02;
   if(w.level<0.15){w.refill+=dt;if(w.refill>15){w.level=1;w.refill=0;}}
   updParticles(SPARK,dt,null,-0.4);updParticles(SCENT,dt,null,-0.05);

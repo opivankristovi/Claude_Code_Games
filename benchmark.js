@@ -1,32 +1,23 @@
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM(`
-  <!DOCTYPE html>
-  <body>
-    <ol id="tasklist">
-      <li class="done"><span class="td"></span></li>
-      <li class="done"><span class="td"></span></li>
-      <li class="cur"><span class="td"></span></li>
-      <li class="todo"><span class="td"></span></li>
-    </ol>
-  </body>
-`);
+const fs = require('fs');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const THREE = require('three');
+
+// Read the index.html
+const html = fs.readFileSync('DaidoSim/index.html', 'utf8');
+const dom = new JSDOM(html);
 const document = dom.window.document;
 
-const N = 100000;
-
-let start = performance.now();
-for (let i = 0; i < N; i++) {
-  const cur = document.querySelector('#tasklist li.cur .td');
-  if (cur) cur.textContent = 'test';
+// Extract JS
+const scriptMatches = html.match(/<script type="module">([\s\S]*?)<\/script>/);
+if (!scriptMatches) {
+  console.error('Could not find script block');
+  process.exit(1);
 }
-let time1 = performance.now() - start;
 
-start = performance.now();
-const curCached = document.querySelector('#tasklist li.cur .td');
-for (let i = 0; i < N; i++) {
-  if (curCached) curCached.textContent = 'test';
-}
-let time2 = performance.now() - start;
+let scriptContent = scriptMatches[1];
 
-console.log(`Baseline (document.querySelector): ${time1.toFixed(2)} ms`);
-console.log(`Optimized (cached): ${time2.toFixed(2)} ms`);
+// We need to extract the `blob` function and dependencies
+// We can just evaluate the script in a context where THREE is defined.
+// Actually, it's an ES module so evaluating it entirely might start the game loop.
+// Let's just extract the `blob` function text and some required utilities.

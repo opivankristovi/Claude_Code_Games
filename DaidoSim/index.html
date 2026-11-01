@@ -226,7 +226,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 function applyStaticLang(){document.documentElement.lang=LANG;
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n);});
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.i18nAria));});
-  document.querySelectorAll('#langswitch button').forEach(b=>{const on=b.dataset.lang===LANG;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});}
+  for(const b of document.getElementById('langswitch').children){if(b.dataset.lang!=null){const on=b.dataset.lang===LANG;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);}}}
 applyStaticLang();
 
 // =====================================================================
@@ -1242,7 +1242,7 @@ function taskLabel(t){return tr('task.'+t.k);}
 function levelName(i){return tr(`lvl${i}.name`);}
 function setLang(l){if(l===LANG||!STR[l])return;LANG=l;try{localStorage.setItem(LKEY,l);}catch(e){}
   applyStaticLang();updateDigButton();lastStatus='';renderMenu();renderTasks();if(!cardEl.hidden&&G.cardKind)showCard(G.cardKind);toast(tr('ui.langSet'));}
-document.querySelectorAll('#langswitch button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.lang);b.blur();}));
+document.getElementById('langswitch').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.lang!=null){setLang(b.dataset.lang);b.blur();}});
 function openMenu(){renderMenu();menuEl.hidden=false;keys.clear();const f=menuEl.querySelector('button:not([disabled])');if(f)f.focus();}
 function closeMenu(){menuEl.hidden=true;}
 function renderMenu(){const box=document.getElementById('levellist');box.innerHTML='';
@@ -1314,13 +1314,13 @@ addEventListener('keydown',e=>{if(e.repeat)return;audio();
   keys.add(e.code);const map={Digit1:'sit',Digit2:'drink',Digit3:'eat',Digit4:'pee',Digit5:'poo',Digit6:'roll',Digit7:'lie',Digit8:'dig',Numpad1:'sit',Numpad2:'drink',Numpad3:'eat',Numpad4:'pee',Numpad5:'poo',Numpad6:'roll',Numpad7:'lie',Numpad8:'dig'};if(map[e.code])requestAction(map[e.code]);if(e.code==='KeyR'){dog.jog=!dog.jog;toast(tr(dog.jog?'msg.jogOn':'msg.jogOff'));}if(e.code==='KeyC')selectDog((DOGS.indexOf(D)+1)%DOGS.length);});
 function selectDog(i){if(DOGS[i]===D)return;if(carried)dropCarried();ST.action=null;dog.ai=null;bindDog(i);headInit=false;standPose(ST.cur);ST.trans=1;
   document.getElementById('dogname').textContent=D.spec.name;
-  document.querySelectorAll('#chars button[data-d]').forEach(b=>{const on=+b.dataset.d===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});
+  for(const b of document.getElementById('chars').children){if(b.dataset.d!=null){const on=+b.dataset.d===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);}}
   updateButtons();toast(tr('msg.nowPlaying',{name:D.spec.name}));}
-document.querySelectorAll('#chars button[data-d]').forEach(b=>b.addEventListener('click',()=>{selectDog(+b.dataset.d);b.blur();}));
+document.getElementById('chars').addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(b){selectDog(+b.dataset.d);b.blur();}});
 addEventListener('keyup',e=>keys.delete(e.code));
 addEventListener('blur',()=>keys.clear());
-document.querySelectorAll('#actions button').forEach(b=>b.addEventListener('click',()=>{requestAction(b.dataset.a);b.blur();}));
-function updateButtons(){document.querySelectorAll('#actions button').forEach(b=>b.classList.toggle('on',!!ST.action&&ST.action.name===b.dataset.a));}
+document.getElementById('actions').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(b){requestAction(b.dataset.a);b.blur();}});
+function updateButtons(){for(const b of document.getElementById('actions').children){if(b.tagName==='BUTTON'){b.classList.toggle('on',!!ST.action&&ST.action.name===b.dataset.a);}}}
 const cam={yaw:dog.heading+Math.PI,pitch:0.32,dist:3.0,lastDrag:-10,tgt:new V3()};
 let drag=null;
 renderer.domElement.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,id:e.pointerId};renderer.domElement.setPointerCapture(e.pointerId);});

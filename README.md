@@ -1,6 +1,6 @@
 # Claude Code Games
 
-A collection of browser games, mostly retro-inspired arcade games, built with Claude Code (Opus 5.5).
+A collection of browser games, mostly retro-inspired arcade games, built with Claude Code Opus 5.5 (back in the day, when this was still allowed).
 
 Each game is one self-contained `index.html`, except Tuxemon 3D and Space Fodder, which split their code into `css/` and `js/` files next to their `index.html`. There is no build step, no bundler and no game asset files: every model, texture, level and sound effect is generated in code at runtime. Neon Arkanoid, Space Fodder and Tardigrades draw on a plain 2D `<canvas>` (Tardigrades with a painted 3D look). The other games render in 3D with [three.js](https://threejs.org/), loaded from a CDN (r128 for Shakur Boy, r160–r169 for the rest).
 

@@ -1,32 +1,32 @@
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM(`
-  <!DOCTYPE html>
-  <body>
-    <ol id="tasklist">
-      <li class="done"><span class="td"></span></li>
-      <li class="done"><span class="td"></span></li>
-      <li class="cur"><span class="td"></span></li>
-      <li class="todo"><span class="td"></span></li>
-    </ol>
-  </body>
-`);
-const document = dom.window.document;
+const { performance } = require('perf_hooks');
 
-const N = 100000;
-
-let start = performance.now();
-for (let i = 0; i < N; i++) {
-  const cur = document.querySelector('#tasklist li.cur .td');
-  if (cur) cur.textContent = 'test';
+function benchmarkSplice(n) {
+  let puddles = Array.from({length: n}, (_, i) => ({ id: i }));
+  const start = performance.now();
+  for (let i = puddles.length - 1; i >= 0; i--) {
+    puddles.splice(i, 1);
+  }
+  const end = performance.now();
+  return end - start;
 }
-let time1 = performance.now() - start;
 
-start = performance.now();
-const curCached = document.querySelector('#tasklist li.cur .td');
-for (let i = 0; i < N; i++) {
-  if (curCached) curCached.textContent = 'test';
+function benchmarkSwapPop(n) {
+  let puddles = Array.from({length: n}, (_, i) => ({ id: i }));
+  const start = performance.now();
+  for (let i = puddles.length - 1; i >= 0; i--) {
+    if (i !== puddles.length - 1) {
+      puddles[i] = puddles[puddles.length - 1];
+    }
+    puddles.pop();
+  }
+  const end = performance.now();
+  return end - start;
 }
-let time2 = performance.now() - start;
 
-console.log(`Baseline (document.querySelector): ${time1.toFixed(2)} ms`);
-console.log(`Optimized (cached): ${time2.toFixed(2)} ms`);
+const n = 100000;
+const spliceTime = benchmarkSplice(n);
+const swapPopTime = benchmarkSwapPop(n);
+
+console.log(`Splice time: ${spliceTime.toFixed(4)} ms`);
+console.log(`Swap & Pop time: ${swapPopTime.toFixed(4)} ms`);
+console.log(`Improvement: ${((spliceTime - swapPopTime) / spliceTime * 100).toFixed(2)}%`);

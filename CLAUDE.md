@@ -4,7 +4,7 @@ Browser games, each in its own top-level folder with an `index.html` (a single s
 
 ## Adding a game (required every time)
 
-A new game is not finished until all of these are done. `npm run test:launcher` (also run in CI) fails if any are missing.
+A new game is not finished until all of these are done. `npm run test:launcher` (also run in CI) catches a missing icon set, `icon.svg` or apple-touch link, launcher button or hover summary, but not the READMEs (steps 1 and 6), the `icon-192.png` link, or the button's accent, `--i`, genre and chips, so a passing test does not mean the list is done.
 
 1. **Folder**: `<GameFolder>/index.html` (the game) and `<GameFolder>/README.md` (description, live link, how to run, controls). Follow the existing games' READMEs.
 2. **Logo**: draw `<GameFolder>/icon.svg`, a 512×512 square icon.
@@ -23,5 +23,5 @@ A new game is not finished until all of these are done. `npm run test:launcher` 
 
 ## Checks
 
-- `npm run test:launcher`: every game folder has its icon set, favicon links and a launcher button, and the launcher has no buttons for missing folders. Needs no `npm install`.
+- `npm run test:launcher`: every game folder has its icon set, its `icon.svg` and `apple-touch-icon` links, and a launcher button with a hover summary, and the launcher has no buttons for missing folders. Needs no `npm install`.
 - `npm test`: the full suite (needs `npm install`).

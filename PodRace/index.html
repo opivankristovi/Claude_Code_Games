@@ -343,7 +343,7 @@ const N=3600,LAPS=3,TRACK_HALF=22,DLIM=17.5,S0=60;
 const rPolar=th=>760+170*Math.sin(3*th+.6)+70*Math.sin(5*th+1.9)+25*Math.sin(7*th+.4);
 const trackYAt=th=>12*Math.sin(2*th+.3)+6*Math.sin(5*th+1.1);
 const canyonAt=th=>smooth(.4,.6,.5+.5*Math.sin(3*th+2.2));
-const ctrl=[];for(let i=0;i<360;i++){const th=i/360*TAU,r=rPolar(th);ctrl.push(new THREE.Vector3(Math.cos(th)*r,0,Math.sin(th)*r));}
+const ctrl=new Array(360);for(let i=0;i<360;i++){const th=i/360*TAU,r=rPolar(th);ctrl[i]=new THREE.Vector3(Math.cos(th)*r,0,Math.sin(th)*r);}
 const curve=new THREE.CatmullRomCurve3(ctrl,true,'catmullrom',.5);
 const sp=curve.getSpacedPoints(N);sp.length=N;
 const SEG=curve.getLength()/N;
